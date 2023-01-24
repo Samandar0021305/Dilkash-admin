@@ -1,6 +1,6 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { sidebar } from "../../utils/Constants";
-import { sidebarIcons } from "../../utils/Constants";
 
 export default function Sidebar() {
   return (
@@ -16,11 +16,15 @@ export default function Sidebar() {
                 <li className="rounded-sm">
                   {sidebar.map((item) => {
                     return (
+                      <div className="flex">
+                        <img width="30" height="10" src={item.icon} alt={item.name}/>
                       <a
-                        href="#!"
+                        href="#"
                         className="flex items-center p-2 space-x-3 rounded-md">
-                        {item}
+                        {item.name}
                         </a>
+                      </div>
+                    
                     );
                   })}
                   {/* <a
