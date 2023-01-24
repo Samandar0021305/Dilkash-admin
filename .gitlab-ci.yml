@@ -46,4 +46,4 @@ deploy_prod:
     - chmod 400 $SSH_PRIVATE_KEY
     - ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY $USER@$SERVER_HOST "docker login -u '$CI_REGISTRY_USER' -p '$CI_REGISTRY_PASSWORD' $CI_REGISTRY"
     - ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY $USER@$SERVER_HOST "docker pull ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME}"
-    - ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY $USER@$SERVER_HOST "docker stop $CI_PROJECT_NAME || true && docker rm $CI_PROJECT_NAME || true && docker run -p 1033:1033 --env-file /var/env_dilkash_admin  --name $CI_PROJECT_NAME -d ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME} && docker ps"
+    - ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY $USER@$SERVER_HOST "docker stop $CI_PROJECT_NAME || true && docker rm $CI_PROJECT_NAME || true && docker run -p 1033:1033 -e PORT=1033 --env-file /var/env_dilkash_admin  --name $CI_PROJECT_NAME -d ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME} && docker ps"
