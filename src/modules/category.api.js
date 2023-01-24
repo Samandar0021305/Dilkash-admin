@@ -1,7 +1,7 @@
 import configureApi from "../api";
 
 const categoryEndpoints = {
-  list: "category",
+  list: "/category",
   getOne: (categId) => `/category/${categId}`,
   add: "category/create",
   updated: ({ categId }) => `/category/update/${categId}`,
@@ -49,3 +49,5 @@ const categoryApi = {
     }
   },
 };
+
+export default categoryApi;

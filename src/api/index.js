@@ -14,25 +14,45 @@ import { product } from "./baseUrl";
 //   }
 // };
 
+function errorHandling(status) {
+  switch (parseInt(status)) {
+    case 401:
+      return "Logout or refresh token";
+    case 403:
+      return alert("Frontend developer sent data incorrectly!");
+    case 500:
+      return alert("Internal server Error!");
+  }
+}
+
+const baseURL = process.env.REACT_APP_API_URL;
+
 const configureApi = axios.create({
-  product,
+  baseURL,
   paramsSerializer: {
     encode: (param) => queryString.stringify(param),
   },
 });
 
 configureApi.interceptors.request.use(async (config) => {
+  config.headers["Content-type"] = "application/json";
+  if (localStorage.getItem("token")) {
+    config.headers["Authorization"] = `Bearer ${localStorage.getItem("token")}`;
+  }
   return {
     ...config,
-    headers: {
-      "Content-type": "application/json",
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
   };
 });
 
-configureApi.interceptors.response.use((response) => {
-  if (response && response.data) return response.data;
-});
+configureApi.interceptors.response.use(
+  (response) => {
+    console.log("response -----------", response);
+    if (response && response.data) return response.data;
+  },
+  function (err) {
+    errorHandling(err.status);
+    return Promise.reject(err);
+  }
+);
 
 export default configureApi;
