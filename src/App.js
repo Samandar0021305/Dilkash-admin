@@ -1,9 +1,9 @@
-import React from "react";
-import LoginPage from "./page/Login/Login";
+const RouteEL = React.lazy(()=>import("./rootes"))
+
 function App() {
   return (
     <>
-    <LoginPage />
+    <RouteEL />
     </>
   );
 }

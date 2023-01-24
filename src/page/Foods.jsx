@@ -1,8 +1,14 @@
 import React from 'react'
-
-const Foods = () => {
+import {useParams} from "react-router-dom";
+import {Outlet} from "react-router-dom"
+const Foods = (props) => {
+  const {foodId} = useParams()
   return (
-    <div>Foods</div>
+    <>
+    welcome to
+
+    <Outlet />
+    </>
   )
 }
 

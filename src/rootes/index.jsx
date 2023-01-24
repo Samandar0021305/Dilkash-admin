@@ -1,17 +1,19 @@
 import React from 'react'
-import { Routes } from 'react-router-dom'
+import { Routes,Route } from 'react-router-dom'
+
+const Home = React.lazy(()=>import("../page/Home"))
+const Foods = React.lazy(()=>import("../page/Foods"))
 
 const index = React.memo(() => {
-    let user = [
-        {id:1,name:"uis"},
-        {id:2,name:"s"},
-    ]
   return (
-    <>
-     <Routes>
-        
-     </Routes>
-    </>
+    <React.Fragment>
+      <Routes>
+         <Route  path='/' element={<React.Suspense fallback="loading...."><Home/></React.Suspense>}/>
+         <Route path="food" element={<Foods/>}>
+          <Route  path=':foodId' />
+         </Route>
+      </Routes>
+    </React.Fragment>
   )
 })
 
