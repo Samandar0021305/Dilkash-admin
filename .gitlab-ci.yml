@@ -1,0 +1,49 @@
+stages:          # List of stages for jobs, and their order of execution
+  - build_kaniko
+  - deploy_prod
+
+build-job:  
+  stage: build_kaniko
+  
+  only:
+    - main
+    - dev
+
+  variables:
+    IMAGE_DESTINATION: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME}
+  image:
+      # We recommend using the CERN version of the Kaniko image: gitlab-registry.cern.ch/ci-tools/docker-image-builder
+      # name: gitlab-registry.cern.ch/ci-tools/docker-image-builder
+      name: gcr.io/kaniko-project/executor:debug
+      
+      entrypoint: [""]
+  script:
+      # Prepare Kaniko configuration file
+      - echo $CI_REGISTRY_IMAGE
+      - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
+      # Build and push the image from the Dockerfile at the root of the project.
+      - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination $IMAGE_DESTINATION --cache-dir=/workspace/cache 
+      # Print the full registry path of the pushed image
+      - echo "Image pushed successfully to ${IMAGE_DESTINATION}"
+      - echo "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME}"  
+
+deploy_prod:
+  stage: deploy_prod
+
+  image: docker
+
+  before_script:
+    - echo "deploying app"
+    - chmod 400 $SSH_PRIVATE_KEY
+    - apk update && apk add openssh-client
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  only:
+    - main
+    - dev
+
+  script:
+    - apk add --update --no-cache openssh
+    - chmod 400 $SSH_PRIVATE_KEY
+    - ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY $USER@$SERVER_HOST "docker login -u '$CI_REGISTRY_USER' -p '$CI_REGISTRY_PASSWORD' $CI_REGISTRY"
+    - ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY $USER@$SERVER_HOST "docker pull ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME}"
+    - ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY $USER@$SERVER_HOST "docker stop $CI_PROJECT_NAME || true && docker rm $CI_PROJECT_NAME || true && docker run -p 1033:1033 --env-file /var/env_dilkash_admin  --name $CI_PROJECT_NAME -d ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME} && docker ps"
