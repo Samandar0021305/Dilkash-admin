@@ -46,7 +46,7 @@ configureApi.interceptors.request.use(async (config) => {
 
 configureApi.interceptors.response.use(
   (response) => {
-    console.log("response -----------", response);
+    // console.log("response -----------", response);
     if (response && response.data) return response.data;
   },
   function (err) {

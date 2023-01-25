@@ -4,14 +4,13 @@ const categoryEndpoints = {
   list: "/category",
   getOne: (categId) => `/category/${categId}`,
   add: "/category/create",
-  updated: ({ categId }) => `/category/update/${categId}`,
-  delete: ({ categId }) => `/category/delete/${categId}`,
-  pagination: ({ page, pageSize }) =>
-    `/category?page=${page}&pageSize=${pageSize}`,
+  updated: (categId) => `/category/update/${categId}`,
+  delete: (categId) => `/category/delete/${categId}`,
+  pagination: (page, pageSize) => `/category?page=${page}&pageSize=${pageSize}`,
 };
 
 const categoryApi = {
-  getCategory: async ({ page, pageSize }) => {
+  getCategory: async (page, pageSize) => {
     if (page && pageSize) {
       try {
         const response = await configureApi.get(
@@ -30,28 +29,26 @@ const categoryApi = {
       }
     }
   },
-  updateCateg: async ({ categId }) => {
+  updateCateg: async (categId, category) => {
     try {
-      const response = await configureApi.put(
-        categoryEndpoints.updated(categId)
+      const response = await configureApi.patch(
+        categoryEndpoints.updated(categId),
+        category
       );
       return response;
     } catch (error) {
       return error;
     }
   },
-  addCategory: async ({ title, image }) => {
+  addCategory: async (category) => {
     try {
-      const response = await configureApi.post(categoryEndpoints.add, {
-        title,
-        image,
-      });
+      const response = await configureApi.post(categoryEndpoints.add, category);
       return response;
     } catch (error) {
       return error;
     }
   },
-  deleteCateg: async ({ categId }) => {
+  deleteCateg: async (categId) => {
     try {
       const response = await configureApi.delete(
         categoryEndpoints.delete(categId)

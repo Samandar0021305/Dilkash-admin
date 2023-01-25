@@ -1,35 +1,66 @@
 import configureApi from "../api";
 
 const foodEndpoints = {
-  list: "foods",
-  add: "foods",
-  remove: ({ foodId }) => `foods/ ${foodId}`,
+  list: "/product",
+  getOne: (foodId) => `/product/${foodId}`,
+  add: "/product/create",
+  updated: (productId) => `/product/update/${productId}`,
+  delete: (productId) => `/product/delete/${productId}`,
+  pagination: (page, pageSize) => `/product?page=${page}&pageSize=${pageSize}`,
 };
 
-const foodApi = {
-  getFood: async () => {
+const productApi = {
+  getProduct: async (page, pageSize) => {
+    if (page && pageSize) {
+      try {
+        const response = await configureApi.get(
+          foodEndpoints.pagination(page, pageSize)
+        );
+        return response;
+      } catch (error) {
+        return error;
+      }
+    } else {
+      try {
+        const response = await configureApi.get(foodEndpoints.list);
+        return response;
+      } catch (error) {
+        return error;
+      }
+    }
+  },
+  addProduct: async (product) => {
     try {
-      const response = await configureApi.get(foodEndpoints.list);
+      const response = await configureApi.post(foodEndpoints.add, product);
       return { response };
     } catch (error) {
       return error;
     }
   },
-  addFood: async ({ name, description, image }) => {
+  getOneProduct: async (productId) => {
     try {
-      const response = await configureApi.post(foodEndpoints.add, {
-        name,
-        description,
-        image,
-      });
+      const response = await configureApi.get(foodEndpoints.getOne(productId));
       return { response };
     } catch (error) {
       return error;
     }
   },
-  deleteFood: async ({ foodId }) => {
+  updateProduct: async (productId, product) => {
     try {
-      const response = await configureApi.delete(foodEndpoints.delete(foodId));
+      const response = await configureApi.patch(
+        foodEndpoints.updated(productId),
+        product
+      );
+      return { response };
+    } catch (error) {
+      return error;
+    }
+  },
+  deleteProduct: async (productId) => {
+    try {
+      const response = await configureApi.delete(
+        foodEndpoints.delete(productId)
+      );
       return { response };
     } catch (error) {
       return error;
@@ -37,4 +68,4 @@ const foodApi = {
   },
 };
 
-export default foodApi
+export default productApi;
