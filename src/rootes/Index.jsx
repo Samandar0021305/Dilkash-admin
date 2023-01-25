@@ -5,14 +5,14 @@ import {routers} from "./RenderRouter"
 
 
 const renderRoutesRecursive = () =>
-      routers.map((route, index) =>
-      route.children ? (
-        renderRoutesRecursive(route.children)
+      routers.map((val) =>
+      val.children ? (
+        renderRoutesRecursive(val.children)
       ) : (
         <Route
-          key={index}
-          path={route.path}
-          element={<route.component/>}
+          key={val.id}
+          path={val.path}
+          element={<val.component/>}
         />
       ),
     )
