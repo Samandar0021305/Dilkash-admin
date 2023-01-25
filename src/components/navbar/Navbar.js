@@ -1,13 +1,13 @@
 import React from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {buttons, words, icons} from "../navbarContents/navbarContents"
+import {buttons, words, icons} from "./navbarContents/navbarContents"
 
 
 export default function Navbar() {
     return (
         <>
             <nav className='flex justify-between'>
-            <div style={{display: "flex", justifyContent: "space-around", alignItems: "center"}}>
+            <div className='flex justify-around items-center'>
                 {buttons.map((items) => {
                     return (
                         <div className="flex justify-between ">
