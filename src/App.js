@@ -1,10 +1,10 @@
 import React from "react";
 import Footer from "./components/footer/Footer";
-import Sidebar from "./components/Sidebar/Sidebar";
+import Navbar from "./components/navbar/Navbar";
 function App() {
   return (
     <>
-    <Sidebar />
+    <Navbar/>
     <Footer/>
     </>
   );

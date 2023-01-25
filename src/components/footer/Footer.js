@@ -5,12 +5,12 @@ export default function Footer() {
     <>
     <div className='flex justify-between'>
     <div className='flex'>
-      <p className='text-blue-600'>CoreUI </p>
-      <p> © 2022 creativeLabs</p>
+      <p className='text-blue-600 cursor-pointer underline'>CoreUI </p>
+      <p className='text-sm text-gray-700 font-medium flex items-center '> © 2022 creativeLabs</p>
     </div>
     <div className='flex'>
-      <p>Powered by</p> 
-      <p className='text-blue-600'>CoreUI ReactAdmin & Dashboard Template</p>
+      <p className='text-sm text-gray-700 font-medium flex items-center'>Powered by</p> 
+      <p className='text-blue-600 cursor-pointer underline'>CoreUI ReactAdmin & Dashboard Template</p>
     </div>
     </div>
     </>
