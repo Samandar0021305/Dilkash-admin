@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { sidebar } from "../../utils/Constants";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function Sidebar() {
   return (
@@ -17,12 +18,7 @@ export default function Sidebar() {
                   {sidebar.map((item) => {
                     return (
                       <div className="flex">
-                        <img
-                          width="30"
-                          height="10"
-                          src={item.icon}
-                          alt={item.name}
-                        />
+                        <FontAwesomeIcon icon={item.icon} className="mt-2.5  text-lg"/>
                         <a
                           href="#"
                           className="flex items-center p-2 space-x-3 rounded-md">

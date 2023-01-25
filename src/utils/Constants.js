@@ -1,28 +1,28 @@
-import HomeIcon from "../icons/home-page.png";
-import BasketIcon from "../icons/shopping-cart.png";
-import ChartIcon from "../icons/chart.png"
-import Personicon from "../icons/contacts.png"
-import LockIcon from "../icons/lock.png"
+import { faHome } from "@fortawesome/free-solid-svg-icons";
+import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
+import { faChartSimple } from "@fortawesome/free-solid-svg-icons";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { faLock } from "@fortawesome/free-solid-svg-icons";
 
 export const sidebar = [
   {
     name: "Home Dashboard",
-    icon: HomeIcon,
+    icon: faHome,
   },
   {
     name: "NFT Marketplace",
-    icon: BasketIcon,
+    icon: faCartShopping,
   },
   {
     name: "Data tables",
-    icon: ChartIcon,
+    icon: faChartSimple,
   },
   {
     name: "Profile",
-    icon: Personicon,
+    icon: faUser,
   },
   {
     name: "Sign In",
-    icon: LockIcon,
+    icon: faLock,
   },
 ];
