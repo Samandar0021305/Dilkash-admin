@@ -1,9 +1,10 @@
 import React from "react";
-import Sidebar from "./components/Sidebar/Sidebar";
+const Routers = React.lazy(()=>import("./rootes/Index"))
+
 function App() {
   return (
     <>
-    <Sidebar />
+    <Routers />
     </>
   );
 }
