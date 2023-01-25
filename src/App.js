@@ -1,8 +1,11 @@
 import React from "react";
+import Footer from "./components/footer/Footer";
+import Sidebar from "./components/Sidebar/Sidebar";
 function App() {
   return (
     <>
-    hello world
+    <Sidebar />
+    <Footer/>
     </>
   );
 }

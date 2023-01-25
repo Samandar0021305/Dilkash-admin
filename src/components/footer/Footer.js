@@ -3,14 +3,14 @@ import React from 'react'
 export default function Footer() {
   return (
     <>
-    <div style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
-    <div style={{display: "flex"}} >
-      <p style={{color: "blue"}}>CoreUI </p>
+    <div className='flex justify-between'>
+    <div className='flex'>
+      <p className='text-blue-600'>CoreUI </p>
       <p> © 2022 creativeLabs</p>
     </div>
-    <div style={{display: "flex"}}>
+    <div className='flex'>
       <p>Powered by</p> 
-      <p style={{color: "blue"}}>CoreUI ReactAdmin & Dashboard Template</p>
+      <p className='text-blue-600'>CoreUI ReactAdmin & Dashboard Template</p>
     </div>
     </div>
     </>
