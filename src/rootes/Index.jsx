@@ -1,27 +1,31 @@
-import React,{Suspense} from 'react'
+import React,{Suspense,useMemo} from 'react'
 import { Routes,Route } from 'react-router-dom'
 import {routers} from "./RenderRouter"
 
 
 
+const renderRoutesRecursive = () =>
+      routers.map((route, index) =>
+      route.children ? (
+        renderRoutesRecursive(route.children)
+      ) : (
+        <Route
+          key={index}
+          path={route.path}
+          element={<route.component/>}
+        />
+      ),
+    )
+
+
 const Index = React.memo(() => {
-  const useRoute = [
-    ...routers.map(x=>({
-      id:x.id,
-      name:x.name,
-      path:x.path,
-      component:x.component
-    }))
-  ]
+  const renderRoutes = useMemo(() => renderRoutesRecursive(routers), [routers])
+
   return (
     <>
      <Suspense fallback={<h1>Loading....</h1>}>
        <Routes>
-          {
-            useRoute.map((x)=>x.component && (
-             <Route index key={x.id} path={x.path} element={<x.component/>} />
-            ))
-          }
+          {renderRoutes}
        </Routes>
      </Suspense>
     </>
