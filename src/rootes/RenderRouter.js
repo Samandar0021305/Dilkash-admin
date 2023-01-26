@@ -3,17 +3,19 @@ const Home = React.lazy(()=>import("../page/Home"))
 const Foods = React.lazy(()=>import("../page/Foods"))
 
 export const routers = [
-    {
-        id:1,
-        name:"login page",
-        path:"/",
-        component:""
-    },
+    // {
+    //     id:1,
+    //     name:"login page",
+    //     path:"/",
+    //     component:""
+    // },
     {
         id:2,
         name:"Home Dashboard",
-        path:"home",
-        component:Home
+        path:"/",
+        index:'index',
+        component:Home,
+        children:[]
     },
     {
         id:4,
@@ -22,5 +24,6 @@ export const routers = [
         component:Foods
     },
 ]
+
 
 

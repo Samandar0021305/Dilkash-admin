@@ -6,7 +6,7 @@ import {routers} from "./RenderRouter"
 
 const renderRoutesRecursive = () =>
       routers.map((val) =>
-      val.children ? (
+       val.children && val.children.length !=0 ? (
         renderRoutesRecursive(val.children)
       ) : (
         <Route
