@@ -2,7 +2,6 @@ import React from "react";
 
 export default function Sidebar() {
   return (
-    <>
       <div className="flex">
         <div className="flex flex-col h-screen p-3 bg-white shadow w-60">
           <div className="space-y-3">
@@ -130,6 +129,5 @@ export default function Sidebar() {
           </div>
         </div>
       </div>
-    </>
   );
 }
