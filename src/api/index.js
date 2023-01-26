@@ -29,9 +29,7 @@ const baseURL = process.env.REACT_APP_API_URL;
 
 const configureApi = axios.create({
   baseURL,
-  paramsSerializer: {
-    encode: (param) => queryString.stringify(param),
-  },
+  
 });
 
 configureApi.interceptors.request.use(async (config) => {

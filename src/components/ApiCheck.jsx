@@ -4,6 +4,7 @@ import productApi from "../modules/food.api";
 
 const ApiCheck = () => {
   const [page, setPage] = useState({ page: 1, pageSize: 2 });
+  const [params, setParams] = useState({ page: 1, pageSize: 2 });
   const [category, setCategory] = useState({
     title: "Shirinliklar",
     image: "1674547599272-wallpaper2you_478525.jpg",
@@ -15,24 +16,38 @@ const ApiCheck = () => {
     image: "1674547599272-wallpaper2you_478525.jpg",
     category_id: "14466288-0efa-4aad-930c-490f7053dd98",
   });
+  const search = (value) => {
+    setParams((old) => {
+      return {
+        ...old,
+        page: 1,
+        search: value,
+      };
+    });
+    getCategoryAll(params);
+  };
 
+  const getCategoryAll = async (params) => {
+    const res = await categoryApi.getCategory(params);
+    return res;
+  };
   //   Category check
 
-  useEffect(() => {
+  useEffect(async () => {
     // category get
-
-    const res = categoryApi.getCategory(page.page, page.pageSize);
-    console.log ("getCateg -------------", res);
+    getCategoryAll(params);
+    // const res = await categoryApi.getCategory(params);
+    // console.log("getCateg -------------", res);
 
     // add category
 
-    const res2 = categoryApi.addCategory(category);
-    console.log("addCateg ---------------", res2);
+    // const res2 = categoryApi.addCategory(category);
+    // console.log("addCateg ---------------", res2);
 
-    //  delete category 
+    // //  delete category
 
-    const res3 = categoryApi.deleteCateg("");
-    console.log(" deleteCateg -------------", res3);
+    // const res3 = categoryApi.deleteCateg("");
+    // console.log(" deleteCateg -------------", res3);
   }, []);
 
   //   Product Check

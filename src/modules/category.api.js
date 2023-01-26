@@ -10,30 +10,22 @@ const categoryEndpoints = {
 };
 
 const categoryApi = {
-  getCategory: async (page, pageSize) => {
-    if (page && pageSize) {
-      try {
-        const response = await configureApi.get(
-          categoryEndpoints.pagination(page, pageSize)
-        );
-        return response;
-      } catch (error) {
-        return error;
-      }
-    } else {
-      try {
-        const response = await configureApi.get(categoryEndpoints.list);
-        return response;
-      } catch (error) {
-        return error;
-      }
+  getCategory: async (params) => {
+    console.log("params -------------", params);
+    try {
+      const response = await configureApi.get(categoryEndpoints.list, {
+        params: { ...params },
+      });
+      return response;
+    } catch (error) {
+      return error;
     }
   },
-  updateCateg: async (categId, category) => {
+  updateCateg: async (categId, data) => {
     try {
       const response = await configureApi.patch(
-        categoryEndpoints.updated(categId),
-        category
+        categoryEndpoints.list + "/update/" + categId,
+        { data }
       );
       return response;
     } catch (error) {
