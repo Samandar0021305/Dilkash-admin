@@ -1,14 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Saidbar from "../components/Sidebar/Sidebar"
 
 const Navbar = React.lazy(()=>import("../components/navbar/Navbar"))
 const Footer = React.lazy(()=>import("../components/footer/Footer"))
-const index = ({children}) => {
+
+let initialValue = true
+const Index = ({children}) => {
+   const [isPage,setIsPage] = useState(initialValue)
   return (
     <div className='flex'>
-            <Saidbar/>
-         <div className='ml-[10px]'>
-            <Navbar  />
+            { isPage && <Saidbar/> }
+         <div className='ml-[10px] w-[100%] pr-[10px]'>
+            <Navbar   setIsPage={setIsPage}/>
                <main className='min-h-[92vh]'>{children}</main>
             <Footer />
          </div>
@@ -16,4 +19,4 @@ const index = ({children}) => {
   )
 }
 
-export default index
+export default Index
