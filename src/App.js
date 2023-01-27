@@ -1,7 +1,7 @@
 import React from "react";
 
-const Routers = React.lazy(()=>import("./rootes/Index"))
-const Layout = React.lazy(()=>import("./Layout"))
+const Routers = React.lazy(() => import("./rootes/Index"));
+const Layout = React.lazy(() => import("./Layout"));
 
 function App() {
   return (

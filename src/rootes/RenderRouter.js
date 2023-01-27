@@ -12,7 +12,7 @@ export const routers = [
     {
         id:2,
         name:"Home Dashboard",
-        path:"/",
+        path:"/home",
         index:'index',
         component:Home,
         children:[]

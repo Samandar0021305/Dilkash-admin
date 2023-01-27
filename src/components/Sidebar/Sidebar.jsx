@@ -5,9 +5,9 @@ import { sidebar } from "../../utils/Constants";
 export default function Sidebar() {
   const styled = ({ isActive }) => {
     return {
-      color: isActive ? "blue" : "black"
-    }
-  }
+      color: isActive ? "blue" : "black",
+    };
+  };
   return (
     <div className="flex">
       <div className="flex flex-col h-screen p-3 bg-white shadow w-60">
@@ -24,10 +24,13 @@ export default function Sidebar() {
                       <i
                         className={
                           item["icon"] + " mt-3  text-xl mr-3 ml-2  w-5"
-                        }></i>
-                      <NavLink style={styled}
+                        }
+                      ></i>
+                      <NavLink
+                        style={styled}
                         to={item.path}
-                        className="flex items-center p-2 space-x-3 rounded-md text-base mt-1.5">
+                        className="flex items-center p-2 space-x-3 rounded-md text-base mt-1.5"
+                      >
                         {item.name}
                       </NavLink>
                     </div>
