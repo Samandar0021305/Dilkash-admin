@@ -1,14 +1,16 @@
 import React from 'react'
 import Saidbar from "../components/Sidebar/Sidebar"
 
+const Navbar = React.lazy(()=>import("../components/navbar/Navbar"))
+const Footer = React.lazy(()=>import("../components/footer/Footer"))
 const index = ({children}) => {
   return (
     <div className='flex'>
             <Saidbar/>
          <div className='ml-[10px]'>
-            <nav></nav>
-               <main>{children}</main>
-            <footer></footer>
+            <Navbar  />
+               <main className='min-h-[90vh]'>{children}</main>
+            <Footer />
          </div>
     </div>
   )
