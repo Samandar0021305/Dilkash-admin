@@ -7,7 +7,7 @@ build-job:
   
   only:
     - main
-    - dev
+    # - dev
 
   variables:
     IMAGE_DESTINATION: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME}
@@ -39,7 +39,7 @@ deploy_prod:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   only:
     - main
-    - dev
+    # - dev
 
   script:
     - apk add --update --no-cache openssh

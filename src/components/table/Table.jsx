@@ -25,6 +25,10 @@ const Table = () => {
         Header: "Trans.Status",
         accessor: "status",
       },
+      {
+        Header: "Actions",
+        accessor: "action",
+      },
     ],
     []
   );
@@ -32,11 +36,9 @@ const Table = () => {
   const data = useMemo(() => customersData(), []);
 
   return (
-    <>
-      <div className="container mx-auto">
-        <TableItem columns={columns} data={data[0]} />
-      </div>
-    </>
+    <div className="w-full">
+      <TableItem columns={columns} data={data[0]} />
+    </div>
   );
 };
 

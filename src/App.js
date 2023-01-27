@@ -1,15 +1,14 @@
 import React from "react";
-import ApiCheck from "./components/ApiCheck";
-import Sidebar from "./components/Sidebar/Sidebar";
 import Table from "./components/table/Table";
+
+const Routers = React.lazy(() => import("./rootes/Index"));
+const Layout = React.lazy(() => import("./Layout"));
 
 function App() {
   return (
-    <>
-      {/* <Sidebar /> */}
-      <ApiCheck />
-      <Table />
-    </>
+    <Layout>
+      <Routers />
+    </Layout>
   );
 }
 
