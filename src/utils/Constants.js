@@ -1,38 +1,47 @@
+import Salad from "../assets/svg/salad.svg"
+
 export const sidebar = [
   {
-    name: "Home Dashboard",
+    name: "Home",
     icon: "fa-solid fa-house",
+    path: "/"
   },
   {
-    name: "Colors",
-    icon: "fa-solid fa-droplet",
+    name: "Category",
+    icon: "fa-solid fa-cart-shopping",
+    path: "category"
   },
   {
-    name: "Typography",
-    icon: "fa-solid fa-pencil",
-  },
-  {
-    name: "Base",
-    icon: "fa-solid fa-puzzle-piece",
-  },
-  {
-    name: "Buttons",
-    icon: "fa-solid fa-user",
-  },
-  {
-    name: "Forms",
-    icon: "fa-solid fa-file-lines",
-  },
-  {
-    name: "Charts",
-    icon: "fa-solid fa-chart-pie",
-  },
-  {
-    name: "Pages",
-    icon: "fa-solid fa-star ",
-  },
-  {
-    name: "Docs",
-    icon: "fa-solid fa-book",
-  },
+    name: "Order",
+    icon: "fa-solid fa-bag-shopping",
+    path: "order"
+  }
 ];
+
+export const CategoryLits= [ 
+    {
+        id:1,
+        name:"Salatlar", 
+        cout:'20',
+        see:"salatlarni ko'rish salat",
+        img:Salad,
+        edit:"edit"
+    },
+    
+    {
+        id:2,
+        name:"ichimliklar", 
+        cout:'14',
+        see:"ichimliklarni ko'rish",
+        img:Salad ,
+        edit:"edit"
+    },
+    {
+        id:3,
+        name:"ovqatlar", 
+        cout:'34',
+        see:"ovqatlarni ko'rish",
+        img:Salad ,
+        edit:"edit"
+    },
+]

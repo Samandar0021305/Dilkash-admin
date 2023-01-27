@@ -1,17 +1,13 @@
 import React from "react";
 
-
-import Navbar from "./components/Navbar"
-import Sidebar from "./components/Sidebar/Sidebar";
 const Routers = React.lazy(()=>import("./rootes/Index"))
+const Layout = React.lazy(()=>import("./Layout"))
 
 function App() {
   return (
-    <>
-      <Navbar />
-      <Sidebar />
-    <Routers />
-    </>
+    <Layout>
+      <Routers />
+    </Layout>
   );
 }
 
