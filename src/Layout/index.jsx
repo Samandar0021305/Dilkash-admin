@@ -9,7 +9,7 @@ const index = ({children}) => {
             <Saidbar/>
          <div className='ml-[10px]'>
             <Navbar  />
-               <main className='min-h-[90vh]'>{children}</main>
+               <main className='min-h-[92vh]'>{children}</main>
             <Footer />
          </div>
     </div>
