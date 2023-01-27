@@ -1,14 +1,58 @@
-import Axios from "axios";
+import axios from "axios";
+import queryString from "query-string";
 import { product } from "./baseUrl";
-export const getProduct = async (params) => {
-  try {
-    const { data } = await Axios({
-      url: product,
-      params: params,
-    });
-    return data;
-  } catch (err) {
-    console.log(err);
-    return err;
+// export const getProduct = async (params) => {
+//   try {
+//     const { data } = await Axios({
+//       url: product,
+//       params: params,
+//     });
+//     return data;
+//   } catch (err) {
+//     console.log(err);
+//     return err;
+//   }
+// };
+
+function errorHandling(status) {
+  switch (parseInt(status)) {
+    case 401:
+      return "Logout or refresh token";
+    case 403:
+      return alert("Frontend developer sent data incorrectly!");
+    case 500:
+      return alert("Internal server Error!");
   }
-};
+}
+
+const baseURL = process.env.REACT_APP_API_URL;
+
+const configureApi = axios.create({
+  baseURL,
+  paramsSerializer: {
+    encode: (param) => queryString.stringify(param),
+  },
+});
+
+configureApi.interceptors.request.use(async (config) => {
+  config.headers["Content-type"] = "application/json";
+  if (localStorage.getItem("token")) {
+    config.headers["Authorization"] = `Bearer ${localStorage.getItem("token")}`;
+  }
+  return {
+    ...config,
+  };
+});
+
+configureApi.interceptors.response.use(
+  (response) => {
+    console.log("response -----------", response);
+    if (response && response.data) return response.data;
+  },
+  function (err) {
+    errorHandling(err.status);
+    return Promise.reject(err);
+  }
+);
+
+export default configureApi;

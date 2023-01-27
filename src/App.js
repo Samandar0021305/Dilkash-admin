@@ -1,14 +1,15 @@
 import React from "react";
-import Footer from "./components/footer/Footer";
-import Navbar from "./components/navbar/Navbar";
 
 
+
+import Navbar from "./components/navbar/Navbar"
+const Routers = React.lazy(()=>import("./rootes/Index"))
 
 function App() {
   return (
     <>
-    <Navbar/>
-    <Footer/>
+    <Navbar />
+    <Routers />
     </>
   );
 }
