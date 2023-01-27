@@ -18,7 +18,7 @@ export default function Sidebar() {
                       <div className="flex" key={item.name}>
                         <i
                           className={
-                            item["icon"] + " mt-2.5  text-xl mr-2 ml-3  w-5"
+                            item["icon"] + " mt-2.5  text-xl mr-3 ml-2  w-5"
                           }></i>
                         <a
                           href="#!"
