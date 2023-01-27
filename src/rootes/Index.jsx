@@ -4,9 +4,9 @@ import {routers} from "./RenderRouter"
 
 
 
-const renderRoutesRecursive = () =>
+const renderRoutesRecursive = (routers) =>
       routers.map((val) =>
-       val.children && val.children.length !=0 ? (
+       val.children && val.children.length  ? (
         renderRoutesRecursive(val.children)
       ) : (
         <Route
@@ -16,6 +16,7 @@ const renderRoutesRecursive = () =>
         />
       ),
     )
+    
 
 
 const Index = React.memo(() => {

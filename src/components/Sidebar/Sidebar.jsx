@@ -1,4 +1,7 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
+import { sidebar } from "../../utils/Constants";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function Sidebar() {
   return (
