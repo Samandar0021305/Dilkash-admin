@@ -5,9 +5,10 @@ export const CategoryLits= [
         id:1,
         name:"Salatlar", 
         cout:'20',
-        see:"salatlarni ko'rish salat",
+        see:"salatlarni ko'rish ",
         img:Salad,
-        edit:"edit"
+        edit:"edit",
+        delete:'delete'
     },
     
     {
@@ -16,7 +17,8 @@ export const CategoryLits= [
         cout:'14',
         see:"ichimliklarni ko'rish",
         img:Salad ,
-        edit:"edit"
+        edit:"edit",
+        delete:'delete'
     },
     {
         id:3,
@@ -24,6 +26,7 @@ export const CategoryLits= [
         cout:'34',
         see:"ovqatlarni ko'rish",
         img:Salad ,
-        edit:"edit"
+        edit:"edit",
+        delete:'delete'
     },
 ]
