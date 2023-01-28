@@ -1,12 +1,15 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { Context } from '../../Layout'
 import {CategoryLits} from "../../utils/Constants"
 
 const index = React.memo(() => {
+  const disp = useContext(Context).dispatch
   const navigate = useNavigate()
     const [list,setList] = useState(CategoryLits)
     const handlerUpdite = (item)=>{   
        navigate('updite')
+      //  disp(item)
     } 
     return (
     <div>
