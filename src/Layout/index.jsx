@@ -11,12 +11,8 @@ let initalState = "Dashboard"
 
 const reducer = (state,action)=>{
 switch(action.name){
-    case 'Dashboard':
-      return "Dashboard";
-   case "Category":
-      return "Category";
-   case "Order":
-      return "Order";
+    case true:
+      return action.name
       default :
       return state
 }}
