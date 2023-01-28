@@ -13,7 +13,6 @@ const TableItem = ({ columns, data }) => {
     page,
     canPreviousPage,
     canNextPage,
-    pageOptions,
     pageCount,
     gotoPage,
     nextPage,
@@ -83,7 +82,23 @@ const TableItem = ({ columns, data }) => {
                             {...cell.getCellProps()}
                             className="px-6 py-10 whitespace-nowrap"
                           >
-                            {cell.render("Cell")}
+                            {cell.column.id === "image" ? (
+                              <img
+                                src={cell.render("Cell")}
+                                alt="category image"
+                              />
+                            ) : cell.column.id === "action" ? (
+                              <>
+                                <button className="border hover:bg-red-500 transition-all hover:text-white rounded-lg px-[10px] py-1">
+                                  delete
+                                </button>{" "}
+                                <button className="border hover:bg-yellow-300 transition-all hover:text-white rounded-lg px-[10px] py-1">
+                                  edit
+                                </button>
+                              </>
+                            ) : (
+                              cell.render("Cell")
+                            )}
                           </td>
                         );
                       })}

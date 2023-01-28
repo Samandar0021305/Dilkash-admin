@@ -103,7 +103,9 @@ const Pagination = ({
                   className=" active:bg-gray-500 w-[30px] border-gray-400 border-1 active:border-gray-300"
                   onClick={() => gotoPage(pageNumber - 1)}
                 >
-                  {pageNumber}
+                  <span className="px-[15px] py-[5px] text-white cursor-pointer rounded-lg bg-blue-500">
+                    {pageNumber}
+                  </span>
                 </div>
               );
             }
@@ -111,10 +113,12 @@ const Pagination = ({
             return (
               <div
                 key={index}
-                className="active:bg-gray-500 w-[30px] border-gray-400 border-1 active:border-gray-300"
+                className="w-[30px] border-gray-400 border-1 "
                 onClick={() => gotoPage(pageNumber - 1)}
               >
-                {pageNumber}
+                <span className="px-[15px] border rounded-lg cursor-pointer py-[5px]">
+                  {pageNumber}
+                </span>
               </div>
             );
           })}

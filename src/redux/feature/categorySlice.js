@@ -5,14 +5,11 @@ export const categorySlice = createSlice({
   initialState: {
     categories: [],
     error: "",
-    loading: false,
   },
   reducers: {
-    fetchCategory: (state, action) => {
+    fetchCategories: (state, action) => {
       if (action.payload) {
-        state.loading = true;
         state.categories = action.payload;
-        state.loading = false;
       }
     },
     addCategory: (state, action) => {
@@ -27,6 +24,6 @@ export const categorySlice = createSlice({
   },
 });
 
-export const { fetchCategory, addCategory, deleteCategory } =
+export const { fetchCategories, addCategory, deleteCategory } =
   categorySlice.actions;
 export default categorySlice.reducer;

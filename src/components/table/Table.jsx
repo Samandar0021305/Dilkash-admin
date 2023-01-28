@@ -2,28 +2,20 @@ import React, { useMemo } from "react";
 import { customersData } from "./config";
 import TableItem from "./config/TableItem";
 
-const Table = () => {
+const Table = ({ data }) => {
   const columns = useMemo(
     () => [
       {
-        Header: "Customer",
-        accessor: "customer",
+        Header: "Catgory image",
+        accessor: "image",
       },
       {
-        Header: "Deposit",
-        accessor: "deposit",
+        Header: "Category name ",
+        accessor: "title",
       },
       {
         Header: "Date",
-        accessor: "date",
-      },
-      {
-        Header: "Voucher NO.",
-        accessor: "voucherNo",
-      },
-      {
-        Header: "Trans.Status",
-        accessor: "status",
+        accessor: "created_at",
       },
       {
         Header: "Actions",
@@ -33,11 +25,12 @@ const Table = () => {
     []
   );
 
-  const data = useMemo(() => customersData(), []);
+  // const data = useMemo(() => customersData(), []);
+  console.log(data);
 
   return (
     <div className="w-full">
-      <TableItem columns={columns} data={data[0]} />
+      <TableItem columns={columns} data={data} />
     </div>
   );
 };
