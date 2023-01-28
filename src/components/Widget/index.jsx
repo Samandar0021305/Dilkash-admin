@@ -1,10 +1,15 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import {CategoryLits} from "../../utils/Constants"
 
+
 const index = React.memo(() => {
+  const navigate = useNavigate()
     const [list,setList] = useState(CategoryLits)
-  return (
+    const handlerUpdite = ()=>{
+       navigate('updite')
+    } 
+    return (
     <div>
         <ul className='flex justify-between mt-[20px]'>
             {list.map(val=>{
@@ -12,10 +17,10 @@ const index = React.memo(() => {
                     <span className='flex flex-col justify-between'>
                         <span className='font-bold text-[14px] text-[#A0A0A0]'>{val.name}</span>
                         <span className='text-[30px] font-[300]'>{val.cout}</span>
-                        <Link className='w-max	 text-[12px] border-b border-gray-900 '>{val.see}</Link>
+                        <a className='w-max	 text-[12px] border-b border-gray-900 '>{val.see}</a>
                     </span>
                     <span className='flex flex-col items-center justify-between'>
-                      <p className='text-green-900 text-[14px]' >{val.edit}</p>
+                      <p onClick={handlerUpdite} className='text-green-900 cursor-pointer text-[14px]' >{val.edit}</p>
                       <img className='p-[5px] bg-[#ff000099]  rounded-[5px] self-end w-[30px] h-[30px]' src={val.img} alt="" />
                     </span>
                 </li>)
