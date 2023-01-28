@@ -1,21 +1,21 @@
-import Salad from "../assets/svg/salad.svg"
+import Salad from "../assets/svg/salad.svg";
 
 export const sidebar = [
   {
     name: "Home",
     icon: "fa-solid fa-house",
-    path: "/"
+    path: "/",
   },
   {
     name: "Category",
     icon: "fa-solid fa-cart-shopping",
-    path: "category"
+    path: "category",
   },
   {
     name: "Order",
     icon: "fa-solid fa-bag-shopping",
-    path: "order"
-  }
+    path: "order",
+  },
 ];
 
 export const CategoryLits = [
@@ -26,6 +26,7 @@ export const CategoryLits = [
     see: "salatlarni ko'rish salat",
     img: Salad,
     edit: "fa-solid fa-pencil",
+    delete: "fa-solid fa-trash",
   },
 
   {
@@ -35,6 +36,7 @@ export const CategoryLits = [
     see: "ichimliklarni ko'rish",
     img: Salad,
     edit: "fa-solid fa-pencil",
+    delete: "fa-solid fa-trash",
   },
   {
     id: 3,
@@ -43,7 +45,6 @@ export const CategoryLits = [
     see: "ovqatlarni ko'rish",
     img: Salad,
     edit: "fa-solid fa-pencil",
+    delete: "fa-solid fa-trash",
   },
 ];
-
-  

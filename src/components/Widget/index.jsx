@@ -4,7 +4,7 @@ import { CategoryLits } from "../../utils/Constants";
 
 const index = React.memo(() => {
   const [list, setList] = useState(CategoryLits);
-  const [isShown, setIsShown] = useState(false)
+  const [isShown, setIsShown] = useState(false);
   return (
     <div>
       <ul className="flex justify-between mt-[20px]">
@@ -31,11 +31,17 @@ const index = React.memo(() => {
                   alt=""
                 />
                 {isShown === true ? (
-                <i
-                  className={
-                    val.edit + " text-green-900 text-[14px]"
-                  }></i>
-                ): null}
+                  <>
+                    <i
+                      className={
+                        val.edit + " text-green-900 text-[14px] cursor-pointer"
+                      }></i>
+                    <i
+                      className={
+                        val.delete + " text-green-900 text-[14px] cursor-pointer"
+                      }></i>
+                  </>
+                ) : null}
               </span>
             </li>
           );

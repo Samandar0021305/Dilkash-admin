@@ -1,5 +1,5 @@
 import React from 'react'
-import Saidbar from "../components/Sidebar/Sidebar"
+import Saidbar from "../components/sidebar/Sidebar"
 
 const index = ({children}) => {
   return (
