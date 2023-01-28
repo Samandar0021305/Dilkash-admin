@@ -1,28 +1,49 @@
-import { faHome } from "@fortawesome/free-solid-svg-icons";
-import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
-import { faChartSimple } from "@fortawesome/free-solid-svg-icons";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
-import { faLock } from "@fortawesome/free-solid-svg-icons";
+import Salad from "../assets/svg/salad.svg"
 
 export const sidebar = [
   {
-    name: "Home Dashboard",
-    icon: faHome,
+    name: "Home",
+    icon: "fa-solid fa-house",
+    path: "/"
   },
   {
-    name: "NFT Marketplace",
-    icon: faCartShopping,
+    name: "Category",
+    icon: "fa-solid fa-cart-shopping",
+    path: "category"
   },
   {
-    name: "Data tables",
-    icon: faChartSimple,
-  },
-  {
-    name: "Profile",
-    icon: faUser,
-  },
-  {
-    name: "Sign In",
-    icon: faLock,
-  },
+    name: "Order",
+    icon: "fa-solid fa-bag-shopping",
+    path: "order"
+  }
 ];
+
+export const CategoryLits= [ 
+    {
+        id:1,
+        name:"Salatlar", 
+        cout:'20',
+        see:"salatlarni ko'rish salat",
+        img:Salad,
+        edit:"edit"
+    },
+    
+    {
+        id:2,
+        name:"ichimliklar", 
+        cout:'14',
+        see:"ichimliklarni ko'rish",
+        img:Salad ,
+        edit:"edit"
+    },
+    {
+        id:3,
+        name:"ovqatlar", 
+        cout:'34',
+        see:"ovqatlarni ko'rish",
+        img:Salad ,
+        edit:"edit"
+    },
+]
+
+  
