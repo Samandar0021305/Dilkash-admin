@@ -2,9 +2,9 @@ import Salad from "../assets/svg/salad.svg"
 
 export const sidebar = [
   {
-    name: "Home",
+    name: "Dashboard",
     icon: "fa-solid fa-house",
-    path: "/"
+    path: "/dashboard"
   },
   {
     name: "Category",

@@ -1,18 +1,17 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { words, navList, icons } from "./navbarContents/navbarContents"
+import { Context } from '../../Layout';
 
-export default function Navbar({setIsPage}) {
+
+export default function Navbar() {
+  const toogle = useContext(Context).setToogle
+  const isToogle = useContext(Context).isToogle
     const changeToogle = ()=>{
-        setTimeout(()=>{
-            setIsPage(p=>!p)
-        },100)
-    }
-
-
+      toogle(!isToogle)
+   }
     
-
     return (
         <>
             <nav className='flex justify-between'>
