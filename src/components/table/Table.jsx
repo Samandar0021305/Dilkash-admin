@@ -1,5 +1,4 @@
 import React, { useMemo } from "react";
-import { customersData } from "./config";
 import TableItem from "./config/TableItem";
 
 const Table = ({ data }) => {
