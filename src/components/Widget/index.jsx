@@ -27,7 +27,7 @@ const index = React.memo(() => {
                     <span className='flex flex-col justify-between'>
                         <span className='font-bold text-[14px] text-[#A0A0A0]'>{val.name}</span>
                         <span className='text-[30px] font-[300]'>{val.cout}</span>
-                        <Link  className='w-max	 text-[12px] border-b border-gray-900 '>{val.see}</Link>
+                        <Link to="/" className='w-max	 text-[12px] border-b border-gray-900 '>{val.see}</Link>
                     </span>
                     <span className='flex flex-col items-center justify-between'>
                      <span>
