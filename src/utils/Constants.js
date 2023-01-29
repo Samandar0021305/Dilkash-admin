@@ -2,9 +2,9 @@ import firstFood from "../images/first-food.jpg";
 
 export const sidebar = [
   {
-    name: "Home",
+    name: "Dashboard",
     icon: "fa-solid fa-house",
-    path: "/",
+    path: "/dashboard"
   },
   {
     name: "Category",

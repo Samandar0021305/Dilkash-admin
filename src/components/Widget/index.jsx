@@ -27,28 +27,30 @@ const index = React.memo(() => {
               }}>
               {isShown.show === true && isShown.id === val.id ? (
                 <>
-                  <span className="flex flex-col justify-between w-full h-full p-[10px] rounded-[10px] backdrop-blur">
-                    <span className="font-bold text-[14px] text-[#A0A0A0]">
-                      {val.name}
+                  <span className="flex justify-between w-full h-full p-[10px] rounded-[10px] backdrop-blur-[10px]">
+                    <span className="flex flex-col">
+                      <span className="font-bold text-[14px] text-white">
+                        {val.name}
+                      </span>
+                      <span className="text-[40px] font-[500] text-white">
+                        {val.cout}
+                      </span>
+                      <Link className="w-max text-white text-[12px] border-b border-white">
+                        {val.see}
+                      </Link>
                     </span>
-                    <span className="text-[40px] font-[500] text-[#fff]">
-                      {val.cout}
+                    <span className="flex flex-col text-[#ebe4e4] items-center gap-[70px]">
+                      <i
+                        className={
+                          val.edit +
+                          " text-900 text-[14px] text-[#e5e2e2] cursor-pointer"
+                        }></i>
+                      <i
+                        className={
+                          val.delete +
+                          " text-900 text-[17px] text-white cursor-pointer"
+                        }></i>
                     </span>
-                    <Link className="w-max	 text-[12px] border-b border-gray-900">
-                      {val.see}
-                    </Link>
-                  </span>
-                  <span className="flex flex-col items-center gap-[70px]">
-                    <i
-                      className={
-                        val.edit +
-                        " text-900 text-[14px] text-black cursor-pointer"
-                      }></i>
-                    <i
-                      className={
-                        val.delete +
-                        " text-900 text-[17px] text-black cursor-pointer"
-                      }></i>
                   </span>
                 </>
               ) : null}
