@@ -1,40 +1,29 @@
 import configureApi from "../api";
 
 const foodEndpoints = {
-  list: "foods",
-  add: "foods",
-  remove: ({ foodId }) => `foods/ ${foodId}`,
+  list: "/product",
+  add: "/product/create",
+  updated: "/product/update/",
+  delete: "/product/delete/",
 };
 
-const foodApi = {
-  getFood: async () => {
-    try {
-      const response = await configureApi.get(foodEndpoints.list);
-      return { response };
-    } catch (error) {
-      return error;
-    }
-  },
-  addFood: async ({ name, description, image }) => {
-    try {
-      const response = await configureApi.post(foodEndpoints.add, {
-        name,
-        description,
-        image,
-      });
-      return { response };
-    } catch (error) {
-      return error;
-    }
-  },
-  deleteFood: async ({ foodId }) => {
-    try {
-      const response = await configureApi.delete(foodEndpoints.delete(foodId));
-      return { response };
-    } catch (error) {
-      return error;
-    }
-  },
-};
+export const getProduct = async (params) =>
+  await configureApi.get(foodEndpoints.list, {
+    params: {
+      page: 1,
+      pageSize: 10,
+      ...params,
+    },
+  });
 
-export default foodApi
+export const createProduct = async (data) =>
+  await configureApi.post(foodEndpoints.add, { data });
+
+export const deleteProduct = async (id) =>
+  await configureApi.delete(foodEndpoints.delete + id);
+
+export const getByIdProduct = async (id) =>
+  await configureApi.get(foodEndpoints.list + id);
+
+export const updateProduct = async (id, data) =>
+  await configureApi.delete(foodEndpoints.delete + id, { data });

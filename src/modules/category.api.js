@@ -2,52 +2,28 @@ import configureApi from "../api";
 
 const categoryEndpoints = {
   list: "/category",
-  getOne: (categId) => `/category/${categId}`,
-  add: "category/create",
-  updated: ({ categId }) => `/category/update/${categId}`,
-  delete: ({ categId }) => `/category/delete/${categId}`,
+  add: "/category/create",
+  updated: "/category/update/",
+  delete: "/category/delete/",
 };
 
-const categoryApi = {
-  getCategory: async () => {
-    try {
-      const response = await configureApi.get(categoryEndpoints.list);
-      return response;
-    } catch (error) {
-      return error;
-    }
-  },
-  updateCateg: async ({ categId }) => {
-    try {
-      const response = await configureApi.put(
-        categoryEndpoints.updated(categId)
-      );
-      return response;
-    } catch (error) {
-      return error;
-    }
-  },
-  addCategory: async ({ title, image }) => {
-    try {
-      const response = await configureApi.post(categoryEndpoints.add, {
-        title,
-        image,
-      });
-      return response;
-    } catch (error) {
-      return error;
-    }
-  },
-  deleteCateg: async ({ categId }) => {
-    try {
-      const response = await configureApi.delete(
-        categoryEndpoints.delete(categId)
-      );
-      return response;
-    } catch (error) {
-      return error;
-    }
-  },
-};
+export const getCategory = async (params) =>
+  await configureApi.get(categoryEndpoints.list, {
+    params: {
+      page: 1,
+      pageSize: 10,
+      ...params,
+    },
+  });
 
-export default categoryApi;
+export const createCategory = async (data) =>
+  await configureApi.post(categoryEndpoints.add, { data });
+
+export const deleteCategory = async (id) =>
+  await configureApi.delete(categoryEndpoints.delete + id);
+
+export const getByIdCategory = async (id) =>
+  await configureApi.get(categoryEndpoints.list + id);
+
+export const updateCategory = async (id, data) =>
+  await configureApi.patch(categoryEndpoints.delete + id, { data });
