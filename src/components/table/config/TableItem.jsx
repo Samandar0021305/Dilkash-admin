@@ -4,7 +4,6 @@ import GlobalFilter from "./GlobalFilter";
 import Pagination, { useCustomPagination } from "./Paginations";
 
 const TableItem = ({ columns, data }) => {
-  // Use the state and functions returned from useTable to build your UI
   const {
     getTableProps,
     getTableBodyProps,

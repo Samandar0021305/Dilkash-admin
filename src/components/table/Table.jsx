@@ -25,7 +25,6 @@ const Table = ({ data }) => {
   );
 
   // const data = useMemo(() => customersData(), []);
-  console.log(data);
 
   return (
     <div className="w-full">
