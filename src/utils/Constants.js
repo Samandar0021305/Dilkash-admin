@@ -1,9 +1,11 @@
 import firstFood from "../images/first-food.jpg";
 
+
 export const sidebar = [
   {
     name: "Dashboard",
     icon: "fa-solid fa-house",
+
     path: "/dashboard"
   },
   {
@@ -27,6 +29,7 @@ export const CategoryLits = [
     edit: "fa-solid fa-pencil",
     delete: "fa-solid fa-trash",
     background: firstFood,
+
   },
 
   {
@@ -46,5 +49,27 @@ export const CategoryLits = [
     edit: "fa-solid fa-pencil",
     delete: "fa-solid fa-trash",
     background: firstFood,
+  },
+];
+
+export const CategoryTableHeader = [
+  {
+    Header: "Cetagory Image",
+    accessor: "cetagoryImage",
+  },
+  {
+    Header: "Cetagory Name",
+    accessor: "cetagoryName",
+  },
+  {
+    Header: "CreatedDate",
+    accessor: "date",
+  },
+  {
+    Header: "Actions",
+    accessor: "actions",
+    delete: true,
+    edit: true,
+    deatils: false,
   },
 ];

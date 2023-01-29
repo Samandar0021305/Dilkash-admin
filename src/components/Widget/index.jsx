@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { CategoryLits } from "../../utils/Constants";
 
+
+
+
 const index = React.memo(() => {
   const [list, setList] = useState(CategoryLits);
   const [isShown, setIsShown] = useState({ show: false, id: "" });
