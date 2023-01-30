@@ -1,5 +1,5 @@
 import React, { useReducer, useState } from 'react'
-import Saidbar from "../components/Sidebar/Sidebar"
+import Sidebar from "../components/Sidebar/Sidebar"
 
 const Navbar = React.lazy(()=>import("../components/navbar/Navbar"))
 const Footer = React.lazy(()=>import("../components/footer/Footer"))
@@ -38,7 +38,7 @@ const Index = ({children}) => {
   return (
    <Context.Provider value={{posts:posts,dispatch:dispatch,setToogle:setToogle,isToogle:isToogle}}>
      <div className='flex'>
-          <Saidbar /> 
+          <Sidebar /> 
          <div className='ml-[10px] w-[100%] pr-[10px]'>
             <Navbar />
             <IsPage/>

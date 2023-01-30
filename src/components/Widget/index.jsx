@@ -1,49 +1,71 @@
-import { Link, NavLink, useParams,useNavigate } from 'react-router-dom'
-import React, { useContext, useState } from 'react'
-import { Context } from '../../Layout'
-import {CategoryLits} from "../../utils/Constants"
-
-
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { CategoryLits } from "../../utils/Constants";
 
 const index = React.memo(() => {
-  const disp = useContext(Context).dispatch
-  const navigate = useNavigate()
-    const [list,setList] = useState(CategoryLits)
-    const [idValue ,setIdValue] = useState([])
-    const changeHandler  = (items)=>{
-      setIdValue(p=>[...idValue,items])
-    }
+  const [list, setList] = useState(CategoryLits);
+  const [isShown, setIsShown] = useState({ show: false, id: "" });
 
-    const handlerUpdite = (item)=>{   
-       navigate('updite')
-      //  disp(item)
-    } 
-    return (
+  return (
     <div>
-        <ul className='flex justify-between mt-[20px]'>
-            {list.map(val=>{
-              if(!idValue.includes(val.id))
-                return(<li className='flex mx-[10px] w-[250px] justify-between flex-1 p-[10px] shadow-md rounded-[10px] h-[110px]'  key={val.id}>
-                    <span className='flex flex-col justify-between'>
-                        <span className='font-bold text-[14px] text-[#A0A0A0]'>{val.name}</span>
-                        <span className='text-[30px] font-[300]'>{val.cout}</span>
-                        <Link to="/" className='w-max	 text-[12px] border-b border-gray-900 '>{val.see}</Link>
+      <ul className="flex justify-between mt-[20px]">
+        {list.map((val) => {
+          return (
+            <li
+              className="flex mx-[10px] w-[250px] justify-between flex-1 shadow-md rounded-[10px] h-[130px]"
+              style={{ backgroundImage: `url(${val.background})` }}
+              key={val.id}
+              onMouseEnter={() => {
+                setIsShown((prev) => ({ ...prev, show: true, id: val.id }));
+              }}
+              onMouseLeave={() => {
+                setIsShown((prev) => ({
+                  ...prev,
+                  show: false,
+                  id: val.id,
+                }));
+              }}
+            >
+              {isShown.show === true && isShown.id === val.id ? (
+                <>
+                  <span className="flex justify-between w-full h-full p-[10px] rounded-[10px] backdrop-blur-[10px]">
+                    <span className="flex flex-col">
+                      <span className="font-bold text-[14px] text-white">
+                        {val.name}
+                      </span>
+                      <span className="text-[40px] font-[500] text-white">
+                        {val.cout}
+                      </span>
+                      <Link
+                        to="/"
+                        className="w-max text-white text-[12px] border-b border-white"
+                      >
+                        {val.see}
+                      </Link>
                     </span>
-                    <span className='flex flex-col items-center justify-between'>
-                     <span>
-                     <p  className='text-green-900 text-[14px] cursor-pointer' >{val.edit}</p>
-                     <p onClick={()=>changeHandler(val.id)} className='text-red text-[14px] cursor-pointer'>{val.delete}</p>
-                     </span>
-                        <a className='w-max	 text-[12px] border-b border-gray-900 '>{val.see}</a>
+                    <span className="flex flex-col text-[#ebe4e4] items-center gap-[70px]">
+                      <i
+                        className={
+                          val.edit +
+                          " text-900 text-[14px] text-[#e5e2e2] cursor-pointer"
+                        }
+                      ></i>
+                      <i
+                        className={
+                          val.delete +
+                          " text-900 text-[17px] text-white cursor-pointer"
+                        }
+                      ></i>
                     </span>
-                    <span className='flex flex-col items-center justify-between'>
-                      <p onClick={()=>handlerUpdite(val)} className='text-green-900 cursor-pointer text-[14px]' >{val.edit}</p>
-                      <img className='p-[5px] bg-[#ff000099]  rounded-[5px] self-end w-[30px] h-[30px]' src={val.img} alt="" />
-                    </span>
-                </li>)
-            })}
-        </ul>
+                  </span>
+                </>
+              ) : null}
+            </li>
+          );
+        })}
+      </ul>
     </div>
-  )
-})
-export default index
+  );
+});
+
+export default index;
