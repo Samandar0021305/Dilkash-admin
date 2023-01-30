@@ -1,69 +1,70 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { CategoryLits } from "../../utils/Constants";
+import { getCategory } from "../../modules/category.api";
+import { useSelector,useDispatch } from "react-redux";
+import { fetchCategories } from "../../redux/feature/categorySlice";
 
 const index = React.memo(() => {
-  const [list, setList] = useState(CategoryLits);
+  const [list, setList] = useState(false);
   const [isShown, setIsShown] = useState({ show: false, id: "" });
 
+  const dipatch = useDispatch()
+  const value = useSelector(state=>state.category.categories)
+
+  
+  const FectchData = useCallback(async()=>{
+   let data = await getCategory()
+   return data
+  })
+
+  const dataFerching = useCallback(()=>{
+     FectchData().then(val=>dipatch(fetchCategories(val.data)))
+  })
+  useEffect(()=>{
+    dataFerching()
+    setList(p=>!p)
+  },[])
+  console.log(value);
+   
+  const baseIMG = process.env.REACT_APP_IMG_URL
+  
   return (
     <div>
-      <ul className="flex justify-between mt-[20px]">
-        {list.map((val) => {
-          return (
-            <li
-              className="flex mx-[10px] w-[250px] justify-between flex-1 shadow-md rounded-[10px] h-[130px]"
-              style={{ backgroundImage: `url(${val.background})` }}
-              key={val.id}
-              onMouseEnter={() => {
-                setIsShown((prev) => ({ ...prev, show: true, id: val.id }));
-              }}
-              onMouseLeave={() => {
-                setIsShown((prev) => ({
-                  ...prev,
-                  show: false,
-                  id: val.id,
-                }));
-              }}
-            >
-              {isShown.show === true && isShown.id === val.id ? (
-                <>
-                  <span className="flex justify-between w-full h-full p-[10px] rounded-[10px] backdrop-blur-[10px]">
+       <div className="flex flex-wrap  items-center">
+          {list  ? <h1>Loading</h1> : 
+          value.map(val=>{
+            return   <div className="flex mx-[20px] my-[10px] w-[210px] justify-between  shadow-md rounded-[10px] h-[130px]"
+            style={{ backgroundImage: `url(${baseIMG}${val.image})`}}
+            key={val.id}
+            onMouseEnter={() => {
+              setIsShown((prev) => ({ ...prev, show: true, id: val.id }));
+            }}
+            onMouseLeave={() => {
+              setIsShown((prev) => ({
+                ...prev,
+                show: false,
+                id: val.id,
+              }));
+            }}
+          >
+            {isShown.show === true && isShown.id === val.id ? (
+                <span className="flex justify-between w-full h-full p-[10px] rounded-[10px] backdrop-blur-[10px]">
                     <span className="flex flex-col">
-                      <span className="font-bold text-[14px] text-white">
-                        {val.name}
-                      </span>
-                      <span className="text-[40px] font-[500] text-white">
-                        {val.cout}
-                      </span>
-                      <Link
-                        to="/"
-                        className="w-max text-white text-[12px] border-b border-white"
-                      >
-                        {val.see}
-                      </Link>
+                      <h2 className="text-[#fff]">{val.title}</h2>
                     </span>
                     <span className="flex flex-col text-[#ebe4e4] items-center gap-[70px]">
                       <i
-                        className={
-                          val.edit +
-                          " text-900 text-[14px] text-[#e5e2e2] cursor-pointer"
-                        }
-                      ></i>
-                      <i
-                        className={
-                          val.delete +
-                          " text-900 text-[17px] text-white cursor-pointer"
-                        }
+                        className="fa-solid fa-pencil text-900 text-[14px] text-[#e5e2e2] cursor-pointer"></i> 
+                       <i
+                        className=" fa-solid fa-trash text-900 text-[17px] text-white cursor-pointer"
                       ></i>
                     </span>
                   </span>
-                </>
-              ) : null}
-            </li>
-          );
-        })}
-      </ul>
+            ) : null}
+          </div>
+          })}
+       </div>
     </div>
   );
 });
