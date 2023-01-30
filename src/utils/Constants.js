@@ -1,12 +1,11 @@
 import firstFood from "../images/first-food.jpg";
 
-
 export const sidebar = [
   {
     name: "Dashboard",
     icon: "fa-solid fa-house",
 
-    path: "/dashboard"
+    path: "/dashboard",
   },
   {
     name: "Category",
@@ -29,7 +28,6 @@ export const CategoryLits = [
     edit: "fa-solid fa-pencil",
     delete: "fa-solid fa-trash",
     background: firstFood,
-
   },
 
   {
@@ -52,24 +50,47 @@ export const CategoryLits = [
   },
 ];
 
-export const CategoryTableHeader = [
+export const categoryTableHeader = [
   {
-    Header: "Cetagory Image",
-    accessor: "cetagoryImage",
+    Header: "Catgory image",
+    accessor: "image",
   },
   {
-    Header: "Cetagory Name",
-    accessor: "cetagoryName",
+    Header: "Category name ",
+    accessor: "title",
   },
   {
-    Header: "CreatedDate",
-    accessor: "date",
+    Header: "Date",
+    accessor: "created_at",
   },
   {
     Header: "Actions",
-    accessor: "actions",
-    delete: true,
-    edit: true,
-    deatils: false,
+    accessor: "action",
+  },
+];
+
+export const productTableHeader = [
+  {
+    accessor: "id",
+  },
+  {
+    Header: "Image",
+    accessor: "image",
+  },
+  {
+    Header: "Name ",
+    accessor: "name",
+  },
+  {
+    Header: "Description ",
+    accessor: "content",
+  },
+  {
+    Header: "Price ",
+    accessor: "price",
+  },
+  {
+    Header: "Actions",
+    accessor: "action",
   },
 ];

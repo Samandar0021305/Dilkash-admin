@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { getCategory } from "../modules/category.api";
-import Table from "../components/table/Table";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCategories } from "../redux/feature/categorySlice";
 
@@ -22,7 +21,6 @@ const Category = React.memo(() => {
   return (
     <div className="w-full">
       <Widget />
-      <Table data={data} />
     </div>
   );
 });

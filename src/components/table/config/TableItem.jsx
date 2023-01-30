@@ -1,9 +1,14 @@
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { useGlobalFilter, usePagination, useTable } from "react-table";
+import { deleteProducts } from "../../../redux/feature/productSlice";
 import GlobalFilter from "./GlobalFilter";
 import Pagination, { useCustomPagination } from "./Paginations";
 
 const TableItem = ({ columns, data }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const {
     getTableProps,
     getTableBodyProps,
@@ -29,6 +34,10 @@ const TableItem = ({ columns, data }) => {
     usePagination
   );
 
+  const deleteItem = (id) => {
+    dispatch(deleteProducts(id));
+  };
+
   const { pageIndex } = state;
   const paginationRange = useCustomPagination({
     totalPageCount: pageCount,
@@ -46,7 +55,7 @@ const TableItem = ({ columns, data }) => {
         globalFilter={state.globalFilter}
         setGlobalFilter={setGlobalFilter}
       />
-      <div className="-my-2 overflow-x-auto -mx-4 sm:-mx-6 lg:-mx-8">
+      <div className="-my-2 overflow-x-auto  -mx-4 sm:-mx-6 w-full lg:-mx-8">
         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
           <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
             <table
@@ -79,24 +88,39 @@ const TableItem = ({ columns, data }) => {
                         return (
                           <td
                             {...cell.getCellProps()}
-                            className="px-6 py-10 whitespace-nowrap"
+                            className="px-6 py-10  whitespace-nowrap"
                           >
-                            {cell.column.id === "image" ? (
-                              <img
-                                src={cell.render("Cell")}
-                                alt="category image"
-                              />
+                            {cell.column.id === "id" ? null : cell.column.id ===
+                              "image" ? (
+                              <img src={cell.render("Cell")} alt="image" />
                             ) : cell.column.id === "action" ? (
-                              <>
-                                <button className="border hover:bg-red-500 transition-all hover:text-white rounded-lg px-[10px] py-1">
-                                  delete
-                                </button>{" "}
-                                <button className="border hover:bg-yellow-300 transition-all hover:text-white rounded-lg px-[10px] py-1">
-                                  edit
+                              <div className="flex gap-2">
+                                <button
+                                  onClick={() => navigate(cell.row.original.id)}
+                                  className="border hover:bg-yellow-300 transition-all hover:text-white rounded-lg px-[10px] py-1"
+                                >
+                                  <i className="fa-solid fa-info"></i>
                                 </button>
-                              </>
+                                <button
+                                  onClick={() =>
+                                    deleteItem(cell.row.original.id)
+                                  }
+                                  className="border hover:bg-red-500 transition-all hover:text-white rounded-lg px-[10px] py-1"
+                                >
+                                  <i className="fa-solid fa-trash"></i>
+                                </button>
+                                <button className="border hover:bg-green-500 transition-all hover:text-white rounded-lg px-[10px] py-1">
+                                  <i className="fa-solid fa-pencil"></i>
+                                </button>
+                              </div>
+                            ) : cell.column.id === "content" ? (
+                              <span className="w-[150px]">
+                                {cell.render("Cell")}
+                              </span>
+                            ) : cell.column.id === "price" ? (
+                              <span>{cell.render("Cell")} so'm</span>
                             ) : (
-                              cell.render("Cell")
+                              <span>{cell.render("Cell")}</span>
                             )}
                           </td>
                         );
