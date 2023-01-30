@@ -51,7 +51,7 @@ const index = React.memo(() => {
             {isShown.show === true && isShown.id === val.id ? (
                 <span className="flex justify-between w-full h-full p-[10px] rounded-[10px] backdrop-blur-[10px]">
                     <span className="flex flex-col">
-                      <h2 className="text-[#fff]">{val.title}</h2>
+                      <h2 className="text-[#f00]">{val.title}</h2>
                     </span>
                     <span className="flex flex-col text-[#ebe4e4] items-center gap-[70px]">
                       <i
