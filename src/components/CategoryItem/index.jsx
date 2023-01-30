@@ -6,10 +6,10 @@ const Index = () => {
     let dispatch = useDispatch()
     let data = useSelector(state=>state.food.foods)
    
-    const Fetching = async()=>{
+    const Fetching = useCallback(async()=>{
      let res = await getProduct()
      return res
-    }
+    })
    
     const DataFetching = useCallback(()=>{
         Fetching().then(res=>dispatch(fetchFood(res.data)))
