@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
+
 const Widget = React.lazy(() => import("../components/Widget"));
 
 const Category = React.memo(() => {
 
+  
 
   return (
     <div className="w-full">

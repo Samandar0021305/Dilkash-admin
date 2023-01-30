@@ -18,7 +18,7 @@ const Index = () => {
     useEffect(()=>{
         DataFetching()
     },[dispatch])
-    console.log(data);
+    // console.log(data);
   return (
     <div>
 
