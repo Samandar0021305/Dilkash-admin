@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProduct } from '../../modules/food.api'
 import { fetchFood } from '../../redux/feature/foodSlice'
@@ -10,11 +10,15 @@ const Index = () => {
      let res = await getProduct()
      return res
     }
+   
+    const DataFetching = useCallback(()=>{
+        Fetching().then(res=>dispatch(fetchFood(res.data)))
+    })
 
     useEffect(()=>{
-      Fetching().then(res=>dispatch(fetchFood(res.data)))
+        DataFetching()
     },[dispatch])
-   
+    console.log(data);
   return (
     <div>
 
