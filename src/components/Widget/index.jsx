@@ -1,14 +1,13 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CategoryLits } from "../../utils/Constants";
 import { getCategory } from "../../modules/category.api";
 import { useSelector,useDispatch } from "react-redux";
 import { fetchCategories } from "../../redux/feature/categorySlice";
-
+import CategoryItem from "../CategoryItem"
 const index = React.memo(() => {
   const [list, setList] = useState(false);
   const [isShown, setIsShown] = useState({ show: false, id: "" });
-
   const dipatch = useDispatch()
   const value = useSelector(state=>state.category.categories)
 
@@ -25,10 +24,13 @@ const index = React.memo(() => {
     dataFerching()
     setList(p=>!p)
   },[])
-  console.log(value);
-   
-  const baseIMG = process.env.REACT_APP_IMG_URL
   
+  const baseIMG = process.env.REACT_APP_IMG_URL
+
+ const handlerCard = (item)=>{
+  
+ }
+
   return (
     <div>
        <div className="flex flex-wrap  items-center">
@@ -51,7 +53,7 @@ const index = React.memo(() => {
             {isShown.show === true && isShown.id === val.id ? (
                 <span className="flex justify-between w-full h-full p-[10px] rounded-[10px] backdrop-blur-[10px]">
                     <span className="flex flex-col">
-                      <h2 className="text-[#f00]">{val.title}</h2>
+                      <h2  onClick={()=>handlerCard(val)} className="cursor-pointer text-[#f00]">{val.title}</h2>
                     </span>
                     <span className="flex flex-col text-[#ebe4e4] items-center gap-[70px]">
                       <i
@@ -65,6 +67,8 @@ const index = React.memo(() => {
           </div>
           })}
        </div>
+
+       <CategoryItem />
     </div>
   );
 });
