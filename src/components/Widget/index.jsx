@@ -2,9 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { CategoryLits } from "../../utils/Constants";
 
-
-
-
 const index = React.memo(() => {
   const [list, setList] = useState(CategoryLits);
   const [isShown, setIsShown] = useState({ show: false, id: "" });
@@ -27,7 +24,8 @@ const index = React.memo(() => {
                   show: false,
                   id: val.id,
                 }));
-              }}>
+              }}
+            >
               {isShown.show === true && isShown.id === val.id ? (
                 <>
                   <span className="flex justify-between w-full h-full p-[10px] rounded-[10px] backdrop-blur-[10px]">
@@ -38,7 +36,10 @@ const index = React.memo(() => {
                       <span className="text-[40px] font-[500] text-white">
                         {val.cout}
                       </span>
-                      <Link className="w-max text-white text-[12px] border-b border-white">
+                      <Link
+                        to="/"
+                        className="w-max text-white text-[12px] border-b border-white"
+                      >
                         {val.see}
                       </Link>
                     </span>
@@ -47,12 +48,14 @@ const index = React.memo(() => {
                         className={
                           val.edit +
                           " text-900 text-[14px] text-[#e5e2e2] cursor-pointer"
-                        }></i>
+                        }
+                      ></i>
                       <i
                         className={
                           val.delete +
                           " text-900 text-[17px] text-white cursor-pointer"
-                        }></i>
+                        }
+                      ></i>
                     </span>
                   </span>
                 </>
@@ -64,10 +67,5 @@ const index = React.memo(() => {
     </div>
   );
 });
-
-// font-size: 18px;
-//       padding: 5px;
-//       border-radius: 5px;
-//       align-self: flex-end;
 
 export default index;
