@@ -1,4 +1,5 @@
-import Salad from "../assets/svg/salad.svg";
+import firstFood from "../images/first-food.jpg";
+
 
 export const sidebar = [
   {
@@ -25,25 +26,29 @@ export const CategoryLits = [
     name: "Salatlar",
     cout: "20",
     see: "salatlarni ko'rish salat",
-    img: Salad,
-    edit: "edit",
+    edit: "fa-solid fa-pencil",
+    delete: "fa-solid fa-trash",
+    background: firstFood,
+
   },
 
   {
     id: 2,
-    name: "ichimliklar",
+    name: "Ichimliklar",
     cout: "14",
     see: "ichimliklarni ko'rish",
-    img: Salad,
-    edit: "edit",
+    edit: "fa-solid fa-pencil",
+    delete: "fa-solid fa-trash",
+    background: firstFood,
   },
   {
     id: 3,
-    name: "ovqatlar",
+    name: "Ovqatlar",
     cout: "34",
     see: "ovqatlarni ko'rish",
-    img: Salad,
-    edit: "edit",
+    edit: "fa-solid fa-pencil",
+    delete: "fa-solid fa-trash",
+    background: firstFood,
   },
 ];
 
