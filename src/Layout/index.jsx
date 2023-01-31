@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from 'react'
+import React, { useReducer } from 'react'
 import Sidebar from "../components/Sidebar/Sidebar"
 
 const Navbar = React.lazy(()=>import("../components/navbar/Navbar"))

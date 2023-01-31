@@ -1,4 +1,5 @@
 import React from "react";
+// import Modal from "../src/components/modal/Modal"
 import Table from "./components/table/Table";
 
 const Routers = React.lazy(() => import("./rootes/Index"));
@@ -8,6 +9,7 @@ function App() {
   return (
     <Layout>
       <Routers />
+      {/* <Modal/> */}
     </Layout>
   );
 }

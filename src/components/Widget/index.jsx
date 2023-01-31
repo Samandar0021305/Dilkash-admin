@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { CategoryLits } from "../../utils/Constants";
+import Modal from "../modal/Modal"
 
 const index = React.memo(() => {
   const [list, setList] = useState(CategoryLits);
   const [isShown, setIsShown] = useState({ show: false, id: "" });
+  const [modalActive, setModalActive] = useState(true)
 
   return (
     <div>
@@ -55,6 +57,7 @@ const index = React.memo(() => {
                           val.delete +
                           " text-900 text-[17px] text-white cursor-pointer"
                         }
+                        onClick={() => setModalActive(true)}
                       ></i>
                     </span>
                   </span>
