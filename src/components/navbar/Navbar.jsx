@@ -25,7 +25,7 @@ export default function Navbar() {
                         ))}
                         {words.map(elem => (
                             <li key={elem.id}>
-                                <NavLink className='hover:text-red-900 transition cursor-pointer'>{elem?.name}</NavLink>
+                                <NavLink to="/" className='hover:text-red-900 transition cursor-pointer'>{elem?.name}</NavLink>
                             </li>
                         ))}
                     </ul>

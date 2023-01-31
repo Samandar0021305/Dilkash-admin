@@ -1,9 +1,11 @@
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useGlobalFilter, usePagination, useTable } from "react-table";
-import GlobalFilter from "./GlobalFilter";
-import Pagination, { useCustomPagination } from "./Paginations";
+import GlobalFilter from "./config/GlobalFilter";
+import Pagination, { useCustomPagination } from "./config/Paginations";
 
-const TableItem = ({ columns, data }) => {
+const Table = ({ columns, data, deleteItem }) => {
+  const navigate = useNavigate();
   const {
     getTableProps,
     getTableBodyProps,
@@ -35,6 +37,8 @@ const TableItem = ({ columns, data }) => {
     currentPage: pageIndex,
   });
 
+  const imageUrl = process.env.REACT_APP_IMG_URL;
+
   useEffect(() => {
     setPageSize(5);
   }, [setPageSize]);
@@ -46,7 +50,7 @@ const TableItem = ({ columns, data }) => {
         globalFilter={state.globalFilter}
         setGlobalFilter={setGlobalFilter}
       />
-      <div className="-my-2 overflow-x-auto -mx-4 sm:-mx-6 lg:-mx-8">
+      <div className="-my-2 overflow-x-auto  -mx-4 sm:-mx-6 w-full lg:-mx-8">
         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
           <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
             <table
@@ -54,7 +58,7 @@ const TableItem = ({ columns, data }) => {
               className="min-w-full divide-y divide-gray-200"
             >
               <thead className="bg-gray-10">
-                {headerGroups.map((headerGroup) => (
+                {headerGroups?.map((headerGroup) => (
                   <tr {...headerGroup.getHeaderGroupProps()}>
                     {headerGroup.headers.map((column) => (
                       <th
@@ -71,32 +75,50 @@ const TableItem = ({ columns, data }) => {
                 {...getTableBodyProps()}
                 className="bg-white divide-y divide-gray-200"
               >
-                {page.map((row, i) => {
+                {page?.map((row, i) => {
                   prepareRow(row);
                   return (
                     <tr {...row.getRowProps()}>
-                      {row.cells.map((cell) => {
+                      {row?.cells.map((cell) => {
                         return (
                           <td
                             {...cell.getCellProps()}
-                            className="px-6 py-10 whitespace-nowrap"
+                            className="px-6 py-10  whitespace-nowrap"
                           >
-                            {cell.column.id === "image" ? (
+                            {cell.column.id === "id" ? null : cell.column.id ===
+                              "image" ? (
                               <img
-                                src={cell.render("Cell")}
-                                alt="category image"
+                                src={`${imageUrl}${cell.row.original.image}`}
+                                alt="image"
                               />
                             ) : cell.column.id === "action" ? (
-                              <>
-                                <button className="border hover:bg-red-500 transition-all hover:text-white rounded-lg px-[10px] py-1">
-                                  delete
-                                </button>{" "}
-                                <button className="border hover:bg-yellow-300 transition-all hover:text-white rounded-lg px-[10px] py-1">
-                                  edit
+                              <div className="flex gap-2">
+                                <button
+                                  onClick={() => navigate(cell.row.original.id)}
+                                  className="border hover:bg-yellow-300 transition-all hover:text-white rounded-lg px-[10px] py-1"
+                                >
+                                  <i className="fa-solid fa-info"></i>
                                 </button>
-                              </>
+                                <button
+                                  onClick={() =>
+                                    deleteItem(cell.row.original.id)
+                                  }
+                                  className="border hover:bg-red-500 transition-all hover:text-white rounded-lg px-[10px] py-1"
+                                >
+                                  <i className="fa-solid fa-trash"></i>
+                                </button>
+                                <button className="border hover:bg-green-500 transition-all hover:text-white rounded-lg px-[10px] py-1">
+                                  <i className="fa-solid fa-pencil"></i>
+                                </button>
+                              </div>
+                            ) : cell.column.id === "content" ? (
+                              <span className="w-[150px]">
+                                {cell.render("Cell")}
+                              </span>
+                            ) : cell.column.id === "price" ? (
+                              <span>{cell.render("Cell")} so'm</span>
                             ) : (
-                              cell.render("Cell")
+                              <span>{cell.render("Cell")}</span>
                             )}
                           </td>
                         );
@@ -124,4 +146,4 @@ const TableItem = ({ columns, data }) => {
   );
 };
 
-export default TableItem;
+export default Table;
