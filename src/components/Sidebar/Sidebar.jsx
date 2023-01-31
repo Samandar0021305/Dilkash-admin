@@ -38,7 +38,7 @@ export default function Sidebar() {
                     <div className={isToogle == true ? "flex" : "p-[10px]"} key={item.name}>
                       <i onClick={()=>changeIcon(item)}
                         className={
-                          item["icon"] + " mt-3  cursor-pointer text-xl mr-3 ml-2  w-5"
+                          item["icon"] + " mt-3 cursor-pointer text-xl mr-3 ml-2  w-5"
                         }
                       ></i>
                       {isToogle && <NavLink
