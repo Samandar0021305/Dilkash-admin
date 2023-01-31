@@ -1,14 +1,11 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useGlobalFilter, usePagination, useTable } from "react-table";
-import { deleteProducts } from "../../../redux/feature/productSlice";
-import GlobalFilter from "./GlobalFilter";
-import Pagination, { useCustomPagination } from "./Paginations";
+import GlobalFilter from "./config/GlobalFilter";
+import Pagination, { useCustomPagination } from "./config/Paginations";
 
-const TableItem = ({ columns, data }) => {
+const Table = ({ columns, data, deleteItem }) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const {
     getTableProps,
     getTableBodyProps,
@@ -34,15 +31,13 @@ const TableItem = ({ columns, data }) => {
     usePagination
   );
 
-  const deleteItem = (id) => {
-    dispatch(deleteProducts(id));
-  };
-
   const { pageIndex } = state;
   const paginationRange = useCustomPagination({
     totalPageCount: pageCount,
     currentPage: pageIndex,
   });
+
+  const imageUrl = process.env.REACT_APP_IMG_URL;
 
   useEffect(() => {
     setPageSize(5);
@@ -63,7 +58,7 @@ const TableItem = ({ columns, data }) => {
               className="min-w-full divide-y divide-gray-200"
             >
               <thead className="bg-gray-10">
-                {headerGroups.map((headerGroup) => (
+                {headerGroups?.map((headerGroup) => (
                   <tr {...headerGroup.getHeaderGroupProps()}>
                     {headerGroup.headers.map((column) => (
                       <th
@@ -80,11 +75,11 @@ const TableItem = ({ columns, data }) => {
                 {...getTableBodyProps()}
                 className="bg-white divide-y divide-gray-200"
               >
-                {page.map((row, i) => {
+                {page?.map((row, i) => {
                   prepareRow(row);
                   return (
                     <tr {...row.getRowProps()}>
-                      {row.cells.map((cell) => {
+                      {row?.cells.map((cell) => {
                         return (
                           <td
                             {...cell.getCellProps()}
@@ -92,7 +87,10 @@ const TableItem = ({ columns, data }) => {
                           >
                             {cell.column.id === "id" ? null : cell.column.id ===
                               "image" ? (
-                              <img src={cell.render("Cell")} alt="image" />
+                              <img
+                                src={`${imageUrl}${cell.row.original.image}`}
+                                alt="image"
+                              />
                             ) : cell.column.id === "action" ? (
                               <div className="flex gap-2">
                                 <button
@@ -148,4 +146,4 @@ const TableItem = ({ columns, data }) => {
   );
 };
 
-export default TableItem;
+export default Table;

@@ -50,29 +50,8 @@ export const CategoryLits = [
   },
 ];
 
-export const categoryTableHeader = [
-  {
-    Header: "Catgory image",
-    accessor: "image",
-  },
-  {
-    Header: "Category name ",
-    accessor: "title",
-  },
-  {
-    Header: "Date",
-    accessor: "created_at",
-  },
-  {
-    Header: "Actions",
-    accessor: "action",
-  },
-];
 
 export const productTableHeader = [
-  {
-    accessor: "id",
-  },
   {
     Header: "Image",
     accessor: "image",

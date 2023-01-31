@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
-import Table from "../components/table/Table";
+import React, { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProduct, getProduct } from "../modules/food.api";
-import { fetchProducts } from "../redux/feature/productSlice";
+import { deleteProducts, fetchProducts } from "../redux/feature/productSlice";
 import { productTableHeader } from "../utils/Constants";
+import Table from "../components/table/TableItem";
 
 const Foods = React.memo(() => {
   const dispatch = useDispatch();
@@ -15,13 +15,21 @@ const Foods = React.memo(() => {
     return res;
   };
 
+
   useEffect(() => {
     fetchProduct().then((res) => dispatch(fetchProducts(res.data)));
   }, [dispatch]);
 
+  const deleteItem = (id) => {
+    deleteProduct(id);
+    dispatch(deleteProducts(id));
+  };
+
+  const columns = useMemo(() => productTableHeader);
+
   return (
     <div>
-      <Table data={data} column={productTableHeader} />
+      <Table columns={columns} data={data} deleteItem={deleteItem} />
     </div>
   );
 });
