@@ -1,30 +1,17 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { getCategory } from "../../modules/category.api";
-import { useSelector,useDispatch } from "react-redux";
-import {fetchCategories} from "../../redux/feature/categorySlice";
-import CategoryItem from "../CategoryItem"
+import React, {  useEffect, useState } from "react";
 
-const index = React.memo(() => {
+
+const index = React.memo((props) => {
   const [list, setList] = useState(false);
   const [isShown, setIsShown] = useState({ show: false, id: "" });
-  const dipatch = useDispatch()
-  const value = useSelector(state=>state.category.categories)
+  const [post,setPost] = useState([])
+  const baseIMG = process.env.REACT_APP_IMG_URL
   
-  const FectchData = useCallback(async()=>{
-   let data = await getCategory()
-   return data
-  })
-
-  const dataFerching = useCallback(()=>{
-     FectchData().then(val=>dipatch(fetchCategories(val.data)))
-  })
   useEffect(()=>{
-    dataFerching()
+    props.dataFerching()
+    setPost(props.value)
     setList(p=>!p)
   },[])
-  // console.log(value);
-  const baseIMG = process.env.REACT_APP_IMG_URL
-
 
 
   return (
@@ -36,8 +23,8 @@ const index = React.memo(() => {
 
        </div>
        <div className="flex flex-wrap  items-center">
-          {list  ? <h1>Loading</h1> : 
-          value.map(val=>{
+          {list  ? <h1>Loading...</h1> : 
+          post.map(val=>{
             return   <div className="flex mx-[20px] my-[10px] w-[210px] justify-between  shadow-md rounded-[10px] h-[130px]"
             style={{ backgroundImage: `url(${baseIMG}${val.image})`}}
             key={val.id}
@@ -70,7 +57,6 @@ const index = React.memo(() => {
           })}
        </div>
 
-       <CategoryItem />
     </div>
   );
 });
