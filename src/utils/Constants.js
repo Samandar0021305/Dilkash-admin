@@ -17,6 +17,11 @@ export const sidebar = [
     icon: "fa-solid fa-bag-shopping",
     path: "order",
   },
+  {
+    name: "Foods",
+    icon: "fa-solid fa-bowl-food",
+    path: "foods",
+  },
 ];
 
 export const CategoryLits = [
