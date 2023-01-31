@@ -25,5 +25,8 @@ export const deleteCategory = async (id) =>
 export const getByIdCategory = async (id) =>
   await configureApi.get(categoryEndpoints.list + id);
 
+export const getProductByCategory = async (id) =>
+  await configureApi.get(categoryEndpoints.list + "/list/" + id);
+
 export const updateCategory = async (id, data) =>
   await configureApi.patch(categoryEndpoints.delete + id, { data });
