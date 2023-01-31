@@ -1,7 +1,9 @@
 import React, {  useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 const index = React.memo((props) => {
+  const navigate = useNavigate()
   const [list, setList] = useState(false);
   const [isShown, setIsShown] = useState({ show: false, id: "" });
   const [post,setPost] = useState([])
@@ -12,12 +14,15 @@ const index = React.memo((props) => {
     setPost(props.value)
     setList(p=>!p)
   },[])
-
+  
+  const handlerAdd = ()=>{
+    navigate('add')
+  }
 
   return (
     <div>
        <div className="mb-[10px] flex justify-end">
-       <button className="bg-blue-500 hover:bg-blue-700 mr-[30px] text-white font-bold py-2 px-4 rounded">
+       <button onClick={handlerAdd} className="bg-blue-500 hover:bg-blue-700 mr-[30px] text-white font-bold py-2 px-4 rounded">
            add
        </button>
 
