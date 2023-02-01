@@ -29,7 +29,6 @@ const baseURL = process.env.REACT_APP_API_URL;
 
 const configureApi = axios.create({
   baseURL,
-  
 });
 
 configureApi.interceptors.request.use(async (config) => {

@@ -2,10 +2,13 @@ import React, { Suspense, useMemo } from "react";
 import { Routes, Route } from "react-router-dom";
 import { routers } from "./RenderRouter";
 
-const renderRoutesRecursive = (routers) =>
-  routers.map((val) =>
-    val.children && val.children.length ? (
-      renderRoutesRecursive(val.children)
+const renderRoutesRecursive = (router) =>
+  router.map((val) =>
+    val.children && val.children.length ?  (
+      <React.Fragment key={val.id}>
+      {<Route key={val.id} path={val.path} element={<val.component />} /> }
+      {renderRoutesRecursive(val.children)}
+      </React.Fragment>
     ) : (
       <Route key={val.id} path={val.path} element={<val.component />} />
     )
