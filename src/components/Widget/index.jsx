@@ -6,8 +6,14 @@ import Modal from "../modal/Modal"
 const index = React.memo(() => {
   const [list, setList] = useState(CategoryLits);
   const [isShown, setIsShown] = useState({ show: false, id: "" });
-  const [modalActive, setModalActive] = useState(true)
 
+
+  const myModal = <Modal />
+
+  const showModal = () => {
+    // eslint-disable-next-line no-unused-expressions
+    myModal.style.display = "block"
+  }
   return (
     <div>
       <ul className="flex justify-between mt-[20px]">
@@ -28,6 +34,7 @@ const index = React.memo(() => {
                 }));
               }}
             >
+              {/* <Modal /> */}
               {isShown.show === true && isShown.id === val.id ? (
                 <>
                   <span className="flex justify-between w-full h-full p-[10px] rounded-[10px] backdrop-blur-[10px]">
@@ -45,6 +52,7 @@ const index = React.memo(() => {
                         {val.see}
                       </Link>
                     </span>
+                    {/* <Modal /> */}
                     <span className="flex flex-col text-[#ebe4e4] items-center gap-[70px]">
                       <i
                         className={
@@ -57,7 +65,8 @@ const index = React.memo(() => {
                           val.delete +
                           " text-900 text-[17px] text-white cursor-pointer"
                         }
-                        onClick={() => setModalActive(true)}
+                        // eslint-disable-next-line no-restricted-globals
+                        onClick={() => confirm("Are you sure you want to delete this category?")}
                       ></i>
                     </span>
                   </span>

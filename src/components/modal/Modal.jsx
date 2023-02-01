@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function modal({openModal, setOpenModal}) {
+export default function Modal({ setOpenModal }) {
     return (
         <>
             <div className="fixed inset-0 z-10 overflow-y-auto " >
@@ -30,7 +30,7 @@ export default function modal({openModal, setOpenModal}) {
                                     Delete category ?
                                 </h4>
                                 <p className="mt-2 text-[15px] leading-relaxed text-gray-500">
-                                Are you sure you want to delete this category? Click Delete if you want to open Cencel if you want to leave!
+                                    Are you sure you want to delete this category? Click Delete if you want to open Cencel if you want to leave!
                                 </p>
                                 <div className="items-center gap-2 mt-3 sm:flex">
                                     <button

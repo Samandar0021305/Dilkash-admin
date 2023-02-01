@@ -1,12 +1,11 @@
 import firstFood from "../images/first-food.jpg";
 
-
 export const sidebar = [
   {
     name: "Dashboard",
     icon: "fa-solid fa-house",
 
-    path: "/dashboard"
+    path: "/dashboard",
   },
   {
     name: "Category",
@@ -17,6 +16,11 @@ export const sidebar = [
     name: "Order",
     icon: "fa-solid fa-bag-shopping",
     path: "order",
+  },
+  {
+    name: "Foods",
+    icon: "fa-solid fa-bowl-food",
+    path: "foods",
   },
 ];
 
@@ -29,7 +33,6 @@ export const CategoryLits = [
     edit: "fa-solid fa-pencil",
     delete: "fa-solid fa-trash",
     background: firstFood,
-
   },
 
   {
@@ -52,24 +55,26 @@ export const CategoryLits = [
   },
 ];
 
-export const CategoryTableHeader = [
+
+export const productTableHeader = [
   {
-    Header: "Cetagory Image",
-    accessor: "cetagoryImage",
+    Header: "Image",
+    accessor: "image",
   },
   {
-    Header: "Cetagory Name",
-    accessor: "cetagoryName",
+    Header: "Name ",
+    accessor: "name",
   },
   {
-    Header: "CreatedDate",
-    accessor: "date",
+    Header: "Description ",
+    accessor: "content",
+  },
+  {
+    Header: "Price ",
+    accessor: "price",
   },
   {
     Header: "Actions",
-    accessor: "actions",
-    delete: true,
-    edit: true,
-    deatils: false,
+    accessor: "action",
   },
 ];
