@@ -49,6 +49,7 @@ const index = React.memo((props) => {
                     <span className="flex justify-center items-center">
                       <h2  className="cursor-pointer text-[21px] hover:opacity-70 transition ml-[7px] mr-[15px] text-[#f00]">{val.title}</h2>
                     </span>
+                    {/* <Modal /> */}
                     <span className="flex flex-col text-[#ebe4e4] items-center gap-[70px]">
                       <i
                         className="fa-solid fa-pencil text-900 text-[14px] text-[#e5e2e2] cursor-pointer"></i> 

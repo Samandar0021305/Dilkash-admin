@@ -23,7 +23,7 @@ export default function Sidebar() {
 
   return (
     <div className="flex">
-      <div className={isToogle ==true ?  " flex flex-col h-screen p-3 bg-white shadow w-60" : "w-[60px] shadow"}>
+      <div className={isToogle == true ?  " flex flex-col h-screen p-3 bg-white shadow w-60" : "w-[60px] shadow"}>
         <div className="space-y-3">
           <div className="flex items-center">
            {isToogle && <h2 className="text-xl font-bold">Dashboard</h2>}
