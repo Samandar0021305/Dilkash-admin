@@ -26,8 +26,6 @@ const Foods = React.memo(() => {
 
   const columns = useMemo(() => productTableHeader);
 
- 
-
   return (
     <div>
       <Table columns={columns} data={data} deleteItem={deleteItem} />
