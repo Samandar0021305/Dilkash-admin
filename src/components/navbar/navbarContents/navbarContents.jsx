@@ -8,15 +8,15 @@ import { faUserTie } from "@fortawesome/free-solid-svg-icons";
 export const words = [
     {
         name: "Dashboar",
-        id: 2
+        id: 1
     },
     {
         name: "Users",
-        id: 3
+        id: 2
     },
     {
         name: "Settings",
-        id: 4
+        id: 3
     },
 ];
 
