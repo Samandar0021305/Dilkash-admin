@@ -52,7 +52,7 @@ const Table = ({ columns, data, deleteItem }) => {
       />
       <div className="-my-2 overflow-x-auto  -mx-4 sm:-mx-6 w-full lg:-mx-8">
         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-          <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+          <div className="shadow overflow-y-scroll h-[68vh] border-b border-gray-200 sm:rounded-lg">
             <table
               {...getTableProps()}
               className="min-w-full divide-y divide-gray-200"
@@ -73,7 +73,7 @@ const Table = ({ columns, data, deleteItem }) => {
               </thead>
               <tbody
                 {...getTableBodyProps()}
-                className="bg-white divide-y divide-gray-200"
+                className="bg-white divide-y  divide-gray-200"
               >
                 {page?.map((row, i) => {
                   prepareRow(row);
@@ -83,11 +83,12 @@ const Table = ({ columns, data, deleteItem }) => {
                         return (
                           <td
                             {...cell.getCellProps()}
-                            className="px-6 py-10  whitespace-nowrap"
+                            className="px-6 py-6  whitespace-nowrap"
                           >
                             {cell.column.id === "id" ? null : cell.column.id ===
                               "image" ? (
                               <img
+                                className="w-[100px] rounded"
                                 src={`${imageUrl}${cell.row.original.image}`}
                                 alt="image"
                               />
@@ -129,7 +130,9 @@ const Table = ({ columns, data, deleteItem }) => {
               </tbody>
             </table>
             {/* Pagination start */}
-            <Pagination
+            
+          </div>
+          <Pagination
               previousPage={previousPage}
               canPreviousPage={canPreviousPage}
               nextPage={nextPage}
@@ -138,7 +141,6 @@ const Table = ({ columns, data, deleteItem }) => {
               pageIndex={pageIndex}
               gotoPage={gotoPage}
             />
-          </div>
           {/* Pagination End */}
         </div>
       </div>
