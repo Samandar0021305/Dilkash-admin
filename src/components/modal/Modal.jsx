@@ -1,11 +1,10 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deleteCategory } from "../../modules/category.api";
 import { closeModal } from "../../redux/feature/ModalSlice";
 
-export default function Modal() {
+export default function Modal({deleteItem}) {
   const dispatch = useDispatch();
-  //   const deleteCategory = () => {};
 
   return (
     <>
@@ -42,7 +41,7 @@ export default function Modal() {
                 <div className="items-center gap-2 mt-3 sm:flex">
                   <button
                     className="w-full mt-2 p-2.5 flex-1 text-white bg-red-600 rounded-md outline-none ring-offset-2 ring-red-600 focus:ring-2"
-                    onClick={() => dispatch(closeModal("close"))}
+                    onClick={() =>  deleteItem() }
                   >
                     Delete
                   </button>
