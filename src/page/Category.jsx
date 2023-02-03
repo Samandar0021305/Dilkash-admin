@@ -5,6 +5,7 @@ import { fetchCategories } from "../redux/feature/categorySlice";
 import { fetchFood } from "../redux/feature/foodSlice";
 import { getProduct } from "../modules/food.api";
 import { closeModal } from "../redux/feature/ModalSlice";
+import { toast } from "react-toastify";
 const Widget = React.lazy(() => import("../components/Widget"));
 
 const Category = React.memo(() => {
@@ -29,11 +30,14 @@ const Category = React.memo(() => {
 
   const deleteItem = () => {
     if (categoryId) {
+      dispatch(closeModal("close"));
       deleteCategory(categoryId).then((res) => setStatus(res.statusCode));
     }
-    if (parseInt(status) == 200) {
-      dispatch(closeModal("close"));
+    if (parseInt(status) === 200) {
       fetchCategory().then((res) => dispatch(fetchCategories(res.data)));
+      toast.success("Category successfully deleted!");
+    } else {
+      toast.error("Error, Category was not deleted!");
     }
   };
 
