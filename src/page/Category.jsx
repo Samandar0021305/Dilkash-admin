@@ -1,15 +1,20 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategory } from "../modules/category.api";
-import { deleteCategory, fetchCategories } from "../redux/feature/categorySlice";
+import { getCategory, deleteCategory } from "../modules/category.api";
+import { fetchCategories } from "../redux/feature/categorySlice";
 import { fetchFood } from "../redux/feature/foodSlice";
 import { getProduct } from "../modules/food.api";
+import { closeModal } from "../redux/feature/ModalSlice";
+import { toast } from "react-toastify";
 const Widget = React.lazy(() => import("../components/Widget"));
 
 const Category = React.memo(() => {
-  const dispatch = useDispatch();
-  const data = useSelector((state) => state.category.categories);
+  const [status, setStatus] = useState();
 
+  const dispatch = useDispatch();
+  const { categories, categoryId } = useSelector((state) => state.category);
+
+  // Fetching data
   const fetchCategory = async () => {
     const res = await getCategory();
     return res;
@@ -19,15 +24,28 @@ const Category = React.memo(() => {
     fetchCategory().then((res) => dispatch(fetchCategories(res.data)));
   }, [dispatch]);
 
-  const deleteItem = (id) => {
-    // deleteCategory(id);
-    dispatch(deleteCategory(id));
+  // Fetching data ends
+
+  // Deleting data
+
+  const deleteItem = () => {
+    if (categoryId) {
+      dispatch(closeModal("close"));
+      deleteCategory(categoryId).then((res) => setStatus(res.statusCode));
+    }
+    if (parseInt(status) === 200) {
+      fetchCategory().then((res) => dispatch(fetchCategories(res.data)));
+      toast.success("Category successfully deleted!");
+    } else {
+      toast.error("Error, Category was not deleted!");
+    }
   };
 
+  // Deleting data ends
 
   return (
     <div className="w-full">
-      <Widget data={data} deleteItem={deleteItem} />
+      <Widget data={categories} deleteItem={deleteItem} />
     </div>
   );
 });

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Modal from "../modal/Modal";
 import { openModal } from "../../redux/feature/ModalSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { deleteCategory } from "../../redux/feature/categorySlice";
 
 const index = React.memo(({ data, deleteItem }) => {
   const dispatch = useDispatch();
@@ -58,7 +59,10 @@ const index = React.memo(({ data, deleteItem }) => {
                     <span className="flex flex-col text-[#ebe4e4] items-center gap-[70px]">
                       <i className="fa-solid fa-pencil text-900 text-[14px] text-[#e5e2e2] cursor-pointer"></i>
                       <i
-                        onClick={() => dispatch(openModal("open"))}
+                        onClick={() => {
+                          dispatch(openModal("open"));
+                          dispatch(deleteCategory(val.id));
+                        }}
                         className="fa-solid fa-trash text-900 text-[17px] text-white cursor-pointer"
                       ></i>
                     </span>
@@ -69,7 +73,7 @@ const index = React.memo(({ data, deleteItem }) => {
           })
         )}
       </div>
-      {modal == "open" && <Modal />}
+      {modal == "open" && <Modal deleteItem={deleteItem} />}
     </div>
   );
 });
