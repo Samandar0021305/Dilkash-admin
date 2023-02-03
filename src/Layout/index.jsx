@@ -27,7 +27,7 @@ const Index = ({children}) => {
          <div className='ml-[10px] w-[100%] pr-[10px]'>
             <Navbar />
             <IsPage/>
-               <main className='min-h-[92vh]'>{children}</main>
+               <main className='min-h-[86.5vh]'>{children}</main>
             <Footer />
          </div>
     </div>

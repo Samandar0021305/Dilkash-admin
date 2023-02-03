@@ -24,7 +24,6 @@ const Category = React.memo(() => {
     dispatch(deleteCategory(id));
   };
 
-  console.log(data);
 
   return (
     <div className="w-full">

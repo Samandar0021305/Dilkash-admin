@@ -5,7 +5,7 @@ export const feilds = [
     label: "Email",
     required: true,
     validationsType: "string",
-    value: "",
+    value: "asliddin",
   },
   {
     name: "password",

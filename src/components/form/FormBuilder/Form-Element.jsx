@@ -25,8 +25,7 @@ function checkLabel(errors, touches) {
 }
 export function File(props) {
   const [file, setFile] = useState();
-  const { name, type, error, touch, label, placeholder, filesubmit, ...rest } =
-    props;
+  const { name, type, error, touch, label, placeholder, ...rest } = props;
   return (
     <div style={{ marginTop: "10px" }}>
       {label && (
@@ -42,7 +41,7 @@ export function File(props) {
         name={name}
         placeholder={placeholder || ""}
         {...rest}
-        onChange={(event) => filesubmit(event)}
+        // onChange={(event) => filesubmit(event)}
       />
     </div>
   );

@@ -10,14 +10,14 @@ function GlobalFilter({ globalFilter, setGlobalFilter, placeholder }) {
   }, 200);
 
   return (
-    <span className="flex justify-between  pt-10 pb-10 ">
+    <span className="flex justify-between  pt-6 pb-5 ">
       <input
         value={value || ""}
         onChange={(e) => {
           setValue(e.target.value);
           onChange(e.target.value);
         }}
-        className=" sm:w-6/12 lg:w-3/12 rounded-xl border p-3  text-gray-500 outline-none cursor-pointer"
+        className=" sm:w-6/12 lg:w-3/12 rounded-xl border p-2  text-gray-500 outline-none cursor-pointer"
         type="search"
         placeholder="Search..."
       />

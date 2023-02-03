@@ -8,8 +8,6 @@ const index = React.memo(({ data, deleteItem }) => {
   const dispatch = useDispatch();
   const modal = useSelector((state) => state.modal.show);
 
-  console.log(modal);
-
   const navigate = useNavigate();
   const [list, setList] = useState(false);
   const [isShown, setIsShown] = useState({ show: false, id: "" });

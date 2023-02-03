@@ -5,7 +5,7 @@ import * as Yup from "yup";
 
 const FormBuilder = (props) => {
   const { feilds, title, onSubmit } = props;
-  const Element = (type, props, err, touch, fileSubmit) => {
+  const Element = (type, props, err, touch) => {
     // console.log(type, "===>>");
     let componentList = {
       select: SelectField,
@@ -22,7 +22,7 @@ const FormBuilder = (props) => {
         error={err}
         touch={touch}
         {...props}
-        filesubmit={fileSubmit}
+        // filesubmit={fileSubmit}
       />
     );
   };
@@ -32,7 +32,7 @@ const FormBuilder = (props) => {
   const [file, setFile] = useState({});
 
   const fileSubmit = (event) => {
-    console.log("event-------------" ,event.target.files[0]);
+    // console.log("event-------------" ,event.target.files[0]);
     setFile( event.target.files[0]);
   };
   useEffect(() => {
@@ -82,7 +82,6 @@ const FormBuilder = (props) => {
                       el,
                       errors[el.name],
                       touched[el.name],
-                      fileSubmit
                     )}
                   </div>
                   {errors[el.name] && touched[el.name] ? (
@@ -101,3 +100,5 @@ const FormBuilder = (props) => {
   }
 };
 export default FormBuilder;
+
+// basicUrl/api/v1/uploads/create
