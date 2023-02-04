@@ -49,7 +49,8 @@ export function File(props) {
 
 export function TextFeild(props) {
   // console.log(props, '===>>');
-  const { name, type, error, touch, label, placeholder, ...rest } = props;
+  const { name, type, error, touch, label, placeholder, filesubmit, ...rest } =
+    props;
   return (
     <div style={{ marginTop: "10px" }}>
       {label && (
@@ -65,6 +66,7 @@ export function TextFeild(props) {
         name={name}
         placeholder={placeholder || ""}
         {...rest}
+        onChange={(event) => filesubmit(event)}
       ></Field>
     </div>
   );

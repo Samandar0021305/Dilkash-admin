@@ -1,6 +1,10 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategory, deleteCategory } from "../modules/category.api";
+import {
+  getCategory,
+  deleteCategory,
+  getProductByCategory,
+} from "../modules/category.api";
 import { fetchCategories } from "../redux/feature/categorySlice";
 import { fetchFood } from "../redux/feature/foodSlice";
 import { getProduct } from "../modules/food.api";
@@ -13,6 +17,20 @@ const Category = React.memo(() => {
 
   const dispatch = useDispatch();
   const { categories, categoryId } = useSelector((state) => state.category);
+
+  // console.log(categories);
+
+  //  fetchProductByCategory
+
+  const fetchProductByCateg = async () => {
+    if (categoryId) {
+      const res = await getProductByCategory(categoryId);
+      return res;
+    }
+  };
+  useEffect(() => {
+    fetchProductByCateg().then((res) => console.log(res));
+  }, [categoryId]);
 
   // Fetching data
   const fetchCategory = async () => {
