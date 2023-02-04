@@ -5,7 +5,7 @@ import * as Yup from "yup";
 
 const FormBuilder = (props) => {
   const { feilds, title, onSubmit } = props;
-  const Element = (type, props, err, touch) => {
+  const Element = (type, props, err, touch, filesubmit) => {
     // console.log(type, "===>>");
     let componentList = {
       select: SelectField,
@@ -22,7 +22,7 @@ const FormBuilder = (props) => {
         error={err}
         touch={touch}
         {...props}
-        // filesubmit={fileSubmit}
+        filesubmit={filesubmit}
       />
     );
   };
@@ -31,9 +31,9 @@ const FormBuilder = (props) => {
   const [elmProps, setelmProps] = useState([]);
   const [file, setFile] = useState({});
 
-  const fileSubmit = (event) => {
+  const filesubmit = (event) => {
     // console.log("event-------------" ,event.target.files[0]);
-    setFile( event.target.files[0]);
+    setFile(event.target.files[0]);
   };
   useEffect(() => {
     feilds.forEach((el, index, arr) => {
@@ -82,6 +82,7 @@ const FormBuilder = (props) => {
                       el,
                       errors[el.name],
                       touched[el.name],
+                      filesubmit
                     )}
                   </div>
                   {errors[el.name] && touched[el.name] ? (
