@@ -1,4 +1,5 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 
 const Home = React.lazy(() => import("../page/Home"));
 const Foods = React.lazy(() => import("../page/Foods"));
@@ -8,6 +9,8 @@ const CategoryAdd = React.lazy(() => import("../components/CategoryAdd"));
 const ProductCreate = React.lazy(() =>
   import("../components/product/ProductCreate")
 );
+const CategoryProduct = React.lazy(()=>import("../components/CategoryProduct"))
+
 export const routers = [
   {
     id: 1,
@@ -27,6 +30,12 @@ export const routers = [
         path: "category/add",
         component: CategoryAdd,
       },
+      {
+        id:1.3,
+        name:"Category Product",
+        path:"category/categoryproduct",
+        component:CategoryProduct,
+      }
     ],
   },
 
@@ -49,4 +58,5 @@ export const routers = [
     path: "foods/create",
     component: ProductCreate,
   },
+  
 ];

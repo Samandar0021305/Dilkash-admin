@@ -5,6 +5,7 @@ export const categorySlice = createSlice({
   initialState: {
     categories: [],
     categoryId:"",
+    productcategory:[],
     error: "",
   },
   reducers: {
@@ -12,6 +13,14 @@ export const categorySlice = createSlice({
       if (action.payload) {
         state.categories = action.payload;
       }
+    },
+    getByProductId:(state,action)=>{
+      state.categoryId = action.payload 
+    },
+    getByProduct:(state,action)=>{
+     if(action.payload){
+      state.productcategory = action.payload
+     }
     },
     addCategory: (state, action) => {
       state.categories = [action.payload, ...state.categories];
@@ -23,6 +32,6 @@ export const categorySlice = createSlice({
   },
 });
 
-export const { fetchCategories, addCategory, deleteCategory } =
+export const { fetchCategories, addCategory, deleteCategory ,getByProductId,getByProduct} =
   categorySlice.actions;
 export default categorySlice.reducer;
