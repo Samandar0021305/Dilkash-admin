@@ -74,7 +74,7 @@ const Pagination = ({
   gotoPage,
 }) => {
   return (
-    <div className="py-3 flex items-center text-center justify-center pt-10">
+    <div className="py-3 flex items-center text-center justify-center pt-5">
       <div className="flex-1 flex justify-between md:hidden">
         <button onClick={() => previousPage()} disabled={!canPreviousPage}>
           Previous

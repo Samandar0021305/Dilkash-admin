@@ -1,10 +1,10 @@
-stages:          # List of stages for jobs, and their order of execution
+stages: # List of stages for jobs, and their order of execution
   - build_kaniko
   - deploy_prod
 
-build-job:  
+build-job:
   stage: build_kaniko
-  
+
   only:
     - main
     # - dev
@@ -12,20 +12,20 @@ build-job:
   variables:
     IMAGE_DESTINATION: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME}
   image:
-      # We recommend using the CERN version of the Kaniko image: gitlab-registry.cern.ch/ci-tools/docker-image-builder
-      # name: gitlab-registry.cern.ch/ci-tools/docker-image-builder
-      name: gcr.io/kaniko-project/executor:debug
-      
-      entrypoint: [""]
+    # We recommend using the CERN version of the Kaniko image: gitlab-registry.cern.ch/ci-tools/docker-image-builder
+    # name: gitlab-registry.cern.ch/ci-tools/docker-image-builder
+    name: gcr.io/kaniko-project/executor:debug
+
+    entrypoint: [""]
   script:
-      # Prepare Kaniko configuration file
-      - echo $CI_REGISTRY_IMAGE
-      - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
-      # Build and push the image from the Dockerfile at the root of the project.
-      - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination $IMAGE_DESTINATION --cache-dir=/workspace/cache 
-      # Print the full registry path of the pushed image
-      - echo "Image pushed successfully to ${IMAGE_DESTINATION}"
-      - echo "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME}"  
+    # Prepare Kaniko configuration file
+    - echo $CI_REGISTRY_IMAGE
+    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
+    # Build and push the image from the Dockerfile at the root of the project.
+    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination $IMAGE_DESTINATION --cache-dir=/workspace/cache
+    # Print the full registry path of the pushed image
+    - echo "Image pushed successfully to ${IMAGE_DESTINATION}"
+    - echo "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME}"
 
 deploy_prod:
   stage: deploy_prod
@@ -35,7 +35,10 @@ deploy_prod:
   before_script:
     - echo "deploying app"
     - chmod 400 $SSH_PRIVATE_KEY
-    - apk update && apk add openssh-client
+    - apk update
+    - apk --no-cache --update upgrade && apk --no-cache add ca-certificates
+    - rm -rf /var/cache/apk/*
+    - apk add --no-cache openssh
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   only:
     - main

@@ -16,6 +16,7 @@ export const getProduct = async (params) =>
     },
   });
 
+
 export const createProduct = async (data) =>
   await configureApi.post(foodEndpoints.add, { data });
 
