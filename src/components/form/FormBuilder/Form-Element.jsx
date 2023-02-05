@@ -1,5 +1,6 @@
 import { Field } from "formik";
 import { useState } from "react";
+import { uploadCreate } from "../../../modules/food.api";
 function getStyles(errors, touches) {
   if (errors && touches) {
     return {
@@ -23,9 +24,21 @@ function checkLabel(errors, touches) {
     };
   }
 }
+const uploadFile = async (event) => {
+  // console.log(event.target.files[0]);
+  // // console.log( " form --------", event.target.files[0]);
+  // formData.append("data", );
+  // console.log(" formData -- -- -", formData)
+  const res = await uploadCreate(event.target.files[0]);
+  console.log(res);
+
+  return res;
+};
+
 export function File(props) {
   const [file, setFile] = useState();
-  const { name, type, error, touch, label, placeholder, ...rest } = props;
+  const { name, type, error, touch, label, placeholder, filesubmit, ...rest } =
+    props;
   return (
     <div style={{ marginTop: "10px" }}>
       {label && (
@@ -41,7 +54,7 @@ export function File(props) {
         name={name}
         placeholder={placeholder || ""}
         {...rest}
-        // onChange={(event) => filesubmit(event)}
+        onInput={async (event) => filesubmit(await uploadFile(event))}
       />
     </div>
   );
@@ -66,15 +79,23 @@ export function TextFeild(props) {
         name={name}
         placeholder={placeholder || ""}
         {...rest}
-        onChange={(event) => filesubmit(event)}
       ></Field>
     </div>
   );
 }
 
 export function SelectField(props) {
-  const { name, type, error, touch, label, placeholder, options, ...rest } =
-    props;
+  const {
+    name,
+    type,
+    error,
+    touch,
+    label,
+    placeholder,
+    options,
+    filesubmit,
+    ...rest
+  } = props;
   return (
     <div style={{ marginTop: "10px" }}>
       {label && (

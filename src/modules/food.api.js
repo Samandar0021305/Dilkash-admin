@@ -5,6 +5,7 @@ const foodEndpoints = {
   add: "/product/create",
   updated: "/product/update/",
   delete: "/product/delete/",
+  uploads: "/upload/create",
 };
 
 export const getProduct = async (params) =>
@@ -15,7 +16,6 @@ export const getProduct = async (params) =>
       ...params,
     },
   });
-
 
 export const createProduct = async (data) =>
   await configureApi.post(foodEndpoints.add, { data });
@@ -28,3 +28,9 @@ export const getByIdProduct = async (id) =>
 
 export const updateProduct = async (id, data) =>
   await configureApi.delete(foodEndpoints.delete + id, { data });
+
+export const uploadCreate = async (data) => {
+  const formData = new FormData();
+  formData.append("data", data);
+  await configureApi.post(foodEndpoints.uploads, { data: formData });
+};

@@ -5,7 +5,7 @@ export const feilds = [
     label: "Email",
     required: true,
     validationsType: "string",
-    value: "asliddin",
+    value: "",
   },
   {
     name: "password",
@@ -18,8 +18,8 @@ export const feilds = [
     name: "file",
     type: "file",
     label: "File",
-    required: true,
-    validationsType: "string",
+    // required: true,
+    validationsType: "object",
   },
   {
     name: "user",
