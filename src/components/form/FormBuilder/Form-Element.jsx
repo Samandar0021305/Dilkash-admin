@@ -25,10 +25,6 @@ function checkLabel(errors, touches) {
   }
 }
 const uploadFile = async (event) => {
-  // console.log(event.target.files[0]);
-  // // console.log( " form --------", event.target.files[0]);
-  // formData.append("data", );
-  // console.log(" formData -- -- -", formData)
   const res = await uploadCreate(event.target.files[0]);
   console.log(res);
 
