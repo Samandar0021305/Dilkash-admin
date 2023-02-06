@@ -17,36 +17,39 @@ const FormBuilder = (props) => {
       "": TextFeild,
     };
     let _itemComponent = componentList[type];
+
     return (
       <_itemComponent
         error={err}
         touch={touch}
-        {...props}
         filesubmit={filesubmit}
+        {...props}
       />
     );
   };
   const [validateSchema, setvalidateSchema] = useState({});
   const [initialValues, setinitialValues] = useState({});
   const [elmProps, setelmProps] = useState([]);
-  const [file, setFile] = useState({});
+  const [files, setFile] = useState();
 
-  const filesubmit = (event) => {
-    // console.log("event-------------" ,event.target.files[0]);
-    setFile(event.target.files[0]);
+  const filesubmit = (data) => {
+    setFile(data.data.data);
   };
+
   useEffect(() => {
     feilds.forEach((el, index, arr) => {
       setvalidateSchema((old) => ({
         ...old,
-        [el.name]: Yup[arr[index].validationsType]().required(
-          el.name + " " + "is required"
-        ),
+        [el.name]:
+          el.required &&
+          Yup[arr[index].validationsType]().required(
+            el.name + " " + "is required"
+          ),
       }));
       setinitialValues((old) => ({
         ...old,
 
-        [el.name]: [el.name] == "file" ? file : arr[index].value ?? "",
+        [el.name]: arr[index].value ?? "",
       }));
     });
     let elProps = feilds.map((el) => {
@@ -68,8 +71,7 @@ const FormBuilder = (props) => {
           initialValues={initialValues}
           validationSchema={Yup.object().shape(validateSchema ?? {})}
           onSubmit={(values) => {
-            console.log(values);
-            onSubmit(values);
+            onSubmit({ ...values, image: files });
           }}
         >
           {({ errors, touched }) => (
@@ -101,5 +103,3 @@ const FormBuilder = (props) => {
   }
 };
 export default FormBuilder;
-
-// basicUrl/api/v1/uploads/create

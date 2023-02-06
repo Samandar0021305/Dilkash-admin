@@ -3,12 +3,12 @@ import { useNavigate } from "react-router-dom";
 import Modal from "../modal/Modal";
 import { openModal } from "../../redux/feature/ModalSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteCategory } from "../../redux/feature/categorySlice";
+import { deleteCategory ,getByProductId} from "../../redux/feature/categorySlice";
+
 
 const index = React.memo(({ data, deleteItem }) => {
   const dispatch = useDispatch();
   const modal = useSelector((state) => state.modal.show);
-
   const navigate = useNavigate();
   const [list, setList] = useState(false);
   const [isShown, setIsShown] = useState({ show: false, id: "" });
@@ -52,7 +52,10 @@ const index = React.memo(({ data, deleteItem }) => {
                 {isShown.show === true && isShown.id === val.id ? (
                   <span className="flex justify-between w-full h-full p-[10px] rounded-[10px] backdrop-blur-[10px]">
                     <span className="flex justify-center items-center">
-                      <h2 className="cursor-pointer text-[21px] hover:opacity-70 transition ml-[7px] mr-[15px] text-[#f00]">
+                      <h2 onClick={()=>{
+                        dispatch(getByProductId(val.id))
+                        navigate(val.id)
+                      }} className="cursor-pointer text-[21px] hover:opacity-70 transition ml-[7px] mr-[15px] text-[#f00]">
                         {val.title}
                       </h2>
                     </span>

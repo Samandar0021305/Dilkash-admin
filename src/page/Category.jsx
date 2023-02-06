@@ -1,37 +1,23 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getCategory,
   deleteCategory,
   getProductByCategory,
 } from "../modules/category.api";
-import { fetchCategories } from "../redux/feature/categorySlice";
-import { fetchFood } from "../redux/feature/foodSlice";
-import { getProduct } from "../modules/food.api";
+
+import { fetchCategories ,getByProduct} from "../redux/feature/categorySlice";
 import { closeModal } from "../redux/feature/ModalSlice";
 import { toast } from "react-toastify";
 const Widget = React.lazy(() => import("../components/Widget"));
 
 const Category = React.memo(() => {
   const [status, setStatus] = useState();
-
   const dispatch = useDispatch();
   const { categories, categoryId } = useSelector((state) => state.category);
 
-  // console.log(categories);
 
-  //  fetchProductByCategory
-
-  const fetchProductByCateg = async () => {
-    if (categoryId) {
-      const res = await getProductByCategory(categoryId);
-      return res;
-    }
-  };
-  useEffect(() => {
-    fetchProductByCateg().then((res) => console.log(res));
-  }, [categoryId]);
-
+  
   // Fetching data
   const fetchCategory = async () => {
     const res = await getCategory();
@@ -58,9 +44,7 @@ const Category = React.memo(() => {
       toast.error("Error, Category was not deleted!");
     }
   };
-
-  // Deleting data ends
-
+  // console.log(productcategory)
   return (
     <div className="w-full">
       <Widget data={categories} deleteItem={deleteItem} />
