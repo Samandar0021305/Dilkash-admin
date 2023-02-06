@@ -4,7 +4,8 @@ export const productSlice = createSlice({
   name: "product",
   initialState: {
     products: [],
-    porudctsValeu:[],
+    porudctsValeu: [],
+    productId: "",
     error: "",
   },
   reducers: {
@@ -13,10 +14,13 @@ export const productSlice = createSlice({
         state.products = action.payload;
       }
     },
-    getProducts:(state,action)=>{
-    if(action.payload){
-      state.porudctsValeu = action.payload
-    }
+    addProductId: (state, action) => {
+      state.productId = action.payload;
+    },
+    getProducts: (state, action) => {
+      if (action.payload) {
+        state.porudctsValeu = action.payload;
+      }
     },
     addProducts: (state, action) => {
       state.products = [action.payload, ...state.products];
@@ -28,6 +32,11 @@ export const productSlice = createSlice({
   },
 });
 
-export const { fetchProducts, addProducts, deleteProducts ,getProducts} =
-  productSlice.actions;
+export const {
+  fetchProducts,
+  addProducts,
+  deleteProducts,
+  getProducts,
+  addProductId,
+} = productSlice.actions;
 export default productSlice.reducer;

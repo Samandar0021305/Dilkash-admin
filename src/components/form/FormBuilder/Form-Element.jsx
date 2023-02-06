@@ -112,7 +112,7 @@ export function SelectField(props) {
         <option value="">Choose...</option>
         {options &&
           options.map((op, index) => (
-            <option key={index} value={op.value} label={op.value || op.label} />
+            <option key={index} value={op.value} label={op.label} />
           ))}
       </Field>
     </div>
