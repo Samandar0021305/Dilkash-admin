@@ -1,5 +1,6 @@
 import React,{useEffect,useMemo, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
 import { getProductByCategory } from '../../modules/category.api'
 import { deleteProduct } from '../../modules/food.api'
 import { getByProduct } from '../../redux/feature/categorySlice'
@@ -8,12 +9,14 @@ import { productTableHeader } from '../../utils/Constants'
 const Table = React.lazy(()=>import("../table/TableItem"))
 
 const Index = () => {
-  const {categoryId,productcategory} = useSelector((state)=>state.category)
+  const params = useParams()
+  
+  const {productcategory} = useSelector((state)=>state.category)
  
   const dispatch = useDispatch()
   const fetchProductByCateg = async () => {
-    if (categoryId) {
-      const res = await getProductByCategory(categoryId);
+    if (params.categoryproductId) {
+      const res = await getProductByCategory(params.categoryproductId);
       return res;
     }
   };
@@ -25,7 +28,6 @@ const Index = () => {
     dispatch(deleteProducts(id));
   };
   const columns = useMemo(() => productTableHeader);
-  // console.log(productcategory)
   return (
     <div>
          <Table columns={columns} data={productcategory} deleteItem={deleteItem} />

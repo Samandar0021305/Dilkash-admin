@@ -13,22 +13,8 @@ const Widget = React.lazy(() => import("../components/Widget"));
 const Category = React.memo(() => {
   const [status, setStatus] = useState();
   const dispatch = useDispatch();
-  const { categories, categoryId ,productcategory} = useSelector((state) => state.category);
+  const { categories, categoryId } = useSelector((state) => state.category);
 
-  // console.log(categories);
-
-  //  fetchProductByCategory
-
-  // const fetchProductByCateg = async () => {
-  //   if (categoryId) {
-  //     const res = await getProductByCategory(categoryId);
-  //     return res;
-  //   }
-  // };
-  // useEffect(() => {
-  //   fetchProductByCateg().then((res) => dispatch(getByProduct(res?.data.rows)));
-  // },[categoryId]);
- 
 
   
   // Fetching data

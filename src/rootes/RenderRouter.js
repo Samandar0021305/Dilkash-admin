@@ -33,7 +33,7 @@ export const routers = [
       {
         id:1.3,
         name:"Category Product",
-        path:"category/categoryproduct",
+        path:"category/:categoryproductId",
         component:CategoryProduct,
       }
     ],

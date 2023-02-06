@@ -54,7 +54,7 @@ const index = React.memo(({ data, deleteItem }) => {
                     <span className="flex justify-center items-center">
                       <h2 onClick={()=>{
                         dispatch(getByProductId(val.id))
-                        navigate('categoryproduct')
+                        navigate(val.id)
                       }} className="cursor-pointer text-[21px] hover:opacity-70 transition ml-[7px] mr-[15px] text-[#f00]">
                         {val.title}
                       </h2>
