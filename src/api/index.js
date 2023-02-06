@@ -32,14 +32,12 @@ const configureApi = axios.create({
 });
 
 configureApi.interceptors.request.use(async (config) => {
-  const headers = { Accept: 'application/json', 'Accept-Encoding': 'identity' }
+  const headers = { Accept: "application/json", "Accept-Encoding": "identity" };
   config.headers = headers;
   if (localStorage.getItem("token")) {
     config.headers["Authorization"] = `Bearer ${localStorage.getItem("token")}`;
   }
-  console.log(config)
-  return await config
-
+  return await config;
 });
 
 configureApi.interceptors.response.use(

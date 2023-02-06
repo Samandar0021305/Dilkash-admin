@@ -6,8 +6,6 @@ import {
   getProductByCategory,
 } from "../modules/category.api";
 import { fetchCategories } from "../redux/feature/categorySlice";
-import { fetchFood } from "../redux/feature/foodSlice";
-import { getProduct } from "../modules/food.api";
 import { closeModal } from "../redux/feature/ModalSlice";
 import { toast } from "react-toastify";
 const Widget = React.lazy(() => import("../components/Widget"));
@@ -22,15 +20,15 @@ const Category = React.memo(() => {
 
   //  fetchProductByCategory
 
-  const fetchProductByCateg = async () => {
-    if (categoryId) {
-      const res = await getProductByCategory(categoryId);
-      return res;
-    }
-  };
-  useEffect(() => {
-    fetchProductByCateg().then((res) => console.log(res));
-  }, [categoryId]);
+  // const fetchProductByCateg = async () => {
+  //   if (categoryId) {
+  //     const res = await getProductByCategory(categoryId);
+  //     return res;
+  //   }
+  // };
+  // useEffect(() => {
+  //   fetchProductByCateg().then((res) => console.log(res));
+  // }, [categoryId]);
 
   // Fetching data
   const fetchCategory = async () => {

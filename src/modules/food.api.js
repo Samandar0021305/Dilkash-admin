@@ -32,19 +32,10 @@ export const updateProduct = async (id, data) =>
 export const uploadCreate = async (data) => {
   let formData = new FormData()
   formData.append("data", data);
-  // console.log(data)
-  // for (let [key, value] in formData) {
-  //   console.log(`${key} =${value}`, )
-  // }
-  // // console.log(formData)
   const itemData = await configureApi({
     url: foodEndpoints.uploads,
     method: "POST",
     data: formData
   });
   return itemData;
-  // const itemdata  = await fetch( `https://api.dilkash.itechcompany.uz/api/v1/${foodEndpoints.uploads}`, {
-  //   method: "POST",
-  //   body: formData
-  // })
 };

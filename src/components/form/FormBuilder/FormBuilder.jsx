@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Formik, Form } from "formik";
 import { TextFeild, SelectField, File } from "./Form-Element";
 import * as Yup from "yup";
-import { uploadCreate } from "../../../modules/food.api";
 
 const FormBuilder = (props) => {
   const { feilds, title, onSubmit } = props;
@@ -31,42 +30,26 @@ const FormBuilder = (props) => {
   const [validateSchema, setvalidateSchema] = useState({});
   const [initialValues, setinitialValues] = useState({});
   const [elmProps, setelmProps] = useState([]);
-  const [files, setFile] = useState({});
-  const [indicator, setIndicator] = useState(false);
+  const [files, setFile] = useState();
 
-
-
-  const filesubmit = (event) => {
-    console.log("event-------------", event.target.files);
-    setFile(event.target.files[0]);
-    setIndicator(true);
-    // const formData = new FormData();
-    // formData.append("data", event.target.files);
-    // console.log(formData);
-
-    // uploadFile(formData).then((res) => console.log(res));
-    // setFile(event.target.files[0]);
+  const filesubmit = (data) => {
+    setFile(data.data.data);
   };
-  // useEffect(() => {
-  //   const data = new FormData();
-  //   data.append("data", files);
-  //   if (files) {
-  //     // uploadFile(data).then((res) => console.log(res));
-  //   }
-  // }, [indicator]);
 
   useEffect(() => {
     feilds.forEach((el, index, arr) => {
       setvalidateSchema((old) => ({
         ...old,
-        [el.name]: Yup[arr[index].validationsType]().required(
-          el.name + " " + "is required"
-        ),
+        [el.name]:
+          el.required &&
+          Yup[arr[index].validationsType]().required(
+            el.name + " " + "is required"
+          ),
       }));
       setinitialValues((old) => ({
         ...old,
 
-        [el.name]: [el.name] == "file" ? files : arr[index].value ?? "",
+        [el.name]: arr[index].value ?? "",
       }));
     });
     let elProps = feilds.map((el) => {
@@ -88,8 +71,7 @@ const FormBuilder = (props) => {
           initialValues={initialValues}
           validationSchema={Yup.object().shape(validateSchema ?? {})}
           onSubmit={(values) => {
-            console.log(values);
-            onSubmit(values);
+            onSubmit({ ...values, image: files });
           }}
         >
           {({ errors, touched }) => (
@@ -121,5 +103,3 @@ const FormBuilder = (props) => {
   }
 };
 export default FormBuilder;
-
-// basicUrl/api/v1/uploads/create

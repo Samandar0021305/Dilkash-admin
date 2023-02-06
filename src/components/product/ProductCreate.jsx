@@ -1,6 +1,8 @@
 import React from "react";
 import FormBuilder from "../form/FormBuilder/FormBuilder";
-import { feilds } from "../form/formData";
+import FormDataFood from "../form/formData";
+
+
 
 const onSubmit = (values) => {
   console.log(values);
@@ -8,7 +10,11 @@ const onSubmit = (values) => {
 
 const ProductCreate = () => {
   return (
-    <FormBuilder feilds={feilds} onSubmit={onSubmit} title={"Add Product"}>
+    <FormBuilder
+      feilds={FormDataFood()}
+      onSubmit={onSubmit}
+      title={"Add Product"}
+    >
       <button className="border p-[10px]" type="submit">
         Submit
       </button>

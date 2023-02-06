@@ -26,7 +26,7 @@ function checkLabel(errors, touches) {
 }
 const uploadFile = async (event) => {
   const res = await uploadCreate(event.target.files[0]);
-  console.log(res);
+  // console.log(res);
 
   return res;
 };
@@ -49,8 +49,8 @@ export function File(props) {
         id={name}
         name={name}
         placeholder={placeholder || ""}
-        {...rest}
         onInput={async (event) => filesubmit(await uploadFile(event))}
+        {...rest}
       />
     </div>
   );
