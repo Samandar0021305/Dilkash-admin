@@ -16,16 +16,14 @@ export default function Sidebar() {
 
   const changeIcon = (link)=>{
     navigate(link.path)
-    func(link)
+    
   }
 
-  const hanlderChanage = (value)=>{
-   func(value)
-  }
+  
 
   return (
     <div className="flex">
-      <div className={isToogle ==true ?  " flex flex-col h-screen p-3 bg-white shadow w-60" : "w-[60px] shadow"}>
+      <div className={isToogle == true ?  " flex flex-col h-screen p-3 bg-white shadow w-60" : "w-[60px] shadow"}>
         <div className="space-y-3">
           <div className="flex items-center">
            {isToogle && <h2 className="text-xl font-bold">Dashboard</h2>}
@@ -42,7 +40,6 @@ export default function Sidebar() {
                         }
                       ></i>
                       {isToogle && <NavLink
-                      onClick={()=>hanlderChanage(item)}
                         style={styled}
                         to={item.path}
                         className="flex items-center p-2 space-x-3 rounded-md text-base mt-1.5"

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProduct, getProduct } from "../modules/food.api";
 import { deleteProducts, fetchProducts } from "../redux/feature/productSlice";
@@ -8,13 +8,10 @@ import Table from "../components/table/TableItem";
 const Foods = React.memo(() => {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.product.products);
-  console.log(data);
-
   const fetchProduct = async () => {
     const res = await getProduct();
     return res;
   };
-
 
   useEffect(() => {
     fetchProduct().then((res) => dispatch(fetchProducts(res.data)));

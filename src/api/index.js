@@ -29,17 +29,15 @@ const baseURL = process.env.REACT_APP_API_URL;
 
 const configureApi = axios.create({
   baseURL,
-  
 });
 
 configureApi.interceptors.request.use(async (config) => {
-  config.headers["Content-type"] = "application/json";
+  const headers = { Accept: "application/json", "Accept-Encoding": "identity" };
+  config.headers = headers;
   if (localStorage.getItem("token")) {
     config.headers["Authorization"] = `Bearer ${localStorage.getItem("token")}`;
   }
-  return {
-    ...config,
-  };
+  return await config;
 });
 
 configureApi.interceptors.response.use(

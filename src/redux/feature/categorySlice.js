@@ -4,6 +4,8 @@ export const categorySlice = createSlice({
   name: "category",
   initialState: {
     categories: [],
+    categoryId: "",
+    productcategory: [],
     error: "",
   },
   reducers: {
@@ -12,18 +14,29 @@ export const categorySlice = createSlice({
         state.categories = action.payload;
       }
     },
+    getByProductId: (state, action) => {
+      state.categoryId = action.payload;
+    },
+    getByProduct: (state, action) => {
+      if (action.payload) {
+        state.productcategory = action.payload;
+      }
+    },
     addCategory: (state, action) => {
       state.categories = [action.payload, ...state.categories];
     },
     deleteCategory: (state, action) => {
-      const { categId } = action.payload;
-      state.categories = [...state.categories].filter(
-        (item) => item.categId.toString() !== categId.toString()
-      );
+      const categId = action.payload;
+      state.categoryId = categId;
     },
   },
 });
 
-export const { fetchCategories, addCategory, deleteCategory } =
-  categorySlice.actions;
+export const {
+  fetchCategories,
+  addCategory,
+  deleteCategory,
+  getByProductId,
+  getByProduct,
+} = categorySlice.actions;
 export default categorySlice.reducer;
