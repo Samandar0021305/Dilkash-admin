@@ -5,7 +5,6 @@ import { Context } from "../../Layout";
 
 export default function Sidebar() {
  const navigate = useNavigate()
-  const func = useContext(Context).dispatch
   const isToogle = useContext(Context).isToogle
   const styled = ({ isActive }) => {
     return {
