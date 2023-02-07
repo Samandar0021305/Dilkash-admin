@@ -15,7 +15,6 @@ const Widget = React.lazy(() => import("../components/Widget"));
 
 const Category = () => {
   const [status, setStatus] = useState();
-  console.log("hello");
   const dispatch = useDispatch();
   const { categories, categoryId } = useSelector((state) => state.category);
   const { get, post, put, getById, remove } = actions(_page);

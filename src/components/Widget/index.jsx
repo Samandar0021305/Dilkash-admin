@@ -10,7 +10,6 @@ const index = React.memo(({ data, deleteItem }) => {
   const dispatch = useDispatch();
   const modal = useSelector((state) => state.modal.show);
   const navigate = useNavigate();
-  const [list, setList] = useState(false);
   const [isShown, setIsShown] = useState({ show: false, id: "" });
   const baseIMG = process.env.REACT_APP_IMG_URL;
 
@@ -29,9 +28,7 @@ const index = React.memo(({ data, deleteItem }) => {
         </button>
       </div>
       <div className="flex flex-wrap  items-center">
-        {list ? (
-          <h1>Loading...</h1>
-        ) : (
+        {data.length   ? (
           data.map((val) => {
             return (
               <div
@@ -74,7 +71,10 @@ const index = React.memo(({ data, deleteItem }) => {
               </div>
             );
           })
-        )}
+        )
+      : (
+        <h1>Loading...</h1>
+      )}
       </div>
       {modal == "open" && <Modal deleteItem={deleteItem} />}
     </div>
