@@ -9,31 +9,31 @@ function errorHandling(status) {
       return alert("Internal server Error!");
   }
 }
-
 const baseURL = process.env.REACT_APP_API_URL;
 
-const configureApi = axios.create({
+const request = axios.create({
   baseURL,
 });
-configureApi.interceptors.request.use(async (config) => {
+request.interceptors.request.use((config) => {
   const headers = { Accept: 'application/json', 'Accept-Encoding': 'identity' }
   config.headers = headers;
   if (localStorage.getItem("token")) {
     config.headers["Authorization"] = `Bearer ${localStorage.getItem("token")}`;
   }
-  return await config
+  return config
 
 });
 
-configureApi.interceptors.response.use(
+request.interceptors.response.use(
   (response) => {
-    // console.log("response -----------", response);
-    if (response && response.data) return response.data;
+          const {data} = request;
+    return data ?? response;
   },
-  function (err) {
-    errorHandling(err.status);
-    return Promise.reject(err);
+  function (error) {
+          const {status} = error
+    errorHandling(status);
+    return Promise.reject(error);
   }
 );
 
-export default configureApi;
+export default request;
