@@ -5,9 +5,8 @@ import {
   deleteCategory,
   getProductByCategory,
 } from "../modules/category.api";
-import { fetchCategories } from "../redux/feature/categorySlice";
-import { fetchFood } from "../redux/feature/foodSlice";
-import { getProduct } from "../modules/food.api";
+
+import { fetchCategories, getByProduct } from "../redux/feature/categorySlice";
 import { closeModal } from "../redux/feature/ModalSlice";
 import { toast } from "react-toastify";
 import {actions} from '../utils/actions'
@@ -49,13 +48,16 @@ console.log('hello')
       // dispatch(closeModal("close"));
       deleteCategory(categoryId).then((res) => setStatus(res.statusCode));
     }
+  };
+  useEffect(() => {
     if (parseInt(status) === 200) {
       // fetchCategory().then((res) => dispatch(fetchCategories(res.data)));
       toast.success("Category successfully deleted!");
-    } else {
+      setStatus(0);
+    } else if (parseInt(status) >= 400) {
       toast.error("Error, Category was not deleted!");
     }
-  };
+  });
   const getCategory = async () => {
   const data = await get()
   console.log(data)

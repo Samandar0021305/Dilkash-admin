@@ -8,6 +8,13 @@ const CategoryAdd = React.lazy(() => import("../components/CategoryAdd"));
 const ProductCreate = React.lazy(() =>
   import("../components/product/ProductCreate")
 );
+const CategoryProduct = React.lazy(() =>
+  import("../components/CategoryProduct")
+);
+const ProductEdit = React.lazy(() =>
+  import("../components/product/ProductEdit")
+);
+
 export const routers = [
   {
     id: 1,
@@ -26,6 +33,12 @@ export const routers = [
         name: "catogary add page",
         path: "category/add",
         component: CategoryAdd,
+      },
+      {
+        id: 1.3,
+        name: "Category Product",
+        path: "category/:categoryproductId",
+        component: CategoryProduct,
       },
     ],
   },
@@ -48,5 +61,11 @@ export const routers = [
     name: "Foods page",
     path: "foods/create",
     component: ProductCreate,
+  },
+  {
+    id: 5,
+    name: "Foods page",
+    path: "foods/update",
+    component: ProductEdit,
   },
 ];

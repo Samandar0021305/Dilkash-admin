@@ -1,10 +1,14 @@
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useGlobalFilter, usePagination, useTable } from "react-table";
+import { openModal } from "../../redux/feature/ModalSlice";
+import { addProductId } from "../../redux/feature/productSlice";
 import GlobalFilter from "./config/GlobalFilter";
 import Pagination, { useCustomPagination } from "./config/Paginations";
 
 const Table = ({ columns, data, deleteItem }) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
     getTableProps,
@@ -101,9 +105,12 @@ const Table = ({ columns, data, deleteItem }) => {
                                   <i className="fa-solid fa-info"></i>
                                 </button>
                                 <button
-                                  onClick={() =>
-                                    deleteItem(cell.row.original.id)
-                                  }
+                                  onClick={() => {
+                                    dispatch(openModal("open"));
+                                    dispatch(
+                                      addProductId(cell.row.original.id)
+                                    );
+                                  }}
                                   className="border hover:bg-red-500 transition-all hover:text-white rounded-lg px-[10px] py-1"
                                 >
                                   <i className="fa-solid fa-trash"></i>
@@ -130,17 +137,16 @@ const Table = ({ columns, data, deleteItem }) => {
               </tbody>
             </table>
             {/* Pagination start */}
-            
           </div>
           <Pagination
-              previousPage={previousPage}
-              canPreviousPage={canPreviousPage}
-              nextPage={nextPage}
-              canNextPage={canNextPage}
-              paginationRange={paginationRange}
-              pageIndex={pageIndex}
-              gotoPage={gotoPage}
-            />
+            previousPage={previousPage}
+            canPreviousPage={canPreviousPage}
+            nextPage={nextPage}
+            canNextPage={canNextPage}
+            paginationRange={paginationRange}
+            pageIndex={pageIndex}
+            gotoPage={gotoPage}
+          />
           {/* Pagination End */}
         </div>
       </div>

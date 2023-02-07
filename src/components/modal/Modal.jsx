@@ -1,6 +1,5 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteCategory } from "../../modules/category.api";
 import { closeModal } from "../../redux/feature/ModalSlice";
 
 export default function Modal({deleteItem}) {
