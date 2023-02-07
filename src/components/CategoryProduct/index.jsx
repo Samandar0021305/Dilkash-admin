@@ -5,18 +5,20 @@ import { getProductByCategory } from '../../modules/category.api'
 import { deleteProduct } from '../../modules/food.api'
 import { getByProduct } from '../../redux/feature/categorySlice'
 import { deleteProducts } from '../../redux/feature/productSlice'
+import { actions } from '../../utils/actions'
 import { productTableHeader } from '../../utils/Constants'
 const Table = React.lazy(()=>import("../table/TableItem"))
+const _page = 'products'
+
 
 const Index = () => {
-  const params = useParams()
-  
+  const params = useParams()  
   const {productcategory} = useSelector((state)=>state.category)
- 
+ const {get} = actions(_page)
   const dispatch = useDispatch()
   const fetchProductByCateg = async () => {
     if (params.categoryproductId) {
-      const res = await getProductByCategory(params.categoryproductId);
+      const res = await get(params.categoryproductId);
       return res;
     }
   };

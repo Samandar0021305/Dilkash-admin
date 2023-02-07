@@ -49,7 +49,7 @@ const Table = ({ columns, data, deleteItem }) => {
 
   return (
     <div className="mt-2 flex flex-col">
-      <GlobalFilter
+      {data.length ? <><GlobalFilter
         preGlobalFilteredRows={preGlobalFilteredRows}
         globalFilter={state.globalFilter}
         setGlobalFilter={setGlobalFilter}
@@ -149,7 +149,7 @@ const Table = ({ columns, data, deleteItem }) => {
           />
           {/* Pagination End */}
         </div>
-      </div>
+      </div> </> : <div className="flex justify-center items-center h-[70vh]"><h2 className="text-[red] text-[40px]">Ma'lumot yo'q</h2></div>}
     </div>
   );
 };

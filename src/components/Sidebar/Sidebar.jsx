@@ -7,7 +7,6 @@ export default function Sidebar() {
  const navigate = useNavigate()
   const func = useContext(Context).dispatch
   const isToogle = useContext(Context).isToogle
-  console.log(isToogle)
   const styled = ({ isActive }) => {
     return {
       color: isActive ? "blue" : "black",
@@ -32,9 +31,9 @@ export default function Sidebar() {
           <div className="flex-1 justify-center">
             <ul className="pt-2 pb-4 space-y-1 text-sm">
               <li className="rounded-sm">
-                {sidebar.map((item) => {
+                {sidebar.map((item,index) => {
                   return (
-                    <>
+                    <div key={index}>
                       {isToogle == true ? (
                         <>
                           <div
@@ -80,7 +79,7 @@ export default function Sidebar() {
                           </div>
                         </>
                       )}
-                    </>
+                    </div>
                   );
                 })}
               </li>

@@ -4,7 +4,7 @@ import Modal from "../modal/Modal";
 import { openModal } from "../../redux/feature/ModalSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteCategory ,getByProductId} from "../../redux/feature/categorySlice";
-
+import Loader from "../Loader/LoaderComponent"
 
 const index = React.memo(({ data, deleteItem }) => {
   const dispatch = useDispatch();
@@ -18,7 +18,8 @@ const index = React.memo(({ data, deleteItem }) => {
   };
 
   return (
-    <div>
+    <>
+    {data.length ? <div>
       <div className="mb-[10px] flex justify-end">
         <button
           onClick={handlerAdd}
@@ -77,7 +78,8 @@ const index = React.memo(({ data, deleteItem }) => {
       )}
       </div>
       {modal == "open" && <Modal deleteItem={deleteItem} />}
-    </div>
+    </div> : <Loader />}
+    </>
   );
 });
 
