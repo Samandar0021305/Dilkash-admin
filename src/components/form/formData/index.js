@@ -19,7 +19,7 @@ const FormDataFood = () => {
   function arrs() {
     let arr = [];
     categories.map((item) => {
-      arr.push({ value: item.title, label: item.id });
+      arr.push({ value: item.id, label: item.title });
     });
     return arr;
   }
@@ -57,7 +57,7 @@ const FormDataFood = () => {
       validationsType: "object",
     },
     {
-      name: "category",
+      name: "category_id",
       type: "select",
       label: "Category",
       required: true,

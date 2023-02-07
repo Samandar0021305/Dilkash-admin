@@ -71,7 +71,7 @@ const FormBuilder = (props) => {
           initialValues={initialValues}
           validationSchema={Yup.object().shape(validateSchema ?? {})}
           onSubmit={(values) => {
-            onSubmit({ ...values, image: files });
+            onSubmit({ ...values, image: files,  });
           }}
         >
           {({ errors, touched }) => (

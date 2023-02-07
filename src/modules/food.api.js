@@ -11,14 +11,14 @@ const foodEndpoints = {
 export const getProduct = async (params) =>
   await configureApi.get(foodEndpoints.list, {
     params: {
-      page: 1,
-      pageSize: 10,
+      // page: 1,
+      // pageSize: 10,
       ...params,
     },
   });
 
 export const createProduct = async (data) =>
-  await configureApi.post(foodEndpoints.add, { data });
+  await configureApi.post(foodEndpoints.add, data);
 
 export const deleteProduct = async (id) =>
   await configureApi.delete(foodEndpoints.delete + id);
@@ -30,12 +30,12 @@ export const updateProduct = async (id, data) =>
   await configureApi.delete(foodEndpoints.delete + id, { data });
 
 export const uploadCreate = async (data) => {
-  let formData = new FormData()
+  let formData = new FormData();
   formData.append("data", data);
   const itemData = await configureApi({
     url: foodEndpoints.uploads,
     method: "POST",
-    data: formData
+    data: formData,
   });
   return itemData;
 };
