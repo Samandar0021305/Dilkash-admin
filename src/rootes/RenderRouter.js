@@ -54,7 +54,7 @@ export const routers = [
     id: 4,
     name: "Foods page",
     path: "foods",
-    component: Foods,
+    component: Foods
   },
   {
     id: 5,

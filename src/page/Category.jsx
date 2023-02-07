@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { fetchCategories } from "../redux/feature/categorySlice";
+import { deleteCategory, fetchCategories, getByProduct } from "../redux/feature/categorySlice";
 import { closeModal } from "../redux/feature/ModalSlice";
 import { toast } from "react-toastify";
 import { actions } from "../utils/actions";
@@ -13,6 +13,18 @@ const Category = () => {
   const dispatch = useDispatch();
   const { categories, categoryId } = useSelector((state) => state.category);
   const { get,remove } = actions(_page);
+  
+  const getCategory = async () => {
+    const data = await get();
+    return data
+  };
+  useEffect(() => {
+    getCategory().then((res) => dispatch(fetchCategories(res)));
+  }, []);
+
+
+ 
+
 
 
   const deleteItem = () => {
@@ -23,21 +35,13 @@ const Category = () => {
   };
   useEffect(() => {
     if (parseInt(status) === 200) {
-      get().then((res) => dispatch(fetchCategories(res.data)));
+      remove().then((res) => dispatch(fetchCategories(res.data)));
       toast.success("Category successfully deleted!");
       setStatus(0);
     } else if (parseInt(status) >= 400) {
       toast.error("Error, Category was not deleted!");
     }
-  });
-  const getCategory = async () => {
-    const data = await get();
-    return data
-  };
-
-  useEffect(() => {
-    getCategory().then((res) => dispatch(fetchCategories(res)));
-  }, []);
+});
 
   return (
     <div className="w-full">
