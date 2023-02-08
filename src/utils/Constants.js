@@ -82,21 +82,22 @@ export const productTableHeader = [
 
 
 export const orderTableHeader = [
+  
   {
-    Header: "Image",
-    accessor: "image",
+    Header: "Overall price ",
+    accessor: "overall_price",
   },
   {
-    Header: "Name ",
-    accessor: "name",
+    Header: "Address ",
+    accessor: "address",
   },
   {
-    Header: "Description ",
-    accessor: "content",
+    Header: "status",
+    accessor: "status",
   },
   {
-    Header: "Price ",
-    accessor: "price",
+    Header: "phone number",
+    accessor: "phone_number",
   },
   {
     Header: "Actions",
