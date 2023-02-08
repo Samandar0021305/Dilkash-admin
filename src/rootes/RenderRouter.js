@@ -14,6 +14,7 @@ const CategoryProduct = React.lazy(() =>
 const ProductEdit = React.lazy(() =>
   import("../components/product/ProductEdit")
 );
+const Order = React.lazy(()=>import("../page/Order"))
 
 export const routers = [
   {
@@ -63,9 +64,15 @@ export const routers = [
     component: ProductCreate,
   },
   {
-    id: 5,
+    id: 6,
     name: "Foods page",
     path: "foods/update",
     component: ProductEdit,
+  },
+  {
+    id: 7,
+    name: "Order page",
+    path: "order",
+    component: Order,
   },
 ];
