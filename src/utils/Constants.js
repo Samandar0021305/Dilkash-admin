@@ -78,3 +78,28 @@ export const productTableHeader = [
     accessor: "action",
   },
 ];
+
+
+
+export const orderTableHeader = [
+  {
+    Header: "Image",
+    accessor: "image",
+  },
+  {
+    Header: "Name ",
+    accessor: "name",
+  },
+  {
+    Header: "Description ",
+    accessor: "content",
+  },
+  {
+    Header: "Price ",
+    accessor: "price",
+  },
+  {
+    Header: "Actions",
+    accessor: "action",
+  },
+];

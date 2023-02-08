@@ -12,7 +12,7 @@ const Index = () => {
       {DynmaicRouter.map((val,i)=>{
         return(
          <h1  key={i}> 
-          <NavLink to={val} className='p-1 rounded cursor-pointer shadow'>{i==2 ? "children" : val}</NavLink>
+          <NavLink  to={val} className='p-1 rounded cursor-pointer shadow'>{i==2 ? "children" : val}</NavLink>
         </h1>
         )
       })}
