@@ -8,14 +8,15 @@ import { orderTableHeader } from '../utils/Constants'
 import { closeModal } from '../redux/feature/ModalSlice'
 import { fetchProducts } from '../redux/feature/productSlice'
 import { toast } from 'react-toastify'
+import Modal from '../components/modal/Modal'
 
 const Order = React.memo(() => {
     const _ = "order"
   const [status, setStatus] = useState();
-
-    const {get,remove,getById} = actions(_)
-    const dispatch = useDispatch()
-    const data = useSelector((state)=>state.order.orders)
+  const {get,remove} = actions(_)
+  const dispatch = useDispatch()
+  const {orders , ordersIdc} = useSelector((state)=>state.order)
+  const modal = useSelector((state) => state.modal.show);
     const fetchProduct = async()=>{
        const res = await get()
        return res
@@ -27,27 +28,35 @@ const Order = React.memo(() => {
  
 
  const deleteItem = () => {
-  if (getById) {
+  if (ordersIdc) {
     dispatch(closeModal("close"));
-    remove(getById).then((res) => setStatus(res.statusCode));
+    remove(ordersIdc).then((res) => setStatus(res.statusCode));
   }
 };
+
+
 useEffect(() => {
   if (parseInt(status) === 200) {
     fetchProduct().then((res) => dispatch(fetchProducts(res.data)));
-    toast.success("Product successfully deleted!");
+    toast.success("order successfully deleted!");
     setStatus(0)
   } else if(parseInt(status) >= 400) {
-    toast.error("Error, Product was not deleted!");
+    toast.error("Error, order was not deleted!");
   }
 }, [status])
 
+
 const columns = useMemo(() => orderTableHeader);
 
-    
   return (
     <>
-      {data.length ? <Table data={data} columns={columns} deleteItem={deleteItem}/> : <LoaderComponent />}
+      {
+      orders.length ? <>
+       <Table order="order" data={orders} columns={columns} deleteItem={deleteItem}/> 
+       {modal == "open" && <Modal deleteItem={deleteItem} />}
+       </> : 
+       <LoaderComponent />
+       }
     </>
   )
 })

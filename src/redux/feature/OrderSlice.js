@@ -4,6 +4,7 @@ export const OrderSlice = createSlice({
   name: "order",
   initialState: {
     orders: [],
+    ordersIdc:"",
     error: "",
   },
   reducers: {
@@ -12,7 +13,11 @@ export const OrderSlice = createSlice({
         state.orders = action.payload;
       }
     },
-    
+    orderId: (state, action) => {
+      if (action.payload) {
+        state.ordersIdc = action.payload;
+      }
+    },
     addOrder: (state, action) => {
       state.orders = [action.payload, ...state.orders];
     },
@@ -23,6 +28,6 @@ export const OrderSlice = createSlice({
   },
 });
 
-export const { fetchOrder, addOrder, deleteOrder } =
+export const { fetchOrder, addOrder, deleteOrder ,orderId} =
 OrderSlice.actions;
 export default OrderSlice.reducer;

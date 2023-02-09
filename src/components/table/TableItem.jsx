@@ -4,10 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { useGlobalFilter, usePagination, useTable } from "react-table";
 import { openModal } from "../../redux/feature/ModalSlice";
 import { addProductId } from "../../redux/feature/productSlice";
+import {orderId} from "../../redux/feature/OrderSlice"
 import GlobalFilter from "./config/GlobalFilter";
 import Pagination, { useCustomPagination } from "./config/Paginations";
 
-const Table = ({ columns, data, deleteItem }) => {
+const Table = ({ columns, data, deleteItem,order }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
@@ -107,9 +108,14 @@ const Table = ({ columns, data, deleteItem }) => {
                                 <button
                                   onClick={() => {
                                     dispatch(openModal("open"));
-                                    dispatch(
-                                      addProductId(cell.row.original.id)
-                                    );
+                                    
+                                    if(order){
+                                      dispatch(orderId(cell.row.original.id))
+                                    }else{
+                                      dispatch(
+                                        addProductId(cell.row.original.id)
+                                      );
+                                    }
                                   }}
                                   className="border hover:bg-red-500 transition-all hover:text-white rounded-lg px-[10px] py-1"
                                 >
