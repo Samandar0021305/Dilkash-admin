@@ -1,14 +1,13 @@
 import {camelize} from './FunctionName.js';
 import request from './axios';
 function CRUD (param) {
-          // this.param = param
        return {
-         [camelize(`get${param}`)]: async  (payload) =>   {
+         [camelize(`get${param}`)]: async  (params) =>   {
             try {
                 const {data:{data}} = await request({
                     url: '/'+param,
                     method: "GET",
-                    params: payload ?? undefined
+                    params: params ?? undefined
                 });
                 return data;
             } catch (err) {
@@ -20,6 +19,7 @@ function CRUD (param) {
             const response = await request({
                 url:`${param}/${payload.id}`,
                 method: "GET",
+                params: payload?.params ?? undefined
             });
             return response;
         } catch (err) {
@@ -40,7 +40,7 @@ function CRUD (param) {
             return error;
         }
         },
-         [camelize(`put${param}`)]: async ( payload) =>  {
+         [camelize(`put${param}`)]: async (payload) =>  {
         const {id,data } = payload;
         const response = await request({
             url: "+"/+param+'/update/' + id,
