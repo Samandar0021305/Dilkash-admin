@@ -1,5 +1,4 @@
 import { Field } from "formik";
-import { useState } from "react";
 import { uploadCreate } from "../../../modules/food.api";
 function getStyles(errors, touches) {
   if (errors && touches) {
@@ -32,7 +31,6 @@ const uploadFile = async (event) => {
 };
 
 export function File(props) {
-  const [file, setFile] = useState();
   const { name, type, error, touch, label, placeholder, filesubmit, ...rest } =
     props;
   return (
@@ -90,6 +88,7 @@ export function SelectField(props) {
     placeholder,
     options,
     filesubmit,
+    value,
     ...rest
   } = props;
   return (

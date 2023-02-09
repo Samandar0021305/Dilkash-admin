@@ -1,5 +1,7 @@
 import React, { Suspense, useMemo } from "react";
 import { Routes, Route } from "react-router-dom";
+import Loader from "../components/Loader/Loader";
+import LoaderComponent from "../components/Loader/LoaderComponent";
 import { routers } from "./RenderRouter";
 
 const renderRoutesRecursive = (router) =>
@@ -19,7 +21,7 @@ const Index = React.memo(() => {
 
   return (
     <>
-      <Suspense fallback={<h1>Loading....</h1>}>
+      <Suspense fallback={<LoaderComponent />}>
         <Routes>{renderRoutes}</Routes>
       </Suspense>
     </>

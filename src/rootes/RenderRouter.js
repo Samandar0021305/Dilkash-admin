@@ -3,13 +3,13 @@ import React from "react";
 const Home = React.lazy(() => import("../page/Home"));
 const Foods = React.lazy(() => import("../page/Foods"));
 const Category = React.lazy(() => import("../page/Category"));
-const CategoryUpdite = React.lazy(() => import("../components/CategoryUpdite"));
-const CategoryAdd = React.lazy(() => import("../components/CategoryAdd"));
+const CategoryUpdite = React.lazy(() => import("../components/category/CategoryUpdite"));
+const CategoryAdd = React.lazy(() => import("../components/category/CategoryAdd"));
 const ProductCreate = React.lazy(() =>
   import("../components/product/ProductCreate")
 );
 const CategoryProduct = React.lazy(() =>
-  import("../components/CategoryProduct")
+  import("../components/category/CategoryProduct/index")
 );
 const ProductEdit = React.lazy(() =>
   import("../components/product/ProductEdit")
@@ -24,8 +24,8 @@ export const routers = [
     children: [
       {
         id: 1.1,
-        name: "catogary updite page",
-        path: "category/updite",
+        name: "catogary update page",
+        path: "category/update/:categoryId",
         component: CategoryUpdite,
       },
       {
@@ -55,17 +55,19 @@ export const routers = [
     name: "Foods page",
     path: "foods",
     component: Foods,
-  },
-  {
-    id: 5,
-    name: "Foods page",
-    path: "foods/create",
-    component: ProductCreate,
-  },
-  {
-    id: 5,
-    name: "Foods page",
-    path: "foods/update",
-    component: ProductEdit,
+    children: [
+      {
+        id: 4.1,
+        name: "Foods page",
+        path: "foods/create",
+        component: ProductCreate,
+      },
+      {
+        id: 4.2,
+        name: "Foods page",
+        path: "foods/update/:productId",
+        component: ProductEdit,
+      },
+    ],
   },
 ];

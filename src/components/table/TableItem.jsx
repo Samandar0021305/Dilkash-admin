@@ -115,7 +115,12 @@ const Table = ({ columns, data, deleteItem }) => {
                                 >
                                   <i className="fa-solid fa-trash"></i>
                                 </button>
-                                <button className="border hover:bg-green-500 transition-all hover:text-white rounded-lg px-[10px] py-1">
+                                <button
+                                  onClick={() => 
+                                    navigate(`update/${cell.row.original.id}`)
+                                  }
+                                  className="border hover:bg-green-500 transition-all hover:text-white rounded-lg px-[10px] py-1"
+                                >
                                   <i className="fa-solid fa-pencil"></i>
                                 </button>
                               </div>
