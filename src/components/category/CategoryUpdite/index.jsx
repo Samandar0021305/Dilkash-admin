@@ -33,10 +33,8 @@ const CategoryUpdate = React.memo(() => {
     arr.forEach((item) => {
       item.value = category[item.name];
     });
-
     return arr;
   };
-
   const arr = arrayFunc();
   if (category?.title) {
     return (
