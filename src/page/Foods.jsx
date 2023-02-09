@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import Modal from "../components/modal/Modal";
 import { closeModal } from "../redux/feature/ModalSlice";
 import { toast } from "react-toastify";
+import LoaderComponent from "../components/Loader/LoaderComponent";
 
 const Foods = React.memo(() => {
   const [status, setStatus] = useState();
@@ -43,16 +44,21 @@ const Foods = React.memo(() => {
   const columns = useMemo(() => productTableHeader);
 
   return (
-    <div>
-      <button
-        onClick={() => navigate("create")}
-        className="border p-2 w-[80px] rounded bg-cyan-600 text-white"
-      >
-        Add
-      </button>
-      <Table columns={columns} data={products} deleteItem={deleteItem} />
-      {modal == "open" && <Modal deleteItem={deleteItem} />}
-    </div>
+    <>
+      {
+        products.length ?   <div>
+        <button
+          onClick={() => navigate("create")}
+          className="border p-2 w-[80px] rounded bg-cyan-600 text-white"
+        >
+          Add
+        </button>
+        <Table columns={columns} data={products} deleteItem={deleteItem} />
+        {modal == "open" && <Modal deleteItem={deleteItem} />}
+      </div> : <LoaderComponent />
+      }
+  
+    </>
   );
 });
 
