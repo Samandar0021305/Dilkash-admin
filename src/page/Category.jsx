@@ -19,6 +19,7 @@ const Category = () => {
   const dispatch = useDispatch();
   const { categories, categoryId } = useSelector((state) => state.category);
   const { get, post, put, getById, remove } = actions(_page);
+  console.log(categories);
   // const fetchProductByCateg = async () => {
   //   if (categoryId) {
   //     const res = await getProductByCategory(categoryId);
@@ -43,7 +44,6 @@ const Category = () => {
 
   // Deleting data
 
-
   const deleteItem = () => {
     if (categoryId) {
       // dispatch(closeModal("close"));
@@ -61,14 +61,13 @@ const Category = () => {
   // });
   const getCategory = async () => {
     const data = await get();
-    return data
+    return data;
   };
   // Deleting data ends
   useEffect(() => {
     getCategory().then((res) => dispatch(fetchCategories(res)));
     // dispatch(fetchCategories(data))
   }, []);
-  console.log(categories)
   return (
     <div className="w-full">
       <Widget data={categories} deleteItem={deleteItem} />

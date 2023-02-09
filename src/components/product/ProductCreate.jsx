@@ -3,24 +3,26 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { createProduct } from "../../modules/food.api";
 import FormBuilder from "../form/FormBuilder/FormBuilder";
-import FormDataFood from "../form/formData";
+import FormDataFood from "../form/formData/productAdd";
+import { actions } from "../../utils/actions";
+const _page = "product";
 
 const ProductCreate = () => {
-  const [status, setStatus] = useState();
   const navigate = useNavigate();
+  const { get, post, put, getById, remove } = actions(_page);
 
   const onSubmit = async (values) => {
-    await createProduct(values).then((res) => setStatus(res.statusCode));
+    await post(values).then((res) => navigate("/foods"));
     console.log(values);
   };
-  useEffect(() => {
-    if (status && status == 201) {
-      toast.success("Product successfully created!");
-      navigate("/foods");
-    } else if( 400 <= status ) {
-      toast.error("Error, Product was not created!");
-    }
-  }, [status]);
+  // useEffect(() => {
+  //   if (status && status == 201) {
+  //     toast.success("Product successfully created!");
+  //     navigate("/foods");
+  //   } else if (400 <= status) {
+  //     toast.error("Error, Product was not created!");
+  //   }
+  // }, [status]);
 
   return (
     <FormBuilder

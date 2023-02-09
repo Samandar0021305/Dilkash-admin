@@ -30,8 +30,7 @@ const FormBuilder = (props) => {
   const [validateSchema, setvalidateSchema] = useState({});
   const [initialValues, setinitialValues] = useState({});
   const [elmProps, setelmProps] = useState([]);
-  const [files, setFile] = useState();
-
+  const [files, setFile] = useState(null);
   const filesubmit = (data) => {
     setFile(data.data.data);
   };
@@ -46,9 +45,11 @@ const FormBuilder = (props) => {
             el.name + " " + "is required"
           ),
       }));
+      if (el.name === "image" && !files) {
+        setFile(arr[index].value);
+      }
       setinitialValues((old) => ({
         ...old,
-
         [el.name]: arr[index].value ?? "",
       }));
     });
@@ -62,7 +63,7 @@ const FormBuilder = (props) => {
       };
     });
     setelmProps([...elProps]);
-  }, [feilds]);
+  }, [feilds, files]);
   if (elmProps.length > 0) {
     return (
       <div>
@@ -71,7 +72,7 @@ const FormBuilder = (props) => {
           initialValues={initialValues}
           validationSchema={Yup.object().shape(validateSchema ?? {})}
           onSubmit={(values) => {
-            onSubmit({ ...values, image: files,  });
+            onSubmit({ ...values, image: files });
           }}
         >
           {({ errors, touched }) => (
