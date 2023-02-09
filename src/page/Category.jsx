@@ -22,11 +22,6 @@ const Category = () => {
     getCategory().then((res) => dispatch(fetchCategories(res)));
   }, []);
 
-
- 
-
-
-
   const deleteItem = () => {
     if (categoryId) {
       dispatch(closeModal("close"));
