@@ -56,7 +56,7 @@ const Table = ({ columns, data, deleteItem }) => {
       />
       <div className="-my-2 overflow-x-auto  -mx-4 sm:-mx-6 w-full lg:-mx-8">
         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-          <div className="shadow overflow-y-scroll h-[68vh] border-b border-gray-200 sm:rounded-lg">
+          <div className="shadow overflow-y-scroll h-[60vh] border-b border-gray-200 sm:rounded-lg">
             <table
               {...getTableProps()}
               className="min-w-full divide-y divide-gray-200"
@@ -116,8 +116,8 @@ const Table = ({ columns, data, deleteItem }) => {
                                   <i className="fa-solid fa-trash"></i>
                                 </button>
                                 <button
-                                  onClick={() => 
-                                    navigate(`update/${cell.row.original.id}`)
+                                  onClick={() =>
+                                    navigate(`action/${cell.row.original.id}`)
                                   }
                                   className="border hover:bg-green-500 transition-all hover:text-white rounded-lg px-[10px] py-1"
                                 >

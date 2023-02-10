@@ -8,21 +8,17 @@ export const routers = [
     children: [
       {
         id: 1.1,
-        name: "catogary update page",
-        path: "category/update/:categoryId",
-        component:React.lazy(() => import("../components/category/CategoryUpdite")) ,
+        name: "catogary-update-page",
+        path: "category/action/:categoryId",
+        component: React.lazy(() => import("../components/category/Category")),
       },
       {
         id: 1.2,
-        name: "catogary add page",
-        path: "category/add",
-        component: React.lazy(() => import("../components/category/CategoryAdd")),
-      },
-      {
-        id: 1.3,
         name: "Category Product",
         path: "category/:categoryproductId",
-        component: React.lazy(() => import("../components/category/CategoryProduct/index"))
+        component: React.lazy(() =>
+          import("../components/category/CategoryProduct/index")
+        ),
       },
     ],
   },
@@ -43,14 +39,8 @@ export const routers = [
       {
         id: 4.1,
         name: "Foods page",
-        path: "foods/create",
-        component: React.lazy(() => import("../components/product/ProductCreate"))
-      },
-      {
-        id: 4.2,
-        name: "Foods page",
-        path: "foods/update/:productId",
-        component: React.lazy(() => import("../components/product/ProductEdit")),
+        path: "foods/action/:productId",
+        component: React.lazy(() => import("../components/product/Product")),
       },
     ],
   },

@@ -37,10 +37,10 @@ const Foods = React.memo(() => {
   const columns = useMemo(() => productTableHeader);
 
   return (
-    <div>
+    <div className=" container flex flex-col">
       <button
-        onClick={() => navigate("create")}
-        className="border p-2 w-[80px] rounded bg-cyan-600 text-white"
+        onClick={() => navigate("action/new")}
+        className="border p-2 w-[80px] ml-auto mr-[65px] rounded bg-cyan-600 text-white"
       >
         +
       </button>

@@ -17,7 +17,7 @@ const index = React.memo(({ data, deleteItem }) => {
   const baseIMG = process.env.REACT_APP_IMG_URL;
 
   const handlerAdd = () => {
-    navigate("add");
+    navigate("action/new");
   };
 
   return (
@@ -66,7 +66,7 @@ const index = React.memo(({ data, deleteItem }) => {
                     </span>
                     <span className="flex flex-col text-[#ebe4e4] items-center gap-[70px]">
                       <i
-                        onClick={() => navigate(`update/${val.id}`)}
+                        onClick={() => navigate(`action/${val.id}`)}
                         className="fa-solid fa-pencil text-900 text-[14px] text-[#e5e2e2] cursor-pointer"
                       ></i>
                       <i

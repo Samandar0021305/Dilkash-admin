@@ -30,6 +30,7 @@ function CRUD(param) {
         return err;
       }
     },
+    
     [camelize(`post${param}`)]: async (payload) => {
       try {
         const response = await request({
@@ -39,7 +40,7 @@ function CRUD(param) {
             ...payload,
           },
         });
-        if (response.status == 201) {
+        if (response.status === 201) {
           toast.success("Successfully created!");
         }
         return response;
@@ -59,7 +60,7 @@ function CRUD(param) {
           },
         });
 
-        if (response.status == 200) {
+        if (response.status === 200) {
           toast.success("Successfully updated !");
         }
 
@@ -75,7 +76,7 @@ function CRUD(param) {
           url: "/" + param + "/delete/" + payload,
           method: "DELETE",
         });
-        if (respones.status == 200) {
+        if (respones.status === 200) {
           toast.success("Successfully deleted !");
         }
         return respones;
