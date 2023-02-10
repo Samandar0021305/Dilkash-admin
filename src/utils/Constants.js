@@ -4,23 +4,26 @@ export const sidebar = [
   {
     name: "Dashboard",
     icon: "fa-solid fa-house",
-
     path: "/dashboard",
+    meta:{roles:['User','admin','operator']},
   },
   {
     name: "Category",
     icon: "fa-solid fa-cart-shopping",
     path: "category",
+    meta:{roles:['User','admin','operator']},
   },
   {
     name: "Order",
     icon: "fa-solid fa-bag-shopping",
     path: "order",
+    meta:{roles:['User','admin','operator']},
   },
   {
     name: "Foods",
     icon: "fa-solid fa-bowl-food",
     path: "foods",
+    meta:{roles:['User','admin','operator']},
   },
 ];
 

@@ -3,6 +3,8 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { sidebar } from "../../utils/Constants";
 import { Context } from "../../Layout";
 
+const role = localStorage.getItem("role") ?? 'User'
+
 export default function Sidebar() {
  const navigate = useNavigate()
   const isToogle = useContext(Context).isToogle
@@ -19,6 +21,7 @@ export default function Sidebar() {
   }
 
   
+  const filtered = sidebar.filter(el=>el.meta.roles.includes(role))
 
   return (
     <div className="flex">
@@ -30,7 +33,7 @@ export default function Sidebar() {
           <div className="flex-1 justify-center">
             <ul className="pt-2 pb-4 space-y-1 text-sm">
               <li className="rounded-sm">
-                {sidebar.map((item,index) => {
+                {filtered.map((item,index) => {
                   return (
                     <div key={index}>
                       {isToogle == true ? (

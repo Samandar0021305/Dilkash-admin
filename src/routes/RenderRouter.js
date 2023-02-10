@@ -22,6 +22,7 @@ export const routers = [
     name: "catogary page",
     path: "/category",
     component: Category,
+    meta:{roles:['User','admin','operator']},
     children: [
       {
         id: 1.1,
@@ -50,29 +51,35 @@ export const routers = [
     path: "/dashboard",
     index: "index",
     component: Home,
+    meta:{roles:['User','admin','operator']},
   },
   {
     id: 4,
     name: "Foods page",
     path: "foods",
-    component: Foods
+    component: Foods,
+    meta:{roles:['User','admin','operator']},
+    children:[
+      {
+        id: 4.1,
+        name: "Foods page",
+        path: "foods/create",
+        component: ProductCreate,
+      },
+      {
+        id: 4.2,
+        name: "Foods page",
+        path: "foods/update",
+        component: ProductEdit,
+      },
+    ]
   },
+  
   {
     id: 5,
-    name: "Foods page",
-    path: "foods/create",
-    component: ProductCreate,
-  },
-  {
-    id: 6,
-    name: "Foods page",
-    path: "foods/update",
-    component: ProductEdit,
-  },
-  {
-    id: 7,
     name: "Order page",
     path: "order",
     component: Order,
+    meta:{roles:['User','admin','operator']},
   },
 ];
