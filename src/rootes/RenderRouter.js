@@ -1,44 +1,24 @@
 import React from "react";
-
-const Home = React.lazy(() => import("../page/Home"));
-const Foods = React.lazy(() => import("../page/Foods"));
-const Category = React.lazy(() => import("../page/Category"));
-const CategoryUpdite = React.lazy(() => import("../components/CategoryUpdite"));
-const CategoryAdd = React.lazy(() => import("../components/CategoryAdd"));
-const ProductCreate = React.lazy(() =>
-  import("../components/product/ProductCreate")
-);
-const CategoryProduct = React.lazy(() =>
-  import("../components/CategoryProduct")
-);
-const ProductEdit = React.lazy(() =>
-  import("../components/product/ProductEdit")
-);
-
 export const routers = [
   {
     id: 1,
     name: "catogary page",
     path: "/category",
-    component: Category,
+    component: React.lazy(() => import("../page/Category")),
     children: [
       {
         id: 1.1,
-        name: "catogary updite page",
-        path: "category/updite",
-        component: CategoryUpdite,
+        name: "catogary-update-page",
+        path: "category/action/:categoryId",
+        component: React.lazy(() => import("../components/category/Category")),
       },
       {
         id: 1.2,
-        name: "catogary add page",
-        path: "category/add",
-        component: CategoryAdd,
-      },
-      {
-        id: 1.3,
         name: "Category Product",
         path: "category/:categoryproductId",
-        component: CategoryProduct,
+        component: React.lazy(() =>
+          import("../components/category/CategoryProduct/index")
+        ),
       },
     ],
   },
@@ -48,24 +28,20 @@ export const routers = [
     name: "Home Dashboard",
     path: "/dashboard",
     index: "index",
-    component: Home,
+    component: React.lazy(() => import("../page/Home")),
   },
   {
     id: 4,
     name: "Foods page",
     path: "foods",
-    component: Foods,
-  },
-  {
-    id: 5,
-    name: "Foods page",
-    path: "foods/create",
-    component: ProductCreate,
-  },
-  {
-    id: 5,
-    name: "Foods page",
-    path: "foods/update",
-    component: ProductEdit,
+    component: React.lazy(() => import("../page/Foods")),
+    children: [
+      {
+        id: 4.1,
+        name: "Foods page",
+        path: "foods/action/:productId",
+        component: React.lazy(() => import("../components/product/Product")),
+      },
+    ],
   },
 ];

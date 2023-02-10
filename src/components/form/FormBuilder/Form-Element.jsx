@@ -6,13 +6,13 @@ function getStyles(errors, touches) {
     return {
       border: "1px solid red",
       width: "100%",
-      padding: "5px",
+      padding: "8px",
       outline: "none",
     };
   } else {
     return {
       width: "100%",
-      padding: "5px",
+      padding: "8px",
       outline: "none",
     };
   }
@@ -30,28 +30,47 @@ const uploadFile = async (event) => {
 
   return res;
 };
+const imageUrl = process.env.REACT_APP_IMG_URL;
 
 export function File(props) {
-  const [file, setFile] = useState();
-  const { name, type, error, touch, label, placeholder, filesubmit, ...rest } =
-    props;
+  const [values, setValues] = useState();
+  const {
+    name,
+    type,
+    error,
+    touch,
+    label,
+    placeholder,
+    files,
+    filesubmit,
+    ...rest
+  } = props;
   return (
-    <div style={{ marginTop: "10px" }}>
-      {label && (
-        <label style={checkLabel(error, touch)} htmlFor={name}>
-          {label}
-        </label>
+    <div style={{ marginTop: "10px" }} className="flex gap-[40px] items-center">
+      <div>
+        {label && (
+          <label style={checkLabel(error, touch)} htmlFor={name}>
+            {label}
+          </label>
+        )}
+        <input
+          className="form-controle rounded-md  border"
+          style={getStyles(error, touch)}
+          type={type}
+          id={name}
+          name={name}
+          placeholder={placeholder || ""}
+          onInput={async (event) => filesubmit(await uploadFile(event))}
+          {...rest}
+        />
+      </div>
+      {files && (
+        <img
+          className="w-[120px] rounded"
+          src={`${imageUrl}${files}`}
+          alt="image"
+        />
       )}
-      <input
-        className="form-controle border"
-        style={getStyles(error, touch)}
-        type={type}
-        id={name}
-        name={name}
-        placeholder={placeholder || ""}
-        onInput={async (event) => filesubmit(await uploadFile(event))}
-        {...rest}
-      />
     </div>
   );
 }
@@ -68,7 +87,7 @@ export function TextFeild(props) {
         </label>
       )}
       <Field
-        className="form-controle border"
+        className="form-controle border  rounded-md"
         style={getStyles(error, touch)}
         as={type}
         id={name}
@@ -90,6 +109,7 @@ export function SelectField(props) {
     placeholder,
     options,
     filesubmit,
+    value,
     ...rest
   } = props;
   return (
@@ -102,7 +122,7 @@ export function SelectField(props) {
       <br />
       <Field
         as={type}
-        className="form-controle border"
+        className="form-controle border rounded-md"
         style={getStyles(error, touch)}
         id={name}
         name={name}
