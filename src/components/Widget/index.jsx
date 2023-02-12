@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Modal from "../modal/Modal";
 import { openModal } from "../../redux/feature/ModalSlice";
@@ -14,7 +14,7 @@ const index = React.memo(({ data, deleteItem }) => {
   const baseIMG = process.env.REACT_APP_IMG_URL;
 
   const handlerAdd = () => {
-    navigate("add");
+    navigate("action/new");
   };
 
   return (
@@ -50,15 +50,21 @@ const index = React.memo(({ data, deleteItem }) => {
                 {isShown.show === true && isShown.id === val.id ? (
                   <span className="flex justify-between w-full h-full p-[10px] rounded-[10px] backdrop-blur-[10px]">
                     <span className="flex justify-center items-center">
-                      <h2 onClick={()=>{
-                        dispatch(getByProductId(val.id))
-                        navigate(val.id)
-                      }} className="cursor-pointer text-[21px] hover:opacity-70 transition ml-[7px] mr-[15px] text-[#f00]">
+                      <h2
+                        onClick={() => {
+                          dispatch(getByProductId(val.id));
+                          navigate(val.id);
+                        }}
+                        className="cursor-pointer text-[21px] hover:opacity-70 transition ml-[7px] mr-[15px] text-[#f00]"
+                      >
                         {val.title}
                       </h2>
                     </span>
                     <span className="flex flex-col text-[#ebe4e4] items-center gap-[70px]">
-                      <i className="fa-solid fa-pencil text-900 text-[14px] text-[#e5e2e2] cursor-pointer"></i>
+                      <i
+                        onClick={() => navigate(`action/${val.id}`)}
+                        className="fa-solid fa-pencil text-900 text-[14px] text-[#e5e2e2] cursor-pointer"
+                      ></i>
                       <i
                         onClick={() => {
                           dispatch(openModal("open"));

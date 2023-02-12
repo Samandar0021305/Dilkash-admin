@@ -9,21 +9,18 @@ function errorHandling(status) {
       return alert("Internal server Error!");
   }
 }
-
 const baseURL = process.env.REACT_APP_API_URL;
-
 const configureApi = axios.create({
   baseURL,
 });
 configureApi.interceptors.request.use(async (config) => {
-  const headers = { Accept: "application/json", "Accept-Encoding": "identity" };
+  const headers = { Accept: "application/json" };
   config.headers = headers;
   if (localStorage.getItem("token")) {
     config.headers["Authorization"] = `Bearer ${localStorage.getItem("token")}`;
   }
   return await config;
 });
-
 configureApi.interceptors.response.use(
   (response) => {
     // console.log("response -----------", response);
@@ -34,5 +31,4 @@ configureApi.interceptors.response.use(
     return Promise.reject(err);
   }
 );
-
 export default configureApi;

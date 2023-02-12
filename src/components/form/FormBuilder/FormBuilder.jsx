@@ -5,8 +5,7 @@ import * as Yup from "yup";
 
 const FormBuilder = (props) => {
   const { feilds, title, onSubmit } = props;
-  const Element = (type, props, err, touch, filesubmit) => {
-    // console.log(type, "===>>");
+  const Element = (type, props, err, touch, files, filesubmit) => {
     let componentList = {
       select: SelectField,
       input: TextFeild,
@@ -23,6 +22,7 @@ const FormBuilder = (props) => {
         error={err}
         touch={touch}
         filesubmit={filesubmit}
+        files={files}
         {...props}
       />
     );
@@ -30,8 +30,7 @@ const FormBuilder = (props) => {
   const [validateSchema, setvalidateSchema] = useState({});
   const [initialValues, setinitialValues] = useState({});
   const [elmProps, setelmProps] = useState([]);
-  const [files, setFile] = useState();
-
+  const [files, setFile] = useState(null);
   const filesubmit = (data) => {
     setFile(data.data.data);
   };
@@ -43,12 +42,14 @@ const FormBuilder = (props) => {
         [el.name]:
           el.required &&
           Yup[arr[index].validationsType]().required(
-            el.name + " " + "is required"
+            el.label + " " + "is required"
           ),
       }));
+      if (el.name === "image" && !files) {
+        setFile(arr[index].value);
+      }
       setinitialValues((old) => ({
         ...old,
-
         [el.name]: arr[index].value ?? "",
       }));
     });
@@ -62,20 +63,20 @@ const FormBuilder = (props) => {
       };
     });
     setelmProps([...elProps]);
-  }, [feilds]);
+  }, [feilds, files]);
   if (elmProps.length > 0) {
     return (
-      <div>
-        <h1>{title}</h1>
+      <div className="  shadow-md h-[84vh] px-[50px] py-[20px] rounded-md">
+        <h1 className="text-[30px] ">{title}</h1>
         <Formik
           initialValues={initialValues}
           validationSchema={Yup.object().shape(validateSchema ?? {})}
           onSubmit={(values) => {
-            onSubmit({ ...values, image: files,  });
+            onSubmit({ ...values, image: files });
           }}
         >
           {({ errors, touched }) => (
-            <Form>
+            <Form className="flex flex-col gap-[5px]">
               {elmProps.map((el, key) => (
                 <div key={key}>
                   <div>
@@ -84,6 +85,7 @@ const FormBuilder = (props) => {
                       el,
                       errors[el.name],
                       touched[el.name],
+                      files,
                       filesubmit
                     )}
                   </div>

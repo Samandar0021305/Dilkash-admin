@@ -8,6 +8,7 @@ const role = localStorage.getItem("role") ?? 'User'
 export default function Sidebar() {
  const navigate = useNavigate()
   const isToogle = useContext(Context).isToogle
+
   const styled = ({ isActive }) => {
     return {
       color: isActive ? "blue" : "black",
@@ -15,25 +16,30 @@ export default function Sidebar() {
   };
 
 
-  const changeIcon = (link)=>{
-    navigate(link.path)
-    
-  }
 
   
   const filtered = sidebar.filter(el=>el.meta.roles.includes(role))
+  const changeIcon = (link) => {
+    navigate(link.path);
+  };
 
   return (
     <div className="flex">
-      <div className={isToogle == true ?  " flex flex-col h-screen p-3 bg-white shadow w-60" : "w-[80px] shadow"}>
+      <div
+        className={
+          isToogle == true
+            ? " flex flex-col h-screen p-3 bg-white shadow w-60"
+            : "w-[80px] shadow"
+        }
+      >
         <div className="space-y-3">
           <div className="flex items-center">
-           {isToogle && <h2 className="text-xl font-bold">Dashboard</h2>}
+            {isToogle && <h2 className="text-xl font-bold">Dashboard</h2>}
           </div>
           <div className="flex-1 justify-center">
             <ul className="pt-2 pb-4 space-y-1 text-sm">
               <li className="rounded-sm">
-                {filtered.map((item,index) => {
+                {filtered.map((item, index) => {
                   return (
                     <div key={index}>
                       {isToogle == true ? (
@@ -64,15 +70,15 @@ export default function Sidebar() {
                         <>
                           {" "}
                           <div
-                            className={"p-[10px] group/item hover:bg-slate-100 ..."
+                            className={
+                              "p-[10px] group/item hover:bg-slate-100 ..."
                             }
                             key={item.name}
                           >
                             <i
                               onClick={() => changeIcon(item)}
                               className={
-                                item["icon"] +
-                                ` cursor-pointer text-xl w-5`
+                                item["icon"] + ` cursor-pointer text-xl w-5`
                               }
                             ></i>
                             <p class="group/edit invisible hover:bg-slate-200 group-hover/item:visible ...">

@@ -3,16 +3,14 @@ import React from "react";
 const Home = React.lazy(() => import("../page/Home"));
 const Foods = React.lazy(() => import("../page/Foods"));
 const Category = React.lazy(() => import("../page/Category"));
-const CategoryUpdite = React.lazy(() => import("../components/CategoryUpdite"));
-const CategoryAdd = React.lazy(() => import("../components/CategoryAdd"));
+const CategoryUpdite = React.lazy(() => import("../components/category/Category"));
+const categoryId = React.lazy(()=>import("../components/category/CategoryProduct"))
 const ProductCreate = React.lazy(() =>
-  import("../components/product/ProductCreate")
+  import("../components/product/Product")
 );
-const CategoryProduct = React.lazy(() =>
-  import("../components/CategoryProduct")
-);
+
 const ProductEdit = React.lazy(() =>
-  import("../components/product/ProductEdit")
+  import("../components/product/Product")
 );
 const Order = React.lazy(()=>import("../page/Order"))
 
@@ -23,24 +21,19 @@ export const routers = [
     path: "/category",
     component: Category,
     meta:{roles:['User','admin','operator']},
+    component: React.lazy(() => import("../page/Category")),
     children: [
       {
         id: 1.1,
-        name: "catogary updite page",
-        path: "category/updite",
+        name: "catogary-update-page",
+        path: "category/action/:categoryId",
         component: CategoryUpdite,
       },
       {
         id: 1.2,
-        name: "catogary add page",
-        path: "category/add",
-        component: CategoryAdd,
-      },
-      {
-        id: 1.3,
         name: "Category Product",
         path: "category/:categoryproductId",
-        component: CategoryProduct,
+        component: categoryId
       },
     ],
   },
@@ -81,5 +74,13 @@ export const routers = [
     path: "order",
     component: Order,
     meta:{roles:['User','admin','operator']},
+    children: [
+      {
+        id: 4.1,
+        name: "Foods page",
+        path: "foods/action/:productId",
+        component: React.lazy(() => import("../components/product/Product")),
+      },
+    ],
   },
 ];

@@ -1,25 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategory } from "../../../modules/category.api";
+import { useParams } from "react-router-dom";
 import { fetchCategories } from "../../../redux/feature/categorySlice";
+import { actions } from "../../../utils/actions";
+const _page1 = "category";
+const _page2 = "product";
 
 const FormDataFood = () => {
-  const [options, setOptions] = useState([]);
   const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.category);
+  const { get, post, put, getById, remove } = actions(_page1);
+
   const fetchCategory = async () => {
-    const res = await getCategory();
+    const res = await get();
     return res;
   };
 
   useEffect(() => {
-    fetchCategory().then((res) => dispatch(fetchCategories(res.data)));
+    fetchCategory().then((res) => dispatch(fetchCategories(res)));
   }, [dispatch]);
 
   function arrs() {
     let arr = [];
-    categories.map((item) => {
-      arr.push({ value: item.id, label: item.title });
+    categories?.map((item) => {
+      arr.push({ value: item.id, label: item.title, selected: false });
     });
     return arr;
   }
@@ -31,7 +35,6 @@ const FormDataFood = () => {
       label: "Name",
       required: true,
       validationsType: "string",
-      value: "",
     },
     {
       name: "content",
@@ -55,6 +58,7 @@ const FormDataFood = () => {
       label: "Image",
       // required: true,
       validationsType: "object",
+      value: "",
     },
     {
       name: "category_id",
@@ -63,6 +67,7 @@ const FormDataFood = () => {
       required: true,
       options: arrs(),
       validationsType: "string",
+      value: ""
     },
   ];
 };

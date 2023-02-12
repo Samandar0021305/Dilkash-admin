@@ -1,13 +1,12 @@
 import React,{useEffect,useMemo, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { getProductByCategory } from '../../modules/category.api'
-import { deleteProduct } from '../../modules/food.api'
-import { getByProduct } from '../../redux/feature/categorySlice'
-import { deleteProducts } from '../../redux/feature/productSlice'
-import { actions } from '../../utils/actions'
-import { productTableHeader } from '../../utils/Constants'
-const Table = React.lazy(()=>import("../table/TableItem"))
+
+import { getByProduct } from '../../../redux/feature/categorySlice'
+import { deleteProducts } from '../../../redux/feature/productSlice'
+import { actions } from '../../../utils/actions'
+import { productTableHeader } from '../../../utils/Constants'
+const Table = React.lazy(()=>import("../../table/TableItem"))
 const _page = 'products'
 
 
@@ -26,8 +25,8 @@ const Index = () => {
     fetchProductByCateg().then((res) => dispatch(getByProduct(res?.data.rows)));
   },[]);
   const deleteItem = (id) => {
-    deleteProduct(id);
-    dispatch(deleteProducts(id));
+    // deleteProduct(id);
+    // dispatch(deleteProducts(id));
   };
   const columns = useMemo(() => productTableHeader);
   return (
