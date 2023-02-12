@@ -11,7 +11,7 @@ const _page = "category";
 
 const Category = () => {
   const [status, setStatus] = useState();
-  const [pagination, setPagination] = useState({ page: 1, pageSize: 2 });
+  const [pagination, setPagination] = useState({ page: 1, pageSize: 5 });
   const dispatch = useDispatch();
   const { categories, categoryId } = useSelector((state) => state.category);
   const { get } = actions(_page);
@@ -36,8 +36,12 @@ const Category = () => {
       page: page,
     }));
   };
-
-  // console.log(pagination);
+  const handleChange = (pageSize) => {
+    setPagination((prev) => ({
+      ...prev,
+      pageSize: pageSize,
+    }));
+  };
 
   return (
     <div className="w-full relative h-[85vh]">
@@ -46,6 +50,7 @@ const Category = () => {
         <Pagination
           page={pagination.page}
           paginationHandler={paginationHandler}
+          handleChange={handleChange}
         />
       </div>
     </div>

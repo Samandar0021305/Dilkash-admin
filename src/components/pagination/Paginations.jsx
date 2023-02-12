@@ -1,8 +1,9 @@
+import { useState } from "react";
 import { useEffect } from "react";
 
-const Pagination = ({ page, paginationHandler }) => {
+const Pagination = ({ page, paginationHandler, handleChange }) => {
+  const [pageSize, setPageSize] = useState(5);
   const total = localStorage.getItem("total");
-  const pageSize = 2;
 
   let arr = [];
   for (let i = 1; i <= Math.ceil(total / pageSize); i++) {
@@ -10,15 +11,7 @@ const Pagination = ({ page, paginationHandler }) => {
   }
 
   return (
-    <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
-      <div className="flex flex-1 justify-between sm:hidden">
-        <span className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
-          Previous
-        </span>
-        <span className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
-          Next
-        </span>
-      </div>
+    <div className="flex w-[97%] items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
       <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
         <div>
           <p className="text-sm text-gray-700">
@@ -27,7 +20,22 @@ const Pagination = ({ page, paginationHandler }) => {
             <span className="font-medium">{total}</span> results
           </p>
         </div>
-        <div>
+        <div className="flex items-center gap-[30px]">
+          <div>
+            <select
+              onChange={(e) => {
+                handleChange(e.target.value);
+                setPageSize(e.target.value);
+              }}
+              className="bg-blue-600 text-white p-[7px] rounded-md outline-none "
+              name="dropdown"
+              id="dropdown"
+            >
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="15">15</option>
+            </select>
+          </div>
           <nav
             className="isolate inline-flex -space-x-px rounded-md shadow-sm"
             aria-label="Pagination"
@@ -39,7 +47,7 @@ const Pagination = ({ page, paginationHandler }) => {
             {/* Current: "z-10 bg-indigo-50 border-indigo-500 text-indigo-600", Default: "bg-white border-gray-300 text-gray-500 hover:bg-gray-50" */}
             {arr.map((id) => (
               <span
-                onClick={() => paginationHandler(id)}
+                onClick={() => paginationHandler(id, pageSize)}
                 key={id}
                 aria-current="page"
                 className={`  relative cursor-pointer z-10 inline-flex items-center border border-indigo-500 bg-indigo-50 px-4 py-2 text-sm font-medium focus:z-20 ${

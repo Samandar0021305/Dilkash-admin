@@ -66,7 +66,7 @@ export function File(props) {
       </div>
       {files && (
         <img
-          className="w-[120px] rounded"
+          className="w-[120px] h-[70px] rounded"
           src={`${imageUrl}${files}`}
           alt="image"
         />
