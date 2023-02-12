@@ -7,24 +7,27 @@ import { useNavigate } from "react-router-dom";
 import Modal from "../components/modal/Modal";
 import { closeModal } from "../redux/feature/ModalSlice";
 import { actions } from "../utils/actions";
+import Pagination from "../components/pagination/Paginations";
 const _page = "product";
 
 const Foods = React.memo(() => {
+  const [pagination, setPagination] = useState({ page: 1, pageSize: 2 });
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { products, productId } = useSelector((state) => state.product);
   const modal = useSelector((state) => state.modal.show);
 
-  const { get, post, put, getById, remove } = actions(_page);
+  const { get, remove } = actions(_page);
 
   const fetchProduct = async () => {
-    const res = await get();
+    const res = await get({ ...pagination });
     return res;
   };
 
   useEffect(() => {
     fetchProduct().then((res) => dispatch(fetchProducts(res)));
-  }, []);
+  }, [pagination.page, pagination.pageSize]);
 
   const deleteItem = () => {
     if (productId) {
@@ -36,6 +39,13 @@ const Foods = React.memo(() => {
 
   const columns = useMemo(() => productTableHeader);
 
+  const paginationHandler = (page) => {
+    setPagination((prev) => ({
+      ...prev,
+      page: page,
+    }));
+  };
+
   return (
     <div className=" container flex flex-col">
       <button
@@ -45,6 +55,10 @@ const Foods = React.memo(() => {
         +
       </button>
       <Table columns={columns} data={products} deleteItem={deleteItem} />
+      <Pagination
+        page={pagination.page}
+        paginationHandler={paginationHandler}
+      />
       {modal == "open" && <Modal deleteItem={deleteItem} />}
     </div>
   );
