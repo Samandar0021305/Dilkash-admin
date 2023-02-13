@@ -1,9 +1,10 @@
-import React, { Suspense, useMemo } from "react";
+import React, { Suspense, useEffect, useMemo } from "react";
 import { Routes, Route } from "react-router-dom";
-import Loader from "../components/Loader/Loader";
 import LoaderComponent from "../components/Loader/LoaderComponent";
 import { routers } from "./RenderRouter";
+
 const role = localStorage.getItem('role') ?? 'User'
+
 
 const renderRoutesRecursive = (router) =>
   router.map((val) =>
@@ -19,6 +20,7 @@ const renderRoutesRecursive = (router) =>
 
 const Index = React.memo(() => {
   const renderRoutes = useMemo(() => renderRoutesRecursive(routers.filter((el)=>el.meta.roles.includes(role))), [routers]);
+  
 
   return (
     <>

@@ -12,7 +12,7 @@ const LoaderComponent = (props) => {
     }, [])
 
   return (
-    <div className="flex justify-center">
+    <div className="flex h-[70vh] items-center justify-center">
       {loading ? (
         <SyncLoader size={props.size} color={"#36d7b7"} loading={loading} />
       ) : (
