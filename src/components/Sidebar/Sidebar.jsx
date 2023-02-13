@@ -7,7 +7,7 @@ export default function Sidebar() {
   const navigate = useNavigate();
   const func = useContext(Context).dispatch;
   const isToogle = useContext(Context).isToogle;
-  console.log(isToogle);
+  // console.log(isToogle);
   const styled = ({ isActive }) => {
     return {
       color: isActive ? "blue" : "black",

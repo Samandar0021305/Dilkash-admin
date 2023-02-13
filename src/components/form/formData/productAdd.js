@@ -9,7 +9,7 @@ const _page2 = "product";
 const FormDataFood = () => {
   const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.category);
-  const { get, post, put, getById, remove } = actions(_page1);
+  const { get } = actions(_page1);
 
   const fetchCategory = async () => {
     const res = await get();
@@ -67,7 +67,7 @@ const FormDataFood = () => {
       required: true,
       options: arrs(),
       validationsType: "string",
-      value: ""
+      value: "",
     },
   ];
 };

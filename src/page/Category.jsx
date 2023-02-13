@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteCategory } from "../modules/category.api";
 
-import { fetchCategories, getByProduct } from "../redux/feature/categorySlice";
+import { fetchCategories } from "../redux/feature/categorySlice";
+import Pagination from "../components/pagination/Paginations";
 import { actions } from "../utils/actions";
 const Widget = React.lazy(() => import("../components/Widget"));
 
@@ -10,62 +11,48 @@ const _page = "category";
 
 const Category = () => {
   const [status, setStatus] = useState();
+  const [pagination, setPagination] = useState({ page: 1, pageSize: 5 });
   const dispatch = useDispatch();
   const { categories, categoryId } = useSelector((state) => state.category);
   const { get } = actions(_page);
-  // const fetchProductByCateg = async () => {
-  //   if (categoryId) {
-  //     const res = await getProductByCategory(categoryId);
-  //     return res;
-  //   }
-  // };
-  // useEffect(() => {
-  //   fetchProductByCateg().then((res) => console.log(res));
-  // }, [categoryId]);
-
-  // Fetching data
-  // const fetchCategory = async () => {
-  //   const res = await getCategory();
-  //   return res;
-  // };
-
-  // useEffect(() => {
-  //   fetchCategory().then((res) => dispatch(fetchCategories(res.data)));
-  // }, [dispatch]);
-
-  // Fetching data ends
-
-  // Deleting data
 
   const deleteItem = () => {
     if (categoryId) {
-      // dispatch(closeModal("close"));
       deleteCategory(categoryId).then((res) => setStatus(res.statusCode));
     }
   };
-  // useEffect(() => {
-  //   if (parseInt(status) === 200) {
-  //     // fetchCategory().then((res) => dispatch(fetchCategories(res.data)));
-  //     toast.success("Category successfully deleted!");
-  //     setStatus(0);
-  //   } else if (parseInt(status) >= 400) {
-  //     toast.error("Error, Category was not deleted!");
-  //   }
-  // });
+
   const getCategory = async () => {
-    const data = await get();
+    const data = await get({ ...pagination });
     return data;
   };
-  // Deleting data ends
   useEffect(() => {
     getCategory().then((res) => dispatch(fetchCategories(res)));
-    // dispatch(fetchCategories(data))
-  }, []);
+  }, [pagination.page, pagination.pageSize]);
 
-  console.log(categories);
+  const paginationHandler = (page) => {
+    setPagination((prev) => ({
+      ...prev,
+      page: page,
+    }));
+  };
+  const handleChange = (pageSize) => {
+    setPagination((prev) => ({
+      ...prev,
+      pageSize: pageSize,
+    }));
+  };
+
   return (
-    <div className="w-full">
+    <div className="w-full relative h-[85vh]">
       <Widget data={categories} deleteItem={deleteItem} />
+      <div className="absolute bottom-0 w-full">
+        <Pagination
+          page={pagination.page}
+          paginationHandler={paginationHandler}
+          handleChange={handleChange}
+        />
+      </div>
     </div>
   );
 };

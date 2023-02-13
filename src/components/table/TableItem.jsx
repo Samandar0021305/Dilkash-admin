@@ -141,18 +141,7 @@ const Table = ({ columns, data, deleteItem }) => {
                 })}
               </tbody>
             </table>
-            {/* Pagination start */}
           </div>
-          <Pagination
-            previousPage={previousPage}
-            canPreviousPage={canPreviousPage}
-            nextPage={nextPage}
-            canNextPage={canNextPage}
-            paginationRange={paginationRange}
-            pageIndex={pageIndex}
-            gotoPage={gotoPage}
-          />
-          {/* Pagination End */}
         </div>
       </div>
     </div>
