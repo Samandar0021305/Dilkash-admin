@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
-import {  fetchCategories, getByProduct } from "../redux/feature/categorySlice";
+import {  fetchCategories } from "../redux/feature/categorySlice";
 import { closeModal } from "../redux/feature/ModalSlice";
 import { toast } from "react-toastify";
+import LoaderComponent from "../components/Loader/LoaderComponent";
 
 import { actions } from "../utils/actions";
 
@@ -44,7 +44,12 @@ const Category = () => {
 
   return (
     <div className="w-full">
-      <Widget data={categories} deleteItem={deleteItem} />
+      {
+        categories.length ? 
+        <Widget data={categories} 
+        deleteItem={deleteItem} /> :
+        <LoaderComponent/> 
+      }
     </div>
   );
 };

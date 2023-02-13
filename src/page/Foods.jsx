@@ -6,7 +6,6 @@ import Table from "../components/table/TableItem";
 import { useNavigate } from "react-router-dom";
 import Modal from "../components/modal/Modal";
 import { closeModal } from "../redux/feature/ModalSlice";
-import { toast } from "react-toastify";
 import LoaderComponent from "../components/Loader/LoaderComponent";
 import { actions } from "../utils/actions";
 const _page = "product";
@@ -17,7 +16,7 @@ const Foods = React.memo(() => {
   const { products, productId } = useSelector((state) => state.product);
   const modal = useSelector((state) => state.modal.show);
 
-  const { get, post, put, getById, remove } = actions(_page);
+  const { get,  remove } = actions(_page);
 
   const fetchProduct = async () => {
     const res = await get();

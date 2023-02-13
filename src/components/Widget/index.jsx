@@ -4,7 +4,6 @@ import Modal from "../modal/Modal";
 import { openModal } from "../../redux/feature/ModalSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteCategory ,getByProductId} from "../../redux/feature/categorySlice";
-import Loader from "../Loader/LoaderComponent"
 
 const index = React.memo(({ data, deleteItem }) => {
   const dispatch = useDispatch();
@@ -84,7 +83,7 @@ const index = React.memo(({ data, deleteItem }) => {
       )}
       </div>
       {modal == "open" && <Modal deleteItem={deleteItem} />}
-    </div> : <Loader />}
+    </div> : ""}
     </>
   );
 });
