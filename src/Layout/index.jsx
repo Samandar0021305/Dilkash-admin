@@ -21,8 +21,9 @@ const Index = ({children}) => {
    const [isToogle,setToogle] = useReducer(reducerFunction,initialValue)
   return (
  
+   <>
+   
    <Context.Provider value={{setToogle:setToogle,isToogle:isToogle}}>
-
      <div className='flex'>
           <Sidebar /> 
          <div className='ml-[10px] w-[100%] pr-[10px]'>
@@ -32,7 +33,8 @@ const Index = ({children}) => {
             <Footer />
          </div>
     </div>
-   </Context.Provider> 
+   </Context.Provider>
+   </> 
   )
 }
 

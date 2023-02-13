@@ -1,5 +1,4 @@
 
-
 import React, { Suspense } from "react";
 import Loader from "./components/Loader/Loader";
 import Modal from "../src/components/modal/Modal"
@@ -16,7 +15,6 @@ function App() {
         {/* <Modal /> */}
       </Layout>
     </Suspense>
-  );
+  )
 }
-
 export default App;
