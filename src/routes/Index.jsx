@@ -2,7 +2,6 @@ import React, { Suspense, useEffect, useMemo } from "react";
 import { Routes, Route } from "react-router-dom";
 import LoaderComponent from "../components/Loader/LoaderComponent";
 import { routers } from "./RenderRouter";
-
 const role = localStorage.getItem('role') ?? 'User'
 
 
@@ -25,7 +24,10 @@ const Index = React.memo(() => {
   return (
     <>
       <Suspense fallback={<LoaderComponent />}>
-        <Routes>{renderRoutes}</Routes>
+
+        <Routes>
+          {renderRoutes}
+          </Routes>
       </Suspense>
     </>
   );

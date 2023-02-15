@@ -1,14 +1,14 @@
 import React from 'react'
-import SignUp from './SignUp';
-import SignUpWith from './SignUpWith';
+import {actions} from '../../utils/actions'
 
-const LoginPage = () => {
+const Login = React.memo(() => {
+    const _page = 'login'
+    const {post} = actions(_page)
+  
+   
   return (
-    <div className='flex'>
-        <SignUpWith />
-        <SignUp />
-    </div>
+    <div>Login</div>
   )
-}
+})
 
-export default LoginPage;
+export default Login

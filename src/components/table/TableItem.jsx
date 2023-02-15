@@ -147,18 +147,7 @@ const Table = ({ columns, data, deleteItem,order }) => {
                 })}
               </tbody>
             </table>
-            {/* Pagination start */}
           </div>
-          <Pagination
-            previousPage={previousPage}
-            canPreviousPage={canPreviousPage}
-            nextPage={nextPage}
-            canNextPage={canNextPage}
-            paginationRange={paginationRange}
-            pageIndex={pageIndex}
-            gotoPage={gotoPage}
-          />
-          {/* Pagination End */}
         </div>
       </div> </> : <div className="flex justify-center items-center h-[70vh]"><h2 className="text-[red] text-[40px]">Ma'lumot yo'q</h2></div>}
     </div>

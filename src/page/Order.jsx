@@ -10,13 +10,13 @@ import { closeModal } from '../redux/feature/ModalSlice'
 import { fetchProducts } from '../redux/feature/productSlice'
 import { toast } from 'react-toastify'
 import Modal from '../components/modal/Modal'
+const _page = "order"
 
 const Order = React.memo(() => {
-    const _ = "order"
   const [status, setStatus] = useState();
-  const {get,remove} = actions(_)
+  const {get,remove} = actions(_page)
   const dispatch = useDispatch()
-  const {orders , ordersIdc} = useSelector((state)=>state.order)
+  const {orders , ordersId} = useSelector((state)=>state.order)
   const modal = useSelector((state) => state.modal.show);
     const fetchProduct = async()=>{
        const res = await get()
@@ -29,9 +29,9 @@ const Order = React.memo(() => {
  
 
  const deleteItem = () => {
-  if (ordersIdc) {
+  if (ordersId) {
     dispatch(closeModal("close"));
-    remove(ordersIdc).then((res) => setStatus(res.statusCode));
+    remove(ordersId).then((res) => setStatus(res.statusCode));
   }
 };
 

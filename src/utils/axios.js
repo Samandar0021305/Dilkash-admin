@@ -15,22 +15,21 @@ const request = axios.create({
   baseURL,
 });
 request.interceptors.request.use((config) => {
-  const headers = { Accept: 'application/json', 'Accept-Encoding': 'identity' }
+  const headers = { Accept: "application/json" };
   config.headers = headers;
   if (localStorage.getItem("token")) {
     config.headers["Authorization"] = `Bearer ${localStorage.getItem("token")}`;
   }
-  return config
-
+  return config;
 });
 
 request.interceptors.response.use(
   (response) => {
-          const {data} = request;
+    const { data } = request;
     return data ?? response;
   },
   function (error) {
-          const {status} = error
+    const { status } = error;
     errorHandling(status);
     return Promise.reject(error);
   }

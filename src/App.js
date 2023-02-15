@@ -2,18 +2,19 @@
 import React, { Suspense } from "react";
 import Loader from "./components/Loader/Loader";
 import Modal from "../src/components/modal/Modal"
+import { Route, Routes } from "react-router-dom";
+import Login from "./page/Login/Login"
 
-
-const Routers = React.lazy(() => import("./routes/Index"));
-const Layout = React.lazy(() => import("./Layout"));
+const Layout = React.lazy(() => import("./Layout/Layout"));
 
 function App() {
   return (
     <Suspense fallback={<Loader />}>
-      <Layout>
-        <Routers />
-        {/* <Modal /> */}
-      </Layout>
+      <Routes>
+        <Route index element={<Login/>} path='/login' />
+        <Route  path="/" element={<Layout/>} />
+      </Routes>
+       
     </Suspense>
   )
 }

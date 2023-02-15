@@ -7,14 +7,19 @@ function CRUD(param) {
   return {
     [camelize(`get${param}`)]: async (payload) => {
       try {
-        const {
-          data: { data },
-        } = await request({
+        const resonse = await request({
           url: "/" + param,
           method: "GET",
-          params: payload ?? undefined,
+          params:
+            {
+              page: 1,
+              pageSize: 3,
+              ...payload,
+            } ?? undefined,
         });
-        return data;
+        // console.log(resonse.data.total);
+        localStorage.setItem("total", resonse.data.total);
+        return resonse.data.data;
       } catch (err) {
         return err;
       }
@@ -30,7 +35,7 @@ function CRUD(param) {
         return err;
       }
     },
-    
+
     [camelize(`post${param}`)]: async (payload) => {
       try {
         const response = await request({

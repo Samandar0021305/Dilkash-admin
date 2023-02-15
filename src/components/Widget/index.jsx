@@ -28,8 +28,8 @@ const index = React.memo(({ data, deleteItem }) => {
         </button>
       </div>
       <div className="flex flex-wrap  items-center">
-        {data.length   ? (
-          data.map((val) => {
+        {data.length   ? 
+          data?.map((val) => {
             return (
               <div
                 className="flex mx-[20px] my-[10px] w-[210px] justify-between  shadow-md rounded-[10px] h-[130px]"
@@ -77,8 +77,7 @@ const index = React.memo(({ data, deleteItem }) => {
               </div>
             );
           })
-        )
-      : (
+        : (
         <h1>Loading...</h1>
       )}
       </div>

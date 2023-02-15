@@ -42,7 +42,6 @@ export const routers = [
     id: 2,
     name: "Home Dashboard",
     path: "/dashboard",
-    index: "index",
     component: Home,
     meta:{roles:['User','admin','operator']},
   },

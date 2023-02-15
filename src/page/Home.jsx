@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useEffect ,useState} from "react";
 import LoaderComponent from "../components/Loader/LoaderComponent";
 
-
 const Home = () => {
- 
+
   return (
     <div>
       <h1>Home Page</h1>

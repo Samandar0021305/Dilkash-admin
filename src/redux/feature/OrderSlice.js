@@ -4,7 +4,7 @@ export const OrderSlice = createSlice({
   name: "order",
   initialState: {
     orders: [],
-    ordersIdc:"",
+    ordersId:"",
     error: "",
   },
   reducers: {
@@ -15,7 +15,7 @@ export const OrderSlice = createSlice({
     },
     orderId: (state, action) => {
       if (action.payload) {
-        state.ordersIdc = action.payload;
+        state.ordersId = action.payload;
       }
     },
     addOrder: (state, action) => {

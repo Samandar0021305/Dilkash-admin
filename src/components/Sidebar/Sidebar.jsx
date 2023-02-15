@@ -6,9 +6,10 @@ import { Context } from "../../Layout";
 const role = localStorage.getItem("role") ?? 'User'
 
 export default function Sidebar() {
- const navigate = useNavigate()
-  const isToogle = useContext(Context).isToogle
 
+  const navigate = useNavigate();
+  const isToogle = useContext(Context).isToogle;
+  // console.log(isToogle);
   const styled = ({ isActive }) => {
     return {
       color: isActive ? "blue" : "black",

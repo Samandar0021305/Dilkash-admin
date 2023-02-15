@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {  fetchCategories } from "../redux/feature/categorySlice";
+import {  deleteCategory, fetchCategories } from "../redux/feature/categorySlice";
 import { closeModal } from "../redux/feature/ModalSlice";
 import { toast } from "react-toastify";
 import LoaderComponent from "../components/Loader/LoaderComponent";
-
+import Pagination from "../components/pagination/Paginations";
 import { actions } from "../utils/actions";
 
 const _page = "category";
@@ -14,24 +14,28 @@ const Widget = React.lazy(() => import("../components/Widget"));
 
 const Category = () => {
   const [status, setStatus] = useState();
+  const [pagination, setPagination] = useState({ page: 1, pageSize: 5 });
   const dispatch = useDispatch();
   const { categories, categoryId } = useSelector((state) => state.category);
   const { get,remove } = actions(_page);
     
+
+  const deleteItem = () => {
+    if (categoryId) {
+      deleteCategory(categoryId).then((res) => setStatus(res.statusCode));
+    }
+  };
+
   const getCategory = async () => {
-    const data = await get();
+    const data = await get({ ...pagination });
     return data;
   };
   useEffect(() => {
     getCategory().then((res) => dispatch(fetchCategories(res)));
   }, []);
 
-  const deleteItem = () => {
-    if (categoryId) {
-      dispatch(closeModal("close"));
-      remove(categoryId).then((res) => setStatus(res.statusCode));
-    }
-  };
+  
+
   useEffect(() => {
     if (parseInt(status) === 200) {
       remove().then((res) => dispatch(fetchCategories(res.data)));
@@ -50,8 +54,9 @@ const Category = () => {
         deleteItem={deleteItem} /> :
         <LoaderComponent/> 
       }
-    </div>
-  );
-};
+      </div>
+
+  )}
+
 
 export default Category;
