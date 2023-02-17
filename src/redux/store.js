@@ -3,6 +3,7 @@ import categorySlice from "./feature/categorySlice";
 import productSlice from "./feature/productSlice";
 import modalSlice from "./feature/ModalSlice";
 import OrderSlice from "./feature/OrderSlice";
+import LoginSlice from "./feature/LoginSlice";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     product: productSlice,
     modal: modalSlice,
     order:OrderSlice,
+    login:LoginSlice
   },
 });
 
