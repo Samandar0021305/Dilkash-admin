@@ -6,6 +6,7 @@ export const LoginSlice = createSlice({
     loginState: [],
     error: "",
   },
+  
   reducers: {
     loginResults: (state, action) => {
       if (action.payload) {
